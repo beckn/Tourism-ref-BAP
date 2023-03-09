@@ -113,13 +113,15 @@ export default {
   h3 {
     font-size: 40px;
     font-weight: 700;
-    color: #387f9a;
+    color: rgba(100, 169, 194, 1);
+
     line-height: 45px;
   }
   h4 {
     font-size: 27px;
     font-weight: 700;
     line-height: 30px;
+    color: rgba(235, 242, 245, 1);
   }
   p {
     font-size: 15px;
@@ -127,8 +129,11 @@ export default {
     line-height: 20px;
     color: #7c7c7c;
     margin-bottom: 30px;
+    color: rgba(235, 242, 245, 1);
   }
   .open-search-input {
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 1);
     display: flex;
     margin-bottom: 8px;
     position: relative;
@@ -184,21 +189,26 @@ export default {
   }
 }
 .sf-footer {
+  z-index: +1;
   text-align: center;
-  background: #fbfcff !important;
+  background:transparent !important;
   position: fixed;
   bottom: 0px;
   width: 100%;
   padding: 0;
+  padding-bottom: 13px;
   p {
     margin: 0;
     span {
       font-size: 17px;
       position: relative;
+      color: #fbfcff;
       top: -6px;
+    
       &.powered-by {
         font-size: 10px;
         top: -1px !important;
+      
       }
     }
   }

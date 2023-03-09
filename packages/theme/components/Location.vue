@@ -86,7 +86,9 @@
           <div class="cart-content">
             <nuxt-link :to="localePath('/cart')">
               <SfButton class="button-pos sf-button--pure">
-                <SfIcon icon="empty_cart" />
+                <SfImage src="/icons/cart.png" alt="icon" />
+
+                <!-- //<SfIcon icon="empty_cart" /> -->
               </SfButton>
             </nuxt-link>
           </div>
@@ -97,11 +99,12 @@
                   class="profile-tooltip"
                   :data-tooltip="this.$fire.auth.currentUser.displayName"
                 >
-                        <div @click="openHamburger=!openHamburger">
+                  <div @click="openHamburger = !openHamburger">
                     <Dropdown>
                       <SfButton class="button-pos sf-button--pure">
-                        <SfIcon icon="profile" />
-                        <SfIcon
+                        <!-- <SfIcon icon="profile" /> -->
+                        <SfImage src="/icons/profile.png" alt="icon" />
+                        <!-- <SfIcon
                           v-if="openHamburger"
                           icon="chevron_up"
                           size="xxs"
@@ -110,11 +113,11 @@
                           v-if="!openHamburger"
                           icon="chevron_down"
                           size="xxs"
-                        />
+                        /> -->
                       </SfButton>
                       <DropdownContent />
                     </Dropdown>
-                        </div>
+                  </div>
                 </div>
               </div>
               <div class="sign-in-text" v-else>sign in</div>
@@ -126,7 +129,13 @@
   </no-ssr>
 </template>
 <script>
-import { SfCircleIcon, SfButton, SfSidebar, SfIcon } from '@storefront-ui/vue';
+import {
+  SfCircleIcon,
+  SfButton,
+  SfSidebar,
+  SfIcon,
+  SfImage
+} from '@storefront-ui/vue';
 import { ref } from '@vue/composition-api';
 import LocationSearchBar from './LocationSearchBar.vue';
 import ModalComponent from './ModalComponent.vue';
@@ -145,18 +154,19 @@ export default {
     ModalComponent,
     Dropdown,
     DropdownContent,
+    SfImage
   },
 
   props: {
     isDisabled: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
 
   data() {
     return {
-      isActive: false,
+      isActive: false
     };
   },
   setup(props, { root }) {
@@ -182,7 +192,7 @@ export default {
       updateLocation({
         latitude: latitude,
         longitude: longitude,
-        address: address,
+        address: address
       });
     };
 
@@ -194,7 +204,7 @@ export default {
       location,
       locationSelected,
       currentUser,
-      openHamburger,
+      openHamburger
     };
   },
   computed: {
@@ -206,14 +216,20 @@ export default {
     },
     isAuthenticatedUser() {
       return this.currentUser !== null;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.sf-image[alt='icon'] {
+  outline-color: red;
+  outline-width: 1px;
+  outline-style: dashed;
+  outline-style: none !important;
+}
 .sf-circle-icon {
-  --icon-color: #387F9A;
+  --icon-color: #387f9a;
 }
 .layout-container {
   display: flex;
@@ -243,16 +259,17 @@ export default {
   text-align: left;
 }
 .sign-in-text {
-  color: #387F9A;
+  color: #387f9a;
 }
 .userIcon {
-  background-color: #387F9A;
+  background-color: #387f9a;
 }
 
 .user-cart-content {
   display: flex;
   justify-content: space-between;
-  width: 7rem;
+  width: 6rem;
+  align-items: center;
 }
 
 .profile-tooltip {

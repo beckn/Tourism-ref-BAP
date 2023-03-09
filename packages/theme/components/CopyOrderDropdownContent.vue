@@ -46,7 +46,7 @@ export default {
       const orderObject = localStorage.getItem('orderHistory')[0].order;
       try {
         await navigator.clipboard.writeText(
-          localStorage.getItem('orderHistory')
+          localStorage.getItem('orderObject')
         );
       } catch (error) {
         console.log('error', error);
@@ -83,7 +83,7 @@ export default {
   right: -6px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  width: 8rem;
+  width: 10rem;
   border-radius: 10px;
   margin-top: 2.1rem;
   margin-right: -0.4rem;

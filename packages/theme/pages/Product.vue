@@ -26,11 +26,11 @@
       <div class="head-container">
           <h1 class="head-title">{{productGetters.getName(product)}}</h1>
         </div>
-        <AddToCart :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart" />
+        <!-- <AddToCart :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
+            @updateItemCount="updateCart" /> -->
       <!-- </div> -->
 
-      <!-- <div class="product__info">
+      <div class="product__info">
         <div class="product__header">
           <SfHeading :title="productGetters.getName(product)" :level="3"
             class="sf-heading--no-underline sf-heading--left" />
@@ -49,13 +49,13 @@
 
         <div v-if="cartGetters.getTotalItems(cart)" class="bottom-bar-cart">
           <Footer @buttonClick="footerClick" :totalPrice="cart.totalPrice" :totalItem="cartGetters.getTotalItems(cart)"
-            buttonText="View Cart">
+            buttonText="Book Now">
             <template v-slot:buttonIcon>
               <SfIcon icon="empty_cart" color="white" :coverage="1" />
             </template>
           </Footer>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -188,6 +188,7 @@ export default {
 .product-description-image {
   position: relative;
   width: 100%;
+  height: 197px;
 }
 
 .prod-info {
@@ -533,6 +534,10 @@ export default {
   padding-left: 18px;
   padding-top: 26px;
   padding-bottom: 31px;
+}
+
+.product__header {
+  display: none;
 }
 
 @keyframes moveicon {

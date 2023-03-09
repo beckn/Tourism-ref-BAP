@@ -379,6 +379,7 @@
           <div class="support-text" style="text-align: center;">
             Scan this QR <br />
             to Import this order another app
+            
           </div>
           <br/>
           <div

@@ -32,7 +32,7 @@ export const getBillingInfo = (billingAddress, addresskey: string): any => {
     },
     phone: billingAddress.mobile,
     name: `./${billingAddress.name}/////`,
-    email: 'mockBilling1@gmail.com'
+    email: 'testemail1@mailinator.com'
   };
 
   return billingInfo;
@@ -52,7 +52,7 @@ const getDeliveryInfo = (shippingAddress, gps): any => {
     type: 'HOME-DELIVERY',
     name: `./${shippingAddress.name}/////`,
     phone: shippingAddress.mobile,
-    email: 'mockBilling1@gmail.com',
+    email: 'testemail1@mailinator.com',
     location: {
       address: {
         door: shippingAddress.landmark,

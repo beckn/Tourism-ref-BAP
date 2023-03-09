@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" class="home-page">
     <OpenSearch />
     <div @click="openCart"></div>
   </div>
@@ -38,3 +38,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  // .home-page {
+  //   height: 100vh;
+  //   background : red
+  // }
+</style>

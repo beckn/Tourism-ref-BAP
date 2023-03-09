@@ -136,7 +136,7 @@ export default {
     padding-right: 10px;
     cursor: pointer;
     .sf-icon {
-      --icon-color: #f37a20 !important;
+      --icon-color: #387F9A !important;
       width: 20px;
       height: 20px;
     }

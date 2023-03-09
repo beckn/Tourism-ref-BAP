@@ -97,147 +97,297 @@
             </tr>
             <tr>
               <th>OndcStatutoryRequestsPackagedCommodities</th>
-              <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'] ? "Available" : "NA" }}</td>
+              <td>
+                {{
+                  product['@ondc/org/statutory_reqs_packaged_commodities']
+                    ? 'Available'
+                    : 'NA'
+                }}
+              </td>
             </tr>
             <tr v-if="product['@ondc/org/statutory_reqs_packaged_commodities']">
               <td colspan="2" class="prod-info-child-td">
                 <table class="prod-info-child">
                   <tr>
                     <th>CommonOrGenericNameOfCommodity</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].common_or_generic_name_of_commodity || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .common_or_generic_name_of_commodity || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>contactDetailsConsumerCare</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].contact_details_consumer_care || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .contact_details_consumer_care || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImportedProductCountryOfOrigin</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].imported_product_country_of_origin || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .imported_product_country_of_origin || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ManufacturerOrPackerAddress</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].manufacturer_or_packer_address || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .manufacturer_or_packer_address || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ManufacturerOrPackerName</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].manufacturer_or_packer_name || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .manufacturer_or_packer_name || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>MonthYearOfManufacturePackinImport</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].month_year_of_manufacture_packing_import || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .month_year_of_manufacture_packing_import || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>multiple_products_name_number_or_qty</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].multiple_products_name_number_or_qty || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .multiple_products_name_number_or_qty || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>NetQuantityorMeasureOfCommodityInPkg</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].net_quantity_or_measure_of_commodity_in_pkg || "NA"}}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .net_quantity_or_measure_of_commodity_in_pkg || 'NA'
+                      }}
+                    </td>
                   </tr>
                 </table>
               </td>
-
             </tr>
             <tr>
               <th>
                 TimeToShip
               </th>
-              <td>{{ product['@ondc/org/time_to_ship'] || "NA" }}</td>
+              <td>{{ product['@ondc/org/time_to_ship'] || 'NA' }}</td>
             </tr>
             <tr>
               <th>OndcStatutoryRequestsPrepackagedFood</th>
-              <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'] ? "Available": "NA" }}</td>
+              <td>
+                {{
+                  product['@ondc/org/statutory_reqs_packaged_commodities']
+                    ? 'Available'
+                    : 'NA'
+                }}
+              </td>
             </tr>
             <tr v-if="product['@ondc/org/statutory_reqs_packaged_commodities']">
               <td class="prod-info-child-td" colspan="2">
                 <table class="prod-info-child">
                   <tr>
                     <th>IngredientsInfo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].ingredients_info || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .ingredients_info || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>NutritionalInfo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].nutritionaI || "NA"	 }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .nutritionaI || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>AdditivesInfo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].additives_info || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .additives_info || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ManufacturerOrPackerName</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].manufacturer_or_packer_name || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .manufacturer_or_packer_name || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ManufacturerOrPackerAddress</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].manufacturer_or_packer_address || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .manufacturer_or_packer_address || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>BrandOwnerName</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].brand_owner_name || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .brand_owner_name || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>BrandOwnerAddress</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].brand_owner_address || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .brand_owner_address || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>BrandOwnerFSSAILogo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].brand_owner_FSSAI_logo || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .brand_owner_FSSAI_logo || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>BrandOwnerFSSAILicenseNo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].brand_owner_FSSAI_license_no || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .brand_owner_FSSAI_license_no || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>OtherFSSAILicenseNo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].other_FSSAI_license_no || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .other_FSSAI_license_no || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImporterName</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].importer_name || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .importer_name || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImporterAddress</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].importer_address || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .importer_address || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImporterFSSAILogo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].importer_FSSAI_logo || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .importer_FSSAI_logo || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImporterFSSAILicenseNo</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].importer_FSSAI_license_no || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .importer_FSSAI_license_no || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>ImportedProductCountryOfOrigin</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].imported_product_country_of_origin || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .imported_product_country_of_origin || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>OtherImporterName</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].other_importer_name || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .other_importer_name || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>OtherImporterAddress</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].other_importer_address || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .other_importer_address || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>OtherPremises</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].other_premises || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .other_premises || 'NA'
+                      }}
+                    </td>
                   </tr>
                   <tr>
                     <th>OtherImporterCountryOfOrigin</th>
-                    <td>{{ product['@ondc/org/statutory_reqs_packaged_commodities'].other_importer_country_of_origin || "NA" }}</td>
+                    <td>
+                      {{
+                        product['@ondc/org/statutory_reqs_packaged_commodities']
+                          .other_importer_country_of_origin || 'NA'
+                      }}
+                    </td>
                   </tr>
-
                 </table>
               </td>
             </tr>
 
             <tr>
               <th>MandatoryRequestsVeggiesFruits</th>
-              <td>{{ product['@ondc/org/mandatory_reqs_veggies_fruits'] ? 'yes' : 'no' }}</td>
+              <td>
+                {{
+                  product['@ondc/org/mandatory_reqs_veggies_fruits']
+                    ? 'yes'
+                    : 'no'
+                }}
+              </td>
             </tr>
           </table>
-
         </div>
         <div v-if="cartGetters.getTotalItems(cart)" class="bottom-bar-cart">
           <!-- <ul class="list-inline">
@@ -431,7 +581,7 @@ export default {
     font-size: 0.875rem;
     height: 48px;
     padding: 0 10px;
-    &.prod-info-child-td{
+    &.prod-info-child-td {
       padding: 0;
     }
   }
@@ -439,23 +589,21 @@ export default {
     background: #eee;
     font-weight: 500;
     width: 50%;
-    word-break: break-word
+    word-break: break-word;
   }
-
 }
-.prod-info-child{
-    @extend .prod-info;
-    margin-top:0;
-    tr{
+.prod-info-child {
+  @extend .prod-info;
+  margin-top: 0;
+  tr {
     &:first-child {
-        border-top: none;
-      }
-      &:last-child {
-        border-bottom: none;
-      }
+      border-top: none;
     }
-
+    &:last-child {
+      border-bottom: none;
+    }
   }
+}
 #product {
   box-sizing: border-box;
   @include for-desktop {
@@ -474,7 +622,7 @@ export default {
   margin: 15px;
   z-index: 2;
   .sf-icon {
-    --icon-color: #f37a20 !important;
+    --icon-color: #387f9a !important;
     width: 20px;
     height: 20px;
   }
@@ -491,7 +639,7 @@ export default {
   z-index: 1;
   width: 100%;
   .cart-checkout {
-    background: #f37a20;
+    background: #387f9a;
   }
   ul {
     list-style: none;
@@ -511,7 +659,7 @@ export default {
       }
       h4 {
         font-size: 16px;
-        color: #f37a20;
+        color: #387f9a;
         span {
           font-size: 10px;
           color: #8d9091;
@@ -521,7 +669,7 @@ export default {
       &.b-cart-blk {
         font-size: 16px;
         color: #fcfcfc;
-        background: #f37a20;
+        background: #387f9a;
         display: flex !important;
         justify-content: space-around;
         padding: 0px 25px !important;
@@ -545,7 +693,7 @@ export default {
   margin: auto;
 }
 .s-p-price {
-  color: #f37a20;
+  color: #387f9a;
   font-size: 22px;
 }
 

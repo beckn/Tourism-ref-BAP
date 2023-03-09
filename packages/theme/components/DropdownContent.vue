@@ -61,7 +61,7 @@ export default {
   padding: 10px;
 }
 .rahul:hover {
-  background: #f37a20;
+  background: #387F9A;
   border-radius: 5px;
   color: #ffff;
 }

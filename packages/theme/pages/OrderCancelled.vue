@@ -74,7 +74,7 @@ export default {
     .continue {
       margin-top: 25px;
       .f-btn-text {
-        color: #f37a20;
+        color: #387F9A;
       }
     }
   }

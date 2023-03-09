@@ -586,7 +586,6 @@ body {
 .s-product {
   position: relative;
   background: $s-p-bg;
-  padding: 15px 10px;
   border-radius: 7px;
   margin-bottom: 10px;
 
@@ -626,6 +625,7 @@ body {
     color: $s-p-weight-color;
     font-size: 16px;
     font-weight: 700;
+    margin-top: 20px;
   }
   .out-stock {
     color: #d30000;
@@ -653,12 +653,15 @@ body {
     display: flex;
     .s-p-image {
       height: 90px;
+     .sf-image-loaded {
+        border-radius: 6px;
+     }
     }
     .s-p-details {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding-left: 10px;
+      padding: 15px 20px;
       flex-grow: 1;
       // Since delete icon is absolutely positoned, need to calculate max-width, so that the details dont overlay on icon.
       max-width: calc(100vw - 160px);

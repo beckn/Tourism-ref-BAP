@@ -233,6 +233,9 @@ export default {
     };
 
     const goToProduct = (product, provider, bpp) => {
+      console.log('provider of the product', provider);
+      console.log('bpp of the product', bpp);
+      console.log('this is a test log');
       const data = btoa(
         JSON.stringify({
           product,

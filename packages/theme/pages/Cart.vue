@@ -6,7 +6,7 @@
           <SfIcon color="var(--c-primary)" size="20px" icon="chevron_left" />
         </span>
       </div>
-      <div class="header-push">Cart</div>
+      <div class="header-push">My Booking</div>
     </div>
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
       <LoadingCircle :enable="enableLoader" />
@@ -39,7 +39,7 @@
     <transition name="sf-fade" mode="out-in">
       <div v-if="cartGetters.getTotalItems(cart)" key="my-cart" class="my-cart">
         <transition-group name="sf-fade" tag="div">
-          <ProductCard
+          <ProductCardOnCart
             v-e2e="'cart-product'"
             name="product-card"
             class="product-card"
@@ -141,7 +141,7 @@ import {
   useQuote,
   providerGetters
 } from '@vue-storefront/beckn';
-import ProductCard from '~/components/ProductCard';
+import ProductCardOnCart from '~/components/ProductCardOnCart';
 import Footer from '~/components/Footer';
 import ModalSlide from '~/components/ModalSlide';
 import { ref, onBeforeMount, watch } from '@vue/composition-api';
@@ -160,7 +160,7 @@ export default {
     SfPrice,
     SfCollectedProduct,
     SfImage,
-    ProductCard,
+    ProductCardOnCart,
     Footer,
     ModalSlide,
     SfInput,

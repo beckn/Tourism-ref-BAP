@@ -40,8 +40,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  // .home-page {
-  //   height: 100vh;
-  //   background : red
-  // }
+.home-page {
+  height: 85vh;
+  background-image: url('/icons/Kedarkantha-Peak.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
 </style>

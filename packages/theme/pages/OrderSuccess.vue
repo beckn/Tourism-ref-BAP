@@ -8,19 +8,15 @@
       <div class="details">
         <div class="sub-heading dis-block">
           <div class="p-name flex-set">Success!</div>
-          <div class="p-name flex-set">Your Order Has Been Placed</div>
+          <div class="p-name flex-set">Your Package Has Been Booked</div>
         </div>
         <div class="sub-heading">
-          Thank You! Your order is currently being processed
+          Thank You! Your package is currently being processed
         </div>
-        <button
-          class="sf-button button color-primary"
-          link=""
-          @click="goToOrderDetails"
-        >
+        <button class="sf-button button color-primary" link="" @click="goToOrderDetails">
           <!-- button icon template  -->
           <slot name="buttonIcon" />
-          <div class="f-btn-text">View Order</div>
+          <div class="f-btn-text">VIEW PACKAGE</div>
         </button>
       </div>
     </div>

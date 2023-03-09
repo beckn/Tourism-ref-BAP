@@ -29,8 +29,8 @@
             </div>
             <div class="side-padding result-num">
               <div>
-                <span><span v-e2e="'total-result'">{{ totalResults }}</span> results
-                  found</span>
+                <span><span v-e2e="'total-result'">{{ totalResults }}</span>
+                  results found</span>
               </div>
             </div>
           </div>
@@ -74,14 +74,19 @@
 
       <LoadingCircle :enable="enableLoader" :customText="`Searching for things to do in ${searchKey}`" key="loding-cir" />
     </div>
-    <div v-if="cartGetters.getTotalItems(cart)" class="sr-footer">
-      <Footer @buttonClick="footerClick" :totalPrice="cartGetters.getTotals(cart).total"
-        :totalItem="cartGetters.getTotalItems(cart)" buttonText="View Cart">
+    <!-- TODO :- removal for DEMO. Need proper handling -->
+    <!-- <div v-if="cartGetters.getTotalItems(cart)" class="sr-footer">
+      <Footer
+        @buttonClick="footerClick"
+        :totalPrice="cartGetters.getTotals(cart).total"
+        :totalItem="cartGetters.getTotalItems(cart)"
+        buttonText="View Cart"
+      >
         <template v-slot:buttonIcon>
           <SfIcon icon="empty_cart" color="white" :coverage="1" />
         </template>
       </Footer>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -270,8 +275,10 @@ export default {
     };
 
     const goToProduct = (product, provider, bpp) => {
-
-      const data =
+      console.log('provider of the product 1', provider);
+      console.log('bpp of the product 1', bpp);
+      console.log('this is a test log 1');
+      const data = btoa(
         JSON.stringify({
           product,
           bpp: {
@@ -284,8 +291,9 @@ export default {
           },
           locations: provider.locations
         })
-        ;
-      console.log('data of the product', data)
+      );
+      console.log('data of the iqwdqwdhqh', data);
+
       context.root.$router.push({
         path: '/product',
         query: {
@@ -346,7 +354,7 @@ export default {
 }
 
 .travel-package-text {
-  color: #387F9A;
+  color: #387f9a;
   font-weight: 700;
   font-size: 16px;
 }

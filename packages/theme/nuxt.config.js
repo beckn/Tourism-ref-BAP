@@ -14,7 +14,7 @@ export default {
     fallback: true
   },
   head: {
-    title: 'Beckn storefront',
+    title: 'Tourism App',
     script: [
       {
         src: `https://maps.googleapis.com/maps/api/js?key=${mapsKey}&libraries=places`,

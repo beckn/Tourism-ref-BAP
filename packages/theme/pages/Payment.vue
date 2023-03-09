@@ -17,11 +17,7 @@
       </div>
       <Card v-if="order.cart">
         <div v-for="(value, bppId) in order.cart.quoteItem" :key="bppId">
-          <div
-            :key="providerId"
-            v-for="(valuePerProvider, providerId) in value"
-            class="address-text bold"
-          >
+          <div :key="providerId" v-for="(valuePerProvider, providerId) in value" class="address-text bold">
             <div :key="id" v-for="(breakup, id) in valuePerProvider.breakup">
               <CardContent class="flex-space-bw">
                 <div class="address-text">
@@ -32,14 +28,18 @@
                 </div>
               </CardContent>
             </div>
-            <div><hr class="sf-divider divider" /></div>
+            <div>
+              <hr class="sf-divider divider" />
+            </div>
             <CardContent class="flex-space-bw">
               <div>Subtotal :</div>
               INR{{ valuePerProvider.price.value }}
             </CardContent>
           </div>
         </div>
-        <div><hr class="sf-divider divider" /></div>
+        <div>
+          <hr class="sf-divider divider" />
+        </div>
       </Card>
       <div class="sub-heading">
         <div class="p-name">Other</div>
@@ -47,41 +47,19 @@
       <Card>
         <CardContent>
           <!-- <div class="address-text color-def">Add Shipping Details</div> -->
-          <SfRadio
-            class="sf-radio--transparent"
-            :name="'Payment'"
-            :value="'Cash on Delivery'"
-            label="Cash On Delivery"
-            :disabled="false"
-            :selected="paymentMethod"
-            @change="changePaymentMethod"
-          />
+          <SfRadio class="sf-radio--transparent" :name="'Payment'" :value="'Pay on arrival'" label="Pay on arrival"
+            :disabled="false" :selected="paymentMethod" @change="changePaymentMethod" />
         </CardContent>
       </Card>
     </div>
-    <Footer
-      class="footer-fixed"
-      :buttonText="'Confirm'"
-      :buttonEnable="isPayConfirmActive"
-      :totalPrice="order.cart.totalPrice"
-      :totalItem="cartGetters.getTotalItems(order.cart)"
-      @buttonClick="proceedToConfirm"
-    >
+    <Footer class="footer-fixed" :buttonText="'Confirm'" :buttonEnable="isPayConfirmActive"
+      :totalPrice="order.cart.totalPrice" :totalItem="cartGetters.getTotalItems(order.cart)"
+      @buttonClick="proceedToConfirm">
       <template v-slot:buttonIcon>
-        <svg
-          width="25"
-          height="19"
-          viewBox="0 0 25 19"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M1.0166 7.10181H23.0166M3.0166 1.10181H21.0166C22.1212 1.10181 23.0166 1.99724 23.0166 3.10181V15.1018C23.0166 16.2064 22.1212 17.1018 21.0166 17.1018H3.0166C1.91203 17.1018 1.0166 16.2064 1.0166 15.1018V3.10181C1.0166 1.99724 1.91203 1.10181 3.0166 1.10181Z"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </template>
     </Footer>
@@ -183,6 +161,7 @@ export default {
       const orderHistory =
         JSON.parse(localStorage.getItem('orderHistory')) ?? [];
       orderHistory.push(order.value);
+      localStorage.setItem('orderObject', JSON.stringify(orderHistory[0].order))
       localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
 
       context.root.$router.push({
@@ -247,6 +226,7 @@ export default {
   left: 0;
   margin: 10px;
 }
+
 .details {
   margin: 2px 20px;
 }

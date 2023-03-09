@@ -6,39 +6,19 @@
         Experience
       </h3>
       <h4>for All</h4>
-
-      <!-- <SfImage
-            src="/icons/XBuy.png"
-            :width="230"
-            :height="120"
-            alt="Vue Storefront Next"
-          /> -->
-
       <p>
-        A global marketplace to discover and buy anything you need. Just type
-        what you want to buy and we'll take care of the rest.
+        A global marketplace to discover anything you need. Just type where you want to go and we'll take care of the
+        rest.
       </p>
       <div class="open-search-input">
-        <input
-          v-on:keyup.enter="openSearch"
-          v-model="message"
-          :valid="false"
-          errorMessage="errer"
-          type="text"
-          placeholder="Search for travel location"
-          :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-input'"
-        />
-        <SfButton
-          class="button-pos sf-button--pure color-primary"
-          :class="{
-            'is-disabled--button':
-              !selectedLocation.latitude || !selectedLocation.longitude
-          }"
-          @click="openSearch"
-          :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-button'"
-        >
+        <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
+          placeholder="Search for travel location" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
+          v-e2e="'home-search-input'" />
+        <SfButton class="button-pos sf-button--pure color-primary" :class="{
+          'is-disabled--button':
+            !selectedLocation.latitude || !selectedLocation.longitude
+        }" @click="openSearch" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
+          v-e2e="'home-search-button'">
           <span class="sf-search-bar__icon">
             <SfIcon color="var(--c-text)" size="18px" icon="search" />
           </span>
@@ -109,40 +89,54 @@ export default {
     width: 50%;
     margin: auto;
   }
+
   padding: 40px 20px;
+
   h3 {
     font-size: 40px;
     font-weight: 700;
-    color: #387f9a;
+    color: rgba(100, 169, 194, 1);
+
     line-height: 45px;
   }
+
   h4 {
     font-size: 27px;
     font-weight: 700;
     line-height: 30px;
+    color: rgba(235, 242, 245, 1);
   }
+
   p {
     font-size: 15px;
     font-weight: 400;
     line-height: 20px;
     color: #7c7c7c;
     margin-bottom: 30px;
+    color: rgba(235, 242, 245, 1);
   }
+
   .open-search-input {
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 1);
     display: flex;
     margin-bottom: 8px;
     position: relative;
+
     &.disable {
       input {
         border: 1px solid #fff;
       }
+
       button {
         background: #bfbfbf;
+
         .sf-icon {
           --icon-color: #fff !important;
         }
       }
     }
+
     input {
       box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
@@ -151,15 +145,18 @@ export default {
       width: calc(100% - 22px);
       font-size: 15px;
       font-weight: 700;
+
       &::placeholder {
         font-size: 14px;
         line-height: 17px;
         color: #dbdbdc;
       }
+
       &:focus {
         border: 1px solid #387f9a !important;
       }
     }
+
     button {
       position: absolute;
       padding: 17px;
@@ -169,6 +166,7 @@ export default {
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       right: 0;
+
       .sf-icon {
         --icon-color: #fff !important;
       }
@@ -178,27 +176,36 @@ export default {
     //   padding-left: 85px;
     // }
   }
+
   .error-msg {
     font-size: 14px;
     color: #d12727;
   }
 }
+
 .sf-footer {
+  z-index: +1;
   text-align: center;
-  background: #fbfcff !important;
+  background: transparent !important;
   position: fixed;
   bottom: 0px;
   width: 100%;
   padding: 0;
+
   p {
     margin: 0;
+
     span {
       font-size: 17px;
       position: relative;
+      color: #fbfcff;
       top: -6px;
+
+
       &.powered-by {
         font-size: 10px;
         top: -1px !important;
+
       }
     }
   }

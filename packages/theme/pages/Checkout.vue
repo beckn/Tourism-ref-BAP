@@ -143,7 +143,7 @@
               name="shipping"
             />
           </div>
-          <div class="address-text">Same as Shipping Details</div>
+          <div class="address-text">Same as Traveller Details</div>
         </CardContent>
       </Card>
 
@@ -197,7 +197,7 @@
 
       <div class="order-policy">
         <div class="sub-heading">
-          <div class="p-name">Order policy</div>
+          <div class="p-name">Terms & Condition</div>
         </div>
         <Card>
           <!-- To redo it after order policy content -->

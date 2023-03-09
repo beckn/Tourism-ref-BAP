@@ -3,20 +3,21 @@
     <div :class="{ horizontal: horizontalView, vertical: !horizontalView }">
       <div @click="$emit('goToProduct')" class="s-p-image">
         <SfImage
+        class="product-listing-image"
           :src="_pImage"
           alt="product img"
-          :width="horizontalView ? 85 : 75"
-          :height="90"
+          :width="horizontalView ? 85 : 129"
+          :height="132"
         />
       </div>
       <div @click="$emit('goToProduct')" class="s-p-details">
         <div>
           <div class="s-p-name">{{ _pName }}</div>
           <div class="s-p-retailer">
-            Sold by {{ _pProviderName }}
+            Conducted by {{ _pProviderName }}
             <span class="s-p-retailer-distance">{{ _pDistance }}</span>
           </div>
-          <div class="s-p-bpp-provider">
+          <!-- <div class="s-p-bpp-provider">
             <p v-if="_pBppName !== _pProviderName">
               {{
                 _pBppName.charAt(0).toUpperCase() +
@@ -24,7 +25,7 @@
               }}
             </p>
             <span class="s-p-retailer-distance">{{ _pDistance }}</span>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="s-p-weight">{{ _pWieght }}</div>    -->
         <div
@@ -38,14 +39,14 @@
         </div>
         <span class="out-stock" v-if="_updatedCount === 0">Out of Stock</span>
       </div>
-      <SfImage
+      <!-- <SfImage
         v-if="deleteCard"
         src="/icons/delete.svg"
         alt="delete-icon"
         @click="$emit('deleteItem')"
         class="delete-icon"
-      />
-      <div class="s-p-add-cart">
+      /> -->
+      <!-- <div class="s-p-add-cart">
         <AddToCart
           v-if="!dropdownCouner"
           v-e2e="'add-to-cart'"
@@ -83,7 +84,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -168,15 +169,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .s-product {
-  height: 120px;
+  height: 129px;
 }
+
+
+
 
 .s-p-bpp-provider {
   p {
     margin: 0;
     padding-top: 2px;
     font-size: 12px;
-  }
+  } 
 }
 
 .dropdown-container {
@@ -185,7 +189,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: #387F9A;
+    color: #387f9a;
     font-weight: 700;
     width: 70px;
     height: 30px;
@@ -211,7 +215,7 @@ export default {
       border-bottom: 1px solid rgba(226, 226, 226, 0.7);
     }
     .color-text {
-      color: #387F9A;
+      color: #387f9a;
       cursor: pointer;
     }
   }

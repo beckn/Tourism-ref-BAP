@@ -4,7 +4,7 @@
     <div class="provider-head flexy-center h-padding">
       <div class="flexy">
         <div class="back" @click="goBack">
-          <SfIcon color="#F37A20" size="20px" icon="chevron_left" />
+          <SfIcon color="#387F9A" size="20px" icon="chevron_left" />
         </div>
         <img
           class="provide-img"
@@ -370,8 +370,8 @@ export default {
       padding-bottom: 70px;
       button {
         background-color: #fff;
-        color: #f37a20;
-        border: 2px solid #f37a20;
+        color: #387F9A;
+        border: 2px solid #387F9A;
         border-radius: 3px;
         font-weight: 600;
         font-size: 15px;

@@ -213,7 +213,7 @@ export default {
 
 <style lang="scss" scoped>
 .sf-circle-icon {
-  --icon-color: #f37a20;
+  --icon-color: #387F9A;
 }
 .layout-container {
   display: flex;
@@ -243,10 +243,10 @@ export default {
   text-align: left;
 }
 .sign-in-text {
-  color: #f37a20;
+  color: #387F9A;
 }
 .userIcon {
-  background-color: #f37a20;
+  background-color: #387F9A;
 }
 
 .user-cart-content {

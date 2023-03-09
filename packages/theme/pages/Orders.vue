@@ -33,7 +33,7 @@
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M21 6.98H16.21L11.83 0.42C11.64 0.14 11.32 0 11 0C10.68 0 10.36 0.14 10.17 0.43L5.79 6.98H1C0.45 6.98 0 7.43 0 7.98C0 8.07 0.01 8.16 0.04 8.25L2.58 17.52C2.81 18.36 3.58 18.98 4.5 18.98H17.5C18.42 18.98 19.19 18.36 19.43 17.52L21.97 8.25L22 7.98C22 7.43 21.55 6.98 21 6.98ZM11 2.78L13.8 6.98H8.2L11 2.78ZM4.51 16.99L17.5 16.98L19.7 8.98H2.31L4.51 16.99Z"
-                    fill="#F37A20"
+                    fill="#387F9A"
                   />
                 </svg>
               </div>
@@ -199,7 +199,7 @@ export default {
 .order-price {
   font-size: 18px;
   font-weight: 700;
-  color: #f37a20;
+  color: #387F9A;
 }
 
 .details {
@@ -232,7 +232,7 @@ export default {
   margin-top: 4rem;
 }
 .orderNowButtonForEmptyOrderListPage {
-  background: #f37a20;
+  background: #387F9A;
   border-radius: 5px;
   padding: 10px;
   margin-top: 10px;

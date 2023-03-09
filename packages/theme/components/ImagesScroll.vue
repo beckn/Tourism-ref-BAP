@@ -224,7 +224,7 @@ export default {
     width: 16px;
     border-radius: 36%;
     height: 3px;
-    background: #F37A20;
+    background: #387F9A;
   }
 }
 </style>

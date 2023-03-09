@@ -1,19 +1,19 @@
 <template>
   <div>
     <div class="open-search header-top-space">
-      <!-- <h3>
-        Open <br />
-        Commerce
+      <h3>
+        Travel <br />
+        Experience
       </h3>
-      <h4>for All</h4> -->
-      
-      <SfImage
+      <h4>for All</h4>
+
+      <!-- <SfImage
             src="/icons/XBuy.png"
             :width="230"
             :height="120"
             alt="Vue Storefront Next"
-          />
-       
+          /> -->
+
       <p>
         A global marketplace to discover and buy anything you need. Just type
         what you want to buy and we'll take care of the rest.
@@ -25,7 +25,7 @@
           :valid="false"
           errorMessage="errer"
           type="text"
-          placeholder="Search for anything"
+          placeholder="Search for travel location"
           :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
           v-e2e="'home-search-input'"
         />
@@ -59,7 +59,7 @@
   </div>
 </template>
 <script>
-import { SfButton,SfImage, SfIcon } from '@storefront-ui/vue';
+import { SfButton, SfImage, SfIcon } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 import { SfFooter } from '@storefront-ui/vue';
 import { ref } from '@vue/composition-api';
@@ -113,7 +113,7 @@ export default {
   h3 {
     font-size: 40px;
     font-weight: 700;
-    color: #f37a20;
+    color: #387f9a;
     line-height: 45px;
   }
   h4 {
@@ -157,7 +157,7 @@ export default {
         color: #dbdbdc;
       }
       &:focus {
-        border: 1px solid #f37a20 !important;
+        border: 1px solid #387f9a !important;
       }
     }
     button {
@@ -165,7 +165,7 @@ export default {
       padding: 17px;
       height: 63px;
       top: 0;
-      // background: #F37A20;
+      // background: #387F9A;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       right: 0;
@@ -213,7 +213,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  color: #f37a20;
+  color: #387f9a;
   box-sizing: border-box;
   font-weight: 700;
   cursor: pointer;
@@ -237,7 +237,7 @@ export default {
 //     border-bottom: 1px solid rgba(226, 226, 226, 0.7);
 //   }
 //   .color-text {
-//     color: #f37a20;
+//     color: #387F9A;
 //     cursor: pointer;
 //   }
 // }

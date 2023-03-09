@@ -42,9 +42,9 @@ body {
   height: 100%;
   background: linear-gradient(
     90deg,
-    #f37a20 17.41%,
+    #387F9A 17.41%,
     #616161 53.73%,
-    #f37a20 70%
+    #387F9A 70%
   );
   background-size: 500% 100%;
   animation: progress-animation 2s linear infinite;

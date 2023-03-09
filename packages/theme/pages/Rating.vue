@@ -149,7 +149,7 @@ export default {
         }
       }
       .input-container:focus-within {
-        border-bottom: 2px solid #f37a20;
+        border-bottom: 2px solid #387F9A;
       }
       .skip {
         margin-top: 15px;

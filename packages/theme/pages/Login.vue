@@ -9,12 +9,17 @@
       <div class="header-push">Sign in</div>
     </div>
     <div class="open-search">
-      <SfImage
+      <!-- <SfImage
         src="/icons/XBuy.png"
         :width="230"
         :height="120"
         alt="Vue Storefront Next"
-      />
+      /> -->
+      <h3>
+        Travel <br />
+        Experience
+      </h3>
+      <h4>for All</h4>
       <div class="socialMedia-login-container">
         <div>
           <SfButton
@@ -166,7 +171,7 @@ export default {
   h3 {
     font-size: 40px;
     font-weight: 700;
-    color: #f37a20;
+    color: #387F9A;
     line-height: 45px;
   }
   h4 {

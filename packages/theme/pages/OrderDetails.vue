@@ -1,7 +1,15 @@
 <template>
   <div>
     <div class="top-bar">
-      <div class="header-push">Order Details</div>
+      <div class="header-push">Booking Details</div>
+
+      <Dropdown>
+      <div>
+        <SfIcon icon="profile" />
+        <CopyOrderDropdownContent />
+      </div>
+    </Dropdown>
+
     </div>
 
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
@@ -36,38 +44,37 @@
       </div> -->
       <Card>
         <SfAccordion>
-          <SfAccordionItem :header="'Order'">
+          <SfAccordionItem :header="'My Trip'">
             <CardContent class="flex-space-bw">
-              <div class="address-text"><span>Placed at</span></div>
+              <div class="address-text"><span>Booked on</span></div>
               <div class="address-text order-id">
                 <span>{{ orderPlacementTime }}</span>
               </div>
             </CardContent>
-            <div><hr class="sf-divider divider" /></div>
+            <div>
+              <hr class="sf-divider divider" />
+            </div>
 
-            <div
-              :key="orderId"
-              v-for="(order, orderId, index) in order.orderData"
-              class="shipment-wrapper"
-            >
-              <CardContent class="flex-space-bw">
+            <div :key="orderId" v-for="(order, orderId, index) in order.orderData" class="shipment-wrapper">
+              <!-- <CardContent class="flex-space-bw">
                 <div class="address-text">
                   <span>Order Id {{ index + 1 }}</span>
                 </div>
                 <div class="address-text">
                   <span>Id - {{ orderId }}</span>
                 </div>
-              </CardContent>
-              <CardContent
-                v-if="orderStatusData && orderStatusData[index]"
-                class="flex-space-bw"
-              >
-                <div class="address-text"><span>Order Status</span></div>
-                <div class="address-text">
-                  <span>{{
+              </CardContent> -->
+              <CardContent v-if="orderStatusData && orderStatusData[index]" class="flex-space-bw">
+                <div class="address-text"><span>Status</span></div>
+                <div class="status-text">
+                  <span>
+                    <!-- {{
                     orderStatusData[index].state.charAt(0).toUpperCase() +
                       orderStatusData[index].state.slice(1).toLowerCase()
-                  }}</span>
+                
+                  }} -->
+                    Confirmed
+                  </span>
                 </div>
               </CardContent>
               <CardContent class="flex-space-bw">
@@ -79,42 +86,33 @@
                   {{ order.items[0].quantity.count }}
                 </div>
                 <div v-if="order.items.length > 1">
-                  <div
-                    @click="
-                      openItemsModal = true;
-                      selectMoreItemsId = orderId;
-                    "
-                    class="more-items-button"
-                  >
-                    <span class="more-items-text"
-                      >{{ order.items.length - 1 }} more items</span
-                    >
+                  <div @click="
+                    openItemsModal = true;
+                  selectMoreItemsId = orderId;
+                                        " class="more-items-button">
+                    <span class="more-items-text">{{ order.items.length - 1 }} more items</span>
                   </div>
                 </div>
               </CardContent>
 
               <div class="order-buttons-wrapper">
-                <SfButton
-                  class="sf-button--pure"
-                  @click="
-                    openTrackModal = true;
-                    selectedTrackingId = index;
-                  "
-                >
+                <SfButton class="sf-button--pure" @click="
+                  openTrackModal = true;
+                selectedTrackingId = index;
+                                    ">
                   <div class="color-def">Track</div>
                 </SfButton>
 
-                <SfButton
-                  class="sf-button--pure"
-                  @click="
-                    openSupportModal = true;
-                    selectedSupportId = index;
-                  "
-                >
+                <SfButton class="sf-button--pure" @click="
+                  openSupportModal = true;
+                selectedSupportId = index;
+                                    ">
                   <div class="color-def">Support</div>
                 </SfButton>
               </div>
-              <div><hr class="sf-divider divider" /></div>
+              <div>
+                <hr class="sf-divider divider" />
+              </div>
             </div>
           </SfAccordionItem>
         </SfAccordion>
@@ -122,99 +120,12 @@
 
       <div class="sub-heading"></div>
 
-      <div v-if="showFulfillmentProgress">
-        <Card>
-          <SfAccordion>
-            <SfAccordionItem :header="'Fulfillment Progress'">
-              <CardContent class="flex-space-bw">
-                <div class="fulfillment-progress">
-                  <div
-                    v-for="(currFulfillment,
-                    fulfillmentId,
-                    index) in fulfillmentData"
-                    class="track-details"
-                    :class="{
-                      first: index === 0,
-                      last: index === Object.keys(fulfillmentData).length - 1
-                    }"
-                    :key="index"
-                  >
-                    <template
-                      v-if="
-                        currFulfillment.state &&
-                          currFulfillment.state.descriptor
-                      "
-                    >
-                      <div class="check-container">
-                        <div v-if="index !== 0" class="dot"></div>
-                        <div v-if="index !== 0" class="dot"></div>
-                        <div v-if="index !== 0" class="dot"></div>
-                        <div class="check">
-                          <img src="/icons/check.svg" alt="" />
-                        </div>
-                        <div
-                          v-if="
-                            index !== Object.keys(fulfillmentData).length - 1
-                          "
-                          class="dot"
-                        ></div>
-                        <div
-                          v-if="
-                            index !== Object.keys(fulfillmentData).length - 1
-                          "
-                          class="dot"
-                        ></div>
-                      </div>
-                      <div class="step-details">
-                        <div class="step-number">Shipment {{ index + 1 }}</div>
-                        <div class="step-name">
-                          {{ currFulfillment.state.descriptor.name }}
-                        </div>
-                        <div class="step-time">
-                          {{ currFulfillment.state.descriptor.updated_at }}
-                        </div>
-                      </div>
-                    </template>
-                  </div>
-                </div>
-              </CardContent>
-            </SfAccordionItem>
-          </SfAccordion>
-        </Card>
-      </div>
-
-      <div class="sub-heading"></div>
-
       <Card>
         <SfAccordion>
-          <SfAccordionItem :header="'Shipping'">
-            <AddressCard
-              :name="order.shippingAddress.name"
-              :address="order.shippingAddress.address"
-              :mobile="order.shippingAddress.mobile"
-              :building="order.shippingAddress.building"
-              :pincode="order.shippingAddress.pincode"
-            />
-          </SfAccordionItem>
-        </SfAccordion>
-      </Card>
-
-      <div class="sub-heading"></div>
-
-      <Card>
-        <SfAccordion>
-          <SfAccordionItem :header="'Billing'">
-            <CardContent v-if="order.shippingAsBilling" class="flex-space-bw">
-              <div class="address-text">Same as Shipping Details</div>
-            </CardContent>
-            <AddressCard
-              v-else
-              :name="order.billingAddress.name"
-              :address="order.billingAddress.address"
-              :mobile="order.billingAddress.mobile"
-              :building="order.billingAddress.building"
-              :pincode="order.billingAddress.pincode"
-            />
+          <SfAccordionItem :header="'Traveller Details'">
+            <AddressCard :name="order.shippingAddress.name" :address="order.shippingAddress.address"
+              :mobile="order.shippingAddress.mobile" :building="order.shippingAddress.building"
+              :pincode="order.shippingAddress.pincode" />
           </SfAccordionItem>
         </SfAccordion>
       </Card>
@@ -233,7 +144,9 @@
                   </div>
                 </CardContent>
               </div>
-              <div><hr class="sf-divider divider" /></div>
+              <div>
+                <hr class="sf-divider divider" />
+              </div>
               <CardContent class="flex-space-bw">
                 <div class="address-text">Total</div>
                 <div class="address-text-value">
@@ -245,7 +158,7 @@
                 <div class="address-text-value">
                   {{
                     value.payment.status.charAt(0).toUpperCase() +
-                      value.payment.status.slice(1).toLowerCase()
+                    value.payment.status.slice(1).toLowerCase()
                   }}
                 </div>
               </CardContent>
@@ -254,62 +167,31 @@
               <div class="address-text">Method</div>
               <div class="address-text-value">{{ order.paymentMethod }}</div>
             </CardContent>
-            <div><hr /></div>
+            <div>
+              <hr />
+            </div>
           </SfAccordionItem>
         </SfAccordion>
       </Card>
 
       <div class="sub-heading"></div>
 
-      <div v-if="orderStatusData">
-        <Card>
-          <SfAccordion>
-            <SfAccordionItem :header="'Fulfillment'">
-              <div
-                v-for="(currOrderStatus, orderStatusId) in orderStatusData"
-                :key="orderStatusId"
-              >
-                <CardContent class="flex-space-bw">
-                  <div class="address-text">ID</div>
-                  <div class="address-text">
-                    {{ currOrderStatus.provider.id }}
-                  </div>
-                </CardContent>
-                <!-- <CardContent class="flex-space-bw">
-                  <div class="address-text">Status</div>
-                  <div class="address-text">
-                    {{
-                      currOrderStatus.state.charAt(0).toUpperCase() +
-                        currOrderStatus.state.slice(1).toLowerCase()
-                    }}
-                  </div>
-                </CardContent> -->
 
-                <div><hr class="sf-divider divider" /></div>
-              </div>
-            </SfAccordionItem>
-          </SfAccordion>
-        </Card>
-      </div>
 
       <div class="sub-heading"></div>
 
-      <button
-        class="sf-button color-primary support-btns card-checkbox"
-        @click="goHome"
-      >
+      <button class="sf-button color-primary support-btns card-checkbox" @click="goHome">
         <div class="f-btn-text">Home</div>
       </button>
 
-      <ModalSlide
-        :visible="openSupportModal"
-        @close="
-          openSupportModal = false;
-          selectedSupportId = null;
-        "
-      >
+      <ModalSlide :visible="openSupportModal" @close="
+        openSupportModal = false;
+      selectedSupportId = null;
+                ">
         <div class="modal-heading">Contact Support</div>
-        <div><hr class="sf-divider" /></div>
+        <div>
+          <hr class="sf-divider" />
+        </div>
         <div class="modal-body">
           <div v-if="supportData && supportData[selectedSupportId]">
             <div class="support-text">
@@ -321,32 +203,15 @@
                 )
               }}
             </div>
-            <SfButton
-              class="support-btns"
-              v-if="supportData[selectedSupportId].phone"
-              @click="openWindow('tel:' + supportData[selectedSupportId].phone)"
-              aria-label="Close modal"
-              type="button"
-              >Call us</SfButton
-            >
-            <SfButton
-              class="support-btns"
-              v-if="supportData[selectedSupportId].email"
-              @click="
-                openWindow('mailto:' + supportData[selectedSupportId].email)
-              "
-              aria-label="Close modal"
-              type="button"
-              >Email us</SfButton
-            >
-            <SfButton
-              class="support-btns"
-              v-if="supportData[selectedSupportId].uri"
-              @click="openWindow(supportData[selectedSupportId].uri)"
-              aria-label="Close modal"
-              type="button"
-              >Chat with us</SfButton
-            >
+            <SfButton class="support-btns" v-if="supportData[selectedSupportId].phone"
+              @click="openWindow('tel:' + supportData[selectedSupportId].phone)" aria-label="Close modal" type="button">
+              Call us</SfButton>
+            <SfButton class="support-btns" v-if="supportData[selectedSupportId].email" @click="
+              openWindow('mailto:' + supportData[selectedSupportId].email)
+            " aria-label="Close modal" type="button">Email us</SfButton>
+            <SfButton class="support-btns" v-if="supportData[selectedSupportId].uri"
+              @click="openWindow(supportData[selectedSupportId].uri)" aria-label="Close modal" type="button">Chat with us
+            </SfButton>
           </div>
           <div v-else class="support-text">
             No Support available at the moment
@@ -354,15 +219,14 @@
         </div>
       </ModalSlide>
 
-      <ModalSlide
-        :visible="openTrackModal"
-        @close="
-          openTrackModal = false;
-          selectedTrackingId = null;
-        "
-      >
+      <ModalSlide :visible="openTrackModal" @close="
+        openTrackModal = false;
+      selectedTrackingId = null;
+                ">
         <div class="modal-heading">Track</div>
-        <div><hr class="sf-divider" /></div>
+        <div>
+          <hr class="sf-divider" />
+        </div>
         <div class="modal-body">
           <div v-if="!trackingData[selectedTrackingId]" class="support-text">
             No Tracking details available
@@ -373,13 +237,8 @@
             }} -->
           </div>
           <div v-else>
-            <SfButton
-              class="support-btns"
-              aria-label="Close modal"
-              type="button"
-              @click="openWindow(trackingData[selectedTrackingId])"
-              >open Link</SfButton
-            >
+            <SfButton class="support-btns" aria-label="Close modal" type="button"
+              @click="openWindow(trackingData[selectedTrackingId])">open Link</SfButton>
           </div>
           <!-- <SfButton class="support-btns" aria-label="Close modal" type="button"
             >Call us</SfButton
@@ -390,15 +249,14 @@
         </div>
       </ModalSlide>
 
-      <ModalSlide
-        :visible="openItemsModal"
-        @close="
-          openItemsModal = false;
-          selectMoreItemsId = null;
-        "
-      >
+      <ModalSlide :visible="openItemsModal" @close="
+        openItemsModal = false;
+      selectMoreItemsId = null;
+                ">
         <div class="modal-heading">Ordered Items</div>
-        <div><hr class="sf-divider" /></div>
+        <div>
+          <hr class="sf-divider" />
+        </div>
         <div class="modal-body">
           <CardContent class="flex-space-bw">
             <div class="address-text">
@@ -410,21 +268,12 @@
           </CardContent>
           <div v-if="selectMoreItemsId !== null">
             <CardContent class="more-items-flex">
-              <div
-                v-for="(product, index) in getMoreItems(
-                  order,
-                  selectMoreItemsId
-                )"
-                :key="index"
-                class="item-wrapper"
-              >
+              <div v-for="(product, index) in getMoreItems(
+                order,
+                selectMoreItemsId
+              )" :key="index" class="item-wrapper">
                 <div class="s-p-image">
-                  <SfImage
-                    :src="cartGetters.getItemImage(product)"
-                    alt="product img"
-                    :width="85"
-                    :height="90"
-                  />
+                  <SfImage :src="cartGetters.getItemImage(product)" alt="product img" :width="85" :height="90" />
                 </div>
                 <div class="s-p-details">
                   <div class="s-p-name">
@@ -443,17 +292,14 @@
                     INR
                     {{
                       cartGetters.getItemPrice(product).regular *
-                        product.quantity
+                      product.quantity
                     }}
                   </div>
                 </div>
               </div>
             </CardContent>
           </div>
-          <button
-            class="sf-button color-primary support-btns"
-            @click="openItemsModal = false"
-          >
+          <button class="sf-button color-primary support-btns" @click="openItemsModal = false">
             <div class="f-btn-text">Okay</div>
           </button>
         </div>
@@ -471,7 +317,10 @@ import {
   SfAccordion,
   SfImage,
   SfInput,
-  SfIcon
+  SfIcon,
+  SfDropdown,
+  SfList,
+  SfListItem
 } from '@storefront-ui/vue';
 import ModalSlide from '~/components/ModalSlide.vue';
 import LoadingCircle from '~/components/LoadingCircle';
@@ -499,6 +348,8 @@ import AddressCard from '~/components/AddressCard';
 import helpers, {
   createStatusTrackAndSupportOrderRequest
 } from '../helpers/helpers';
+import Dropdown from '../components/Dropdown.vue';
+import CopyOrderDropdownContent from '../components/CopyOrderDropdownContent.vue';
 
 export default {
   middleware: 'auth',
@@ -521,7 +372,12 @@ export default {
     SfIcon,
     LoadingCircle,
     AddressCard,
-    helpers
+    helpers,
+    SfDropdown,
+    SfList,
+    SfListItem,
+    Dropdown,
+    CopyOrderDropdownContent,
   },
   setup(_, context) {
     // const isThankYou = computed(() => currentStep.value === 'thank-you');
@@ -776,12 +632,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .order-desrciption {
-    margin-left: 4px;
-  }
-.track-target {
-  color: #f37a20;
+.order-desrciption {
+  margin-left: 4px;
 }
+
+.track-target {
+  color: #387F9A;
+}
+
 .support-btns {
   width: 100%;
   border-radius: 3px;
@@ -804,9 +662,11 @@ export default {
   --checkbox-border-color: transparent !important;
   border: 0;
 }
+
 .sf-input {
   input {
     font-size: 14px;
+
     &:placeholder {
       font-size: 14px;
     }
@@ -836,6 +696,7 @@ export default {
 .address-text {
   align-self: center;
   margin-left: 6px;
+
   span {
     font-weight: 500;
   }
@@ -845,20 +706,21 @@ export default {
   display: flex;
   align-self: center;
   margin-left: 6px;
+
   span {
     font-weight: 500;
   }
 }
 
 .more-items-button {
-  border: 1px solid #f37a20;
+  border: 1px solid #387F9A;
   border-radius: 6px;
   width: 100%;
 }
 
 .more-items-text {
   padding: 9px;
-  color: #f37a20;
+  color: #387F9A;
 }
 
 .sub-heading {
@@ -871,6 +733,7 @@ export default {
   position: fixed;
   bottom: 0;
 }
+
 .address-text {
   font-weight: 600;
 }
@@ -886,7 +749,7 @@ export default {
 }
 
 .color-def {
-  color: #f37a20;
+  color: #387F9A;
 }
 
 .top-bar {
@@ -905,44 +768,54 @@ export default {
   font-weight: 600;
   color: #37474f;
 }
+
 #checkout {
   box-sizing: border-box;
+
   @include for-desktop {
     max-width: 1240px;
     margin: 0 auto;
   }
 }
+
 .order-buttons-wrapper {
   padding-top: 20px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
 }
+
 .checkout-product:first-child {
   border-top: 0px solid rgba(0, 0, 0, 0.3);
 }
+
 .checkout-product {
   display: flex;
   margin-top: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 15px;
+
   &:first-child(2) {
     border-top: 0 !important;
   }
+
   .s-p-image {
     margin-right: 25px;
   }
+
   .s-p-name {
     font-size: 11px;
     color: #000;
   }
+
   .s-p-price {
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
-    color: #f37a20;
+    color: #387F9A;
   }
 }
+
 .item-wrapper {
   display: flex;
   margin: 20px 0;
@@ -950,38 +823,46 @@ export default {
   .s-p-image {
     margin-right: 25px;
   }
+
   .s-p-name {
     font-weight: 700;
     font-size: 15px;
   }
+
   .s-p-retailer {
     padding-top: 5px;
     font-size: 13px;
   }
+
   .s-p-price {
     font-size: 16px;
     margin-top: 10px;
-    color: #f37a20;
+    color: #387F9A;
   }
 }
+
 .checkout {
   @include for-desktop {
     display: flex;
   }
+
   &__main {
     @include for-desktop {
       flex: 1;
       padding: var(--spacer-xl) 0 0 0;
     }
   }
+
   &__aside {
     @include for-desktop {
       flex: 0 0 25.5rem;
       margin: 0 0 0 4.25rem;
     }
   }
+
   &__steps {
     --steps-content-padding: 0 var(--spacer-base);
+
     @include for-desktop {
       --steps-content-padding: 0;
     }
@@ -991,10 +872,12 @@ export default {
     }
   }
 }
+
 .more-items-flex {
   display: flex;
   flex-direction: column;
 }
+
 .modal-heading {
   margin: 20px;
   font-size: 20px;
@@ -1002,14 +885,16 @@ export default {
 }
 
 .color-def {
-  color: #f37a20;
+  color: #387F9A;
 }
 
 .modal-body {
   padding: 28px;
+
   .support-text {
     font-size: 15px;
   }
+
   .support-btns {
     margin-top: 20px;
     width: 100%;
@@ -1032,5 +917,10 @@ export default {
 
 .step-number {
   line-height: 1;
+}
+
+.status-text {
+  color: #5EC401;
+  font-weight: 700;
 }
 </style>

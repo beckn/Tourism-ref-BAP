@@ -185,7 +185,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: #f37a20;
+    color: #387F9A;
     font-weight: 700;
     width: 70px;
     height: 30px;
@@ -211,7 +211,7 @@ export default {
       border-bottom: 1px solid rgba(226, 226, 226, 0.7);
     }
     .color-text {
-      color: #f37a20;
+      color: #387F9A;
       cursor: pointer;
     }
   }

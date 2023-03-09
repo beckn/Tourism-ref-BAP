@@ -6,17 +6,19 @@
           <SfIcon color="var(--c-primary)" size="20px" icon="chevron_left" />
         </span>
       </div>
-      <div>Billing & Shipping</div>
+      <div>Checkout</div>
     </div>
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
       <LoadingCircle :enable="enableLoader" />
     </div>
     <div class="details header-push">
-      <div class="sub-heading">
+      <!-- //TODO removed this because of tourism requirement -->
+      <!-- <div class="sub-heading">
         <div class="p-name" v-e2e="'cart-item'">Items</div>
-      </div>
+      </div> -->
 
-      <div
+      <!-- //TODO removed this because of tourism requirement -->
+      <!-- <div
         :key="bppId"
         v-for="(itemsPerBpp,
         bppId,
@@ -76,10 +78,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="sub-heading">
-        <div class="p-name">Shipping</div>
+        <div class="p-name">Traveller Details</div>
         <SfButton
           v-if="isShippingAddressFilled"
           class="sf-button--pure"
@@ -108,7 +110,7 @@
             >
               <path
                 d="M8 1C11.8598 1 15 4.1402 15 8C15 13.2126 9.80472 18.1458 7.99934 19.7024C6.19334 18.1482 1 13.2239 1 8C1 4.1402 4.14018 1 8 1ZM8 0C3.58176 0 0 3.5817 0 8C0 14.8571 8 21 8 21C8 21 16 14.8571 16 8C16 3.5817 12.4182 0 8 0ZM7 12H9V9H12V7H9V4H7V7H4V9H7V12Z"
-                fill="#F37A20"
+                fill="#387F9A"
               />
             </svg>
           </div>
@@ -217,7 +219,7 @@
       @buttonClick="paymentProceed"
       :totalPrice="cartGetters.getTotals(cart).total"
       :totalItem="cartGetters.getTotalItems(cart)"
-      :buttonText="'Proceed'"
+      :buttonText="'Proceed to Pay'"
       :buttonEnable="proceedToPay"
     >
       <template v-slot:buttonIcon>
@@ -614,7 +616,7 @@ export default {
 }
 
 .color-def {
-  color: #f37a20;
+  color: #387F9A;
 }
 
 .top-bar {
@@ -682,7 +684,7 @@ export default {
   .s-p-price {
     font-size: 16px;
     margin-top: 10px;
-    color: #f37a20;
+    color: #387F9A;
   }
 }
 

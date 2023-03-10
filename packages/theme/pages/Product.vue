@@ -32,9 +32,8 @@
         </div>
 
         <div class="bottom-bar-cart">
-          <BookNow :totalPrice="cart.totalPrice" :totalItem="cartGetters.getTotalItems(cart)"
-            :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart" />
+          <BookNow :totalPrice="Math.abs(product.price.value)" :key="keyVal + 'product-page'"
+            :value="cartGetters.getItemQty(isInCart({ product }))" @updateItemCount="updateCart" />
         </div>
       </div>
     </div>
@@ -95,6 +94,7 @@ export default {
     const { product, bpp, bppProvider, locations } = JSON.parse(
       Buffer.from(data, 'base64').toString()
     );
+
     const { addItem, cart, load, isInCart } = useCart();
 
     const images = productGetters.getImages(product);

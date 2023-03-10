@@ -1,34 +1,19 @@
 <template>
   <div id="product">
-    <!-- <SfBreadcrumbs
-      class="breadcrumbs desktop-only"
-      :breadcrumbs="breadcrumbs"
-    /> -->
-    <!-- <div class="product"> -->
+
     <div @click="goBack" class="sf-chevron--left sf-chevron icon_back">
       <span class="sf-search-bar__icon">
         <SfIcon color="var(--c-primary)" size="20px" icon="chevron_left" />
       </span>
     </div>
-    <!-- <div class="images">
-        <LazyHydrate when-visible>
-          <ImagesScroll
-            :imageHeight="350"
-            :images="images"
-            class="product__gallery"
-          />
-        </LazyHydrate>
-      </div> -->
+
     <div>
       <div>
         <img class="product-description-image" v-bind:src="images" alt="product img" />
       </div>
       <div class="head-container">
-          <h1 class="head-title">{{productGetters.getName(product)}}</h1>
-        </div>
-        <!-- <AddToCart :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart" /> -->
-      <!-- </div> -->
+        <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
+      </div>
 
       <div class="product__info">
         <div class="product__header">
@@ -36,24 +21,11 @@
             class="sf-heading--no-underline sf-heading--left" />
 
         </div>
-        <div class="product__price-and-rating">
-          <div class="s-p-price">
-            INR {{ productGetters.getPrice(product).regular }}
-          </div>
-          <AddToCart :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart" />
-        </div>
-        <div>
-          <hr class="sf-divider divider" />
-        </div>
 
-        <div v-if="cartGetters.getTotalItems(cart)" class="bottom-bar-cart">
-          <Footer @buttonClick="footerClick" :totalPrice="cart.totalPrice" :totalItem="cartGetters.getTotalItems(cart)"
-            buttonText="Book Now">
-            <template v-slot:buttonIcon>
-              <SfIcon icon="empty_cart" color="white" :coverage="1" />
-            </template>
-          </Footer>
+        <div class="bottom-bar-cart">
+          <BookNow :totalPrice="cart.totalPrice" :totalItem="cartGetters.getTotalItems(cart)"
+            :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
+            @updateItemCount="updateCart" />
         </div>
       </div>
     </div>
@@ -79,6 +51,7 @@ import {
 } from '@storefront-ui/vue';
 
 import AddToCart from '~/components/AddToCart.vue';
+import BookNow from '~/components/BookNow.vue';
 import ImagesScroll from '~/components/ImagesScroll.vue';
 import SfAccordionItem from '~/components/Accordion.vue';
 import Footer from '~/components/Footer';
@@ -131,15 +104,14 @@ export default {
           locations: locations
         }
       });
+      context.root.$router.push('/cart');
     };
 
     onBeforeMount(async () => {
       await load();
     });
 
-    const footerClick = () => {
-      context.root.$router.push('/cart');
-    };
+
     return {
       images,
       goBack,
@@ -150,7 +122,6 @@ export default {
       productGetters,
       isInCart,
       cartGetters,
-      footerClick,
       keyVal
     };
   },
@@ -175,7 +146,8 @@ export default {
     SfAccordionItem,
     SfAccordion,
     ImagesScroll,
-    Footer
+    Footer,
+    BookNow
   }
 };
 </script>
@@ -529,6 +501,7 @@ export default {
   letter-spacing: -0.36px;
   color: #387f9a;
 }
+
 .head-container {
   /* padding: 18px 22px; */
   padding-left: 18px;

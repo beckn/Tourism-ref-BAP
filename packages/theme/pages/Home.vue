@@ -29,6 +29,7 @@ export default {
         const cartData = JSON.parse(localStorage.getItem('cartData'));
         const days = helpers.calculateDays(cartData.cartTime, new Date());
         if (days > 7) {
+          console.log('removed')
           localStorage.removeItem('cartData');
           localStorage.removeItem('transactionId');
         }

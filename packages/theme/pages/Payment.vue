@@ -161,8 +161,16 @@ export default {
       const orderHistory =
         JSON.parse(localStorage.getItem('orderHistory')) ?? [];
       orderHistory.push(order.value);
-      localStorage.setItem('orderObject', JSON.stringify(orderHistory[0].order))
+
       localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+      const itemsInTheCart = JSON.parse(localStorage.getItem('cartData'));
+
+      const orderObject = {
+        orderObject: orderHistory[0].order,
+        items: itemsInTheCart.items
+      }
+
+      localStorage.setItem('orderObject', JSON.stringify(orderObject))
 
       context.root.$router.push({
         path: '/ordersuccess',

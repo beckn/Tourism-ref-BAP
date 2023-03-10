@@ -1,5 +1,5 @@
 <template>
-  <div id="product">
+  <div class="Product-container" id="product">
     <div @click="goBack" class="sf-chevron--left sf-chevron icon_back">
       <span class="sf-search-bar__icon">
         <SfIcon color="var(--c-primary)" size="20px" icon="chevron_left" />
@@ -8,64 +8,33 @@
 
     <div>
       <div>
-        <img
-          class="product-description-image"
-          v-bind:src="images"
-          alt="product img"
-        />
+        <img class="product-description-image" v-bind:src="images" alt="product img" />
       </div>
       <div class="head-container">
         <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
       </div>
 
       <div class="trek-description-container">
-        <p>
-          Route Description: Rauli Kholi (2N) Duration: 2 Nights & 3 Days
-          Highlights: Stay and Meals Sleeping Bags and Camps Experienced
-          Trekking Guides Itinerary Day 01: Arrival in Manali | Manali to Gulaba
-          | Trek to Rolla Kholi (8 KM Trek) Arrive in Manali and get transferred
-          to Gulaba by a shared cab. Trek from Gulaba to Rola Kholi 8 kms trek
-          (5 hrs) Snacks + Dinner + Camping at Rola Kholi (12500 feet) Day 02:
-          Trek to Bhrigu Lake (8 KM Trek) Wake up to a beautiful morning and
-          enjoy a hearty breakfast at Rola Kholi. After breakfast, enjoy a day
-          trek to Bhrigu Lake (14000 feet) 4 km (2 HRs). Packed lunch will be
-          served on the trek. On reaching Bhrigu Lake, enjoy the scenery and
-          click some photographs. Later trek down to the base campsite at Rola
-          Kholi 4km (2 hrs) Snacks + Bonfire + Dinner + Camping @ Rola Kholi
-          (12500 ft) Day 03: Trek from Rolla Kholi to Gulaba | Trasnfer from
-          Gulaba to Manali via Kothi (8 KM Trek) Enjoy a sumptuous breakfast at
-          Rola Kholi. Later trek downhill to Gulaba 8 km (3 hrs) On reaching
-          Gulaba, get transferred to Manali (25 km) Trip Ends. Price Per Person
-          Rs.3,750/- *plus 5% GST Other Information INCLUSIONS All Veg Meals on
-          Day 2 and 3 and Breakfast on Day 4 Shared Accommodation in Manali on
-          Day 1 Clock Room to leave any extra stuff at Manali Shared Cabs from
-          Manali >> Gulaba >> Manali Camping at Rolla Kholi Gear (Sticks +
-          SnowGaiters + Tent + Sleeping Bag + Matts + Lights) Certified Guide +
-          Support Staff + Safety Equipment EXCLUSIONS Travel from Delhi >>
-          Manali >> Delhi Meals on day 1 and Local Site-seeing Non-veg and Wines
-          Porter if needed & hired Any Extra meals or Snacks or juice or water
-          that you purchase Anything which is not part of inclusion Cost
-          Escalation due to “Force Majeure” and evacuation charges Bookings
-        </p>
+        <div>
+          <span class="Itinerary-text">Itinerary</span>
+        </div>
+        <div v-html="product.descriptor.long_desc">
+          <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
+
+        </div>
       </div>
+
 
       <div class="product__info">
         <div class="product__header">
-          <SfHeading
-            :title="productGetters.getName(product)"
-            :level="3"
-            class="sf-heading--no-underline sf-heading--left"
-          />
+          <SfHeading :title="productGetters.getName(product)" :level="3"
+            class="sf-heading--no-underline sf-heading--left" />
         </div>
 
         <div class="bottom-bar-cart">
-          <BookNow
-            :totalPrice="cart.totalPrice"
-            :totalItem="cartGetters.getTotalItems(cart)"
-            :key="keyVal + 'product-page'"
-            :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart"
-          />
+          <BookNow :totalPrice="cart.totalPrice" :totalItem="cartGetters.getTotalItems(cart)"
+            :key="keyVal + 'product-page'" :value="cartGetters.getItemQty(isInCart({ product }))"
+            @updateItemCount="updateCart" />
         </div>
       </div>
     </div>
@@ -197,6 +166,11 @@ export default {
   width: 82%;
   margin: auto;
 }
+
+.Itinerary-text {
+  font-weight: 700;
+}
+
 .product-info-container {
   margin-left: 15px;
 }
@@ -420,26 +394,22 @@ export default {
   }
 
   &__count {
-    @include font(
-      --count-font,
+    @include font(--count-font,
       var(--font-weight--normal),
       var(--font-size--sm),
       1.4,
-      var(--font-family--secondary)
-    );
+      var(--font-family--secondary));
     color: var(--c-text);
     text-decoration: none;
     margin: 0 0 0 var(--spacer-xs);
   }
 
   &__description {
-    @include font(
-      --product-description-font,
+    @include font(--product-description-font,
       var(--font-weight--light),
       var(--font-size--base),
       1.6,
-      var(--font-family--primary)
-    );
+      var(--font-family--primary));
   }
 
   &__select-size {
@@ -451,13 +421,11 @@ export default {
   }
 
   &__colors {
-    @include font(
-      --product-color-font,
+    @include font(--product-color-font,
       var(--font-weight--normal),
       var(--font-size--lg),
       1.6,
-      var(--font-family--secondary)
-    );
+      var(--font-family--secondary));
     display: flex;
     align-items: center;
     margin-top: var(--spacer-xl);
@@ -516,13 +484,11 @@ export default {
 
   &__additional-info {
     color: var(--c-link);
-    @include font(
-      --additional-info-font,
+    @include font(--additional-info-font,
       var(--font-weight--light),
       var(--font-size--sm),
       1.6,
-      var(--font-family--primary)
-    );
+      var(--font-family--primary));
 
     &__title {
       font-weight: var(--font-weight--normal);

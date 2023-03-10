@@ -292,7 +292,6 @@ export default {
           locations: provider.locations
         })
       );
-      console.log('data of the iqwdqwdhqh', data);
 
       context.root.$router.push({
         path: '/product',

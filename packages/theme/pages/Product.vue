@@ -1,6 +1,5 @@
 <template>
-  <div id="product">
-
+  <div class="Product-container" id="product">
     <div @click="goBack" class="sf-chevron--left sf-chevron icon_back">
       <span class="sf-search-bar__icon">
         <SfIcon color="var(--c-primary)" size="20px" icon="chevron_left" />
@@ -15,11 +14,21 @@
         <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
       </div>
 
+      <div class="trek-description-container">
+        <div>
+          <span class="Itinerary-text">Itinerary</span>
+        </div>
+        <div v-html="product.descriptor.long_desc">
+          <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
+
+        </div>
+      </div>
+
+
       <div class="product__info">
         <div class="product__header">
           <SfHeading :title="productGetters.getName(product)" :level="3"
             class="sf-heading--no-underline sf-heading--left" />
-
         </div>
 
         <div class="bottom-bar-cart">
@@ -111,7 +120,6 @@ export default {
       await load();
     });
 
-
     return {
       images,
       goBack,
@@ -153,6 +161,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.trek-description-container {
+  display: block;
+  width: 82%;
+  margin: auto;
+}
+
+.Itinerary-text {
+  font-weight: 700;
+}
+
 .product-info-container {
   margin-left: 15px;
 }

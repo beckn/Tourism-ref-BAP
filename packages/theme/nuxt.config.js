@@ -17,7 +17,7 @@ export default {
     title: 'Tourism App',
     script: [
       {
-        src: `https://maps.googleapis.com/maps/api/js?key=${mapsKey}&libraries=places`,
+        src: `https://maps.googleapis.com/maps/api/js?key=${mapsKey}&callback=Function.prototype&libraries=places`,
         async: true,
         defer: true
       }

@@ -25,4 +25,3 @@ EOF'''
             [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
-}

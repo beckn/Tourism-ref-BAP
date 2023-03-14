@@ -164,13 +164,51 @@ export default {
 
       localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
       const itemsInTheCart = JSON.parse(localStorage.getItem('cartData'));
+      const shippingAddress = JSON.parse(localStorage.getItem('shipping_address'));
 
-      const orderObject = {
-        orderObject: orderHistory[0].order,
-        items: itemsInTheCart.items
-      }
+      const orderObjectPrsed = {
+        context: {},
+        order: {
+          orderId: '596006453',
+          billing: {
+            address: {
+              street: shippingAddress.address
+            }
+          },
+          item: [
+            {
+              descriptor: {
+                name: itemsInTheCart.items[0].descriptor.name,
+                images: itemsInTheCart.items[0].descriptor.images
+              },
+              price: {
+                value: itemsInTheCart.items[0].price.value
+              },
+              quantity: itemsInTheCart.items[0].quantity,
+              tags: {
+                fulfillment_end_loc:
+                  itemsInTheCart.items[0].tags.fulfillment_end_loc,
+                fulfillment_end_time:
+                  itemsInTheCart.items[0].tags.fulfillment_end_time,
+                fulfillment_start_loc:
+                  itemsInTheCart.items[0].tags.fulfillment_start_loc,
+                fulfillment_start_time:
+                  itemsInTheCart.items[0].tags.fulfillment_start_time
+              },
+              fulfillment: {
+                start: orderHistory[0].order.fulfillment.start,
+                end: orderHistory[0].order.fulfillment.end
+              }
+            }
+          ]
+        }
+      };
 
-      localStorage.setItem('orderObject', JSON.stringify(orderObject))
+      localStorage.setItem('orderObject', JSON.stringify(orderObjectPrsed));
+
+      const encodedOrderDetails = btoa(JSON.stringify(orderObjectPrsed));
+
+      localStorage.setItem('encodedOrderDetails', encodedOrderDetails);
 
       context.root.$router.push({
         path: '/ordersuccess',
@@ -212,7 +250,7 @@ export default {
       proceedToConfirm,
       isTransactionMatching,
       enableLoader,
-      goBack
+      goBack,
     };
   }
 };

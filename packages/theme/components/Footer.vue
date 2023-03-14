@@ -4,23 +4,15 @@
       <div class="holder">
         <div class="f-total">Total</div>
         <div>
-          <span class="f-p-total">INR {{ totalPrice }} </span
-          ><span class="f-items">{{ totalItem }} Items</span>
+          <span class="f-p-total">₹ {{ formatPrice(totalPrice) }} </span><span class="f-items">{{ totalItem }}
+            Items</span>
         </div>
       </div>
     </div>
-    <button
-      v-e2e="'footer-button'"
-      :value="buttonText"
-      class="sf-button f-button"
-      :class="{
-        'color-primary ': buttonEnable,
-        'is-disabled--button': !buttonEnable
-      }"
-      :disabled="!buttonEnable"
-      link=""
-      @click="$emit('buttonClick')"
-    >
+    <button v-e2e="'footer-button'" :value="buttonText" class="sf-button f-button" :class="{
+      'color-primary ': buttonEnable,
+      'is-disabled--button': !buttonEnable
+    }" :disabled="!buttonEnable" link="" @click="$emit('buttonClick')">
       <!-- button icon template  -->
       <slot name="buttonIcon" />
       <div class="f-btn-text">{{ buttonText }}</div>
@@ -45,6 +37,12 @@ export default {
   },
   setup() {
     return {};
+  },
+  methods: {
+    formatPrice(value) {
+      let val = (value / 1).toFixed(2).replace(',', '.');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
   }
 };
 </script>

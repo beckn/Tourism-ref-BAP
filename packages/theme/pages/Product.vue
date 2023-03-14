@@ -15,9 +15,9 @@
       </div>
 
       <div class="trek-description-container">
-        <div>
+        <!-- <div>
           <span class="Itinerary-text">Itinerary</span>
-        </div>
+        </div> -->
         <div v-html="product.descriptor.long_desc">
           <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
 

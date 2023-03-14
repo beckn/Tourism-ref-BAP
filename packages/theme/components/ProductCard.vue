@@ -2,13 +2,8 @@
   <div class="s-product">
     <div :class="{ horizontal: horizontalView, vertical: !horizontalView }">
       <div @click="$emit('goToProduct')" class="s-p-image">
-        <SfImage
-        class="product-listing-image"
-          :src="_pImage"
-          alt="product img"
-          :width="horizontalView ? 85 : 129"
-          :height="132"
-        />
+        <SfImage class="product-listing-image" :src="_pImage" alt="product img" :width="horizontalView ? 85 : 129"
+          :height="132" />
       </div>
       <div @click="$emit('goToProduct')" class="s-p-details">
         <div>
@@ -28,14 +23,11 @@
           </div> -->
         </div>
         <!-- <div class="s-p-weight">{{ _pWieght }}</div>    -->
-        <div
-          class="price-increase"
-          v-if="!!_updatedPrice && _updatedPrice !== _pPrice"
-        >
-          Price increased by <span>INR{{ _updatedPrice - _pPrice }}</span>
+        <div class="price-increase" v-if="!!_updatedPrice && _updatedPrice !== _pPrice">
+          Price increased by <span>₹ {{ formatPrice(_updatedPrice - _pPrice) }}</span>
         </div>
         <div class="s-p-price" v-if="_updatedCount !== 0">
-          INR{{ _updatedPrice ? _updatedPrice : _pPrice }}
+          ₹ {{ formatPrice(_updatedPrice ? _updatedPrice : _pPrice) }}
         </div>
         <span class="out-stock" v-if="_updatedCount === 0">Out of Stock</span>
       </div>
@@ -163,6 +155,10 @@ export default {
     getProductBase(product) {
       this.$emit('removeSearchResults');
       return btoa(JSON.stringify(product));
+    },
+    formatPrice(value) {
+      let val = (value / 1).toFixed(2).replace(',', '.');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
 };
@@ -172,19 +168,17 @@ export default {
   height: 129px;
 }
 
-
-
-
 .s-p-bpp-provider {
   p {
     margin: 0;
     padding-top: 2px;
     font-size: 12px;
-  } 
+  }
 }
 
 .dropdown-container {
   position: relative;
+
   .dropdown-button {
     display: flex;
     align-items: center;
@@ -206,14 +200,17 @@ export default {
     position: absolute;
     width: 56px;
     z-index: 1;
+
     .dowpdown-item {
       display: flex;
       justify-content: center;
       padding: 7px 0;
     }
+
     .border {
       border-bottom: 1px solid rgba(226, 226, 226, 0.7);
     }
+
     .color-text {
       color: #387f9a;
       cursor: pointer;

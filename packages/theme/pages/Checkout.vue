@@ -122,27 +122,31 @@
         :address="billingAddress.address" :mobile="billingAddress.mobile" :pincode="billingAddress.pincode"
         :building="billingAddress.building" />
 
-      <div class="sub-heading">
+
+      <div v-show="isValidCart(cart)" class="sub-heading">
         <div class="p-name">Payment</div>
       </div>
 
-      <div>
+      <div v-show="isValidCart(cart)">
         <Card>
           <SfAccordion>
             <SfAccordionItem :header="'Subtotal'">
-              <!-- <CardContent > -->
               <div class="bpp_breakup">
+                {{ log('value in he cart', cart) }}
                 <div :key="bppId" v-for="(value, bppId) in cartGetters.getQuoteItem(cart)">
+
                   <div :key="providerId" v-for="(valuePerProvider, providerId) in value">
                     <div :key="id" v-for="(breakup, id) in valuePerProvider.breakup">
                       <CardContent class="flex-space-bw">
                         <div>{{ breakup.title }}</div>
-                        <div>INR{{ breakup.price.value }}</div>
+                        <div>₹ {{ formatPrice(breakup.price.value) }}</div>
                       </CardContent>
                     </div>
                     <CardContent class="flex-space-bw">
                       <div>Subtotal :</div>
-                      <div>INR{{ valuePerProvider.price.value }}</div>
+                      <div>
+                        ₹ {{ formatPrice(valuePerProvider.price.value) }}
+                      </div>
                     </CardContent>
                   </div>
                 </div>
@@ -151,6 +155,8 @@
           </SfAccordion>
         </Card>
       </div>
+
+
 
       <div class="order-policy">
         <div class="sub-heading">
@@ -163,8 +169,8 @@
           <p class="policy-text">
             Cancellation terms:<br />
             1. Orders cannot be cancelled once the items are shipped.<br />
-            2. Cancellation fee of INR 10 will be applied for orders cancelled
-            by the buyer.<br /><br />
+            2. Cancellation fee of ₹ 10 will be applied for orders cancelled by
+            the buyer.<br /><br />
             Returns and Refunds:<br />
             1. Items can be returned within 7 days of delivery with full refund.
           </p>
@@ -476,6 +482,19 @@ export default {
       isShippingButtonEnabled,
       isBillingButtonEnabled
     };
+  },
+
+  methods: {
+    log(address, value) {
+      console.log(address, value)
+    },
+    formatPrice(value) {
+      let val = (value / 1).toFixed(2).replace(',', '.');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+    isValidCart(cart) {
+      return Object.keys(cart.quoteItem).length !== 0
+    }
   }
 };
 </script>
@@ -549,7 +568,7 @@ export default {
 }
 
 .color-def {
-  color: #387F9A;
+  color: #387f9a;
 }
 
 .top-bar {
@@ -622,7 +641,7 @@ export default {
   .s-p-price {
     font-size: 16px;
     margin-top: 10px;
-    color: #387F9A;
+    color: #387f9a;
   }
 }
 

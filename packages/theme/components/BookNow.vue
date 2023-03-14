@@ -4,7 +4,7 @@
             <div class="holder">
                 <div class="f-total">Total</div>
                 <div>
-                    <span class="f-p-total">INR {{ totalPrice }} </span>
+                    <span class="f-p-total">₹ {{ formatPrice(totalPrice) }} </span>
                 </div>
             </div>
         </div>
@@ -57,6 +57,12 @@ export default {
             _maxLimit,
             changeItemNumber
         };
+    },
+    methods: {
+        formatPrice(value) {
+            let val = (value / 1).toFixed(2).replace(',', '.');
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
     }
 };
 </script>

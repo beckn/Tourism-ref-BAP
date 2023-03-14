@@ -24,7 +24,7 @@
                   {{ breakup.title }}
                 </div>
                 <div class="address-text">
-                  INR{{ parseFloat(breakup.price.value).toFixed(2) }}
+                  ₹ {{ formatPrice(parseFloat(breakup.price.value).toFixed(2)) }}
                 </div>
               </CardContent>
             </div>
@@ -33,7 +33,7 @@
             </div>
             <CardContent class="flex-space-bw">
               <div>Subtotal :</div>
-              INR{{ valuePerProvider.price.value }}
+              ₹ {{ formatPrice(valuePerProvider.price.value) }}
             </CardContent>
           </div>
         </div>
@@ -95,6 +95,10 @@ export default {
   methods: {
     openCart() {
       toggleCartSidebar();
+    },
+    formatPrice(value) {
+      let val = (value / 1).toFixed(2).replace(',', '.');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   },
   setup(_, context) {

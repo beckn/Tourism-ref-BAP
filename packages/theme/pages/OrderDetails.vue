@@ -379,15 +379,19 @@
           <div class="support-text" style="text-align: center;">
             Scan this QR <br />
             to Import this order another app
-            
           </div>
-          <br/>
+          <br />
           <div
             style="display: flex; align-items: center; justify-content: center;"
           >
-            <SfImage alt="copypast" class="e" src="/icons/QR.png" />
+            <!-- <SfImage alt="copypast" class="e" src="/icons/QR.png" /> -->
+            <qrcode-vue
+              :value="`https://retail-app.becknprotocol.io?${encodedOrderDetails}`"
+              size="300"
+              level="L"
+            />
           </div>
-          <br/>
+          <br />
           <div
             style="display: flex; align-items: center; justify-content: center;"
           >
@@ -433,6 +437,7 @@ import {
   computed,
   onBeforeUnmount
 } from '@vue/composition-api';
+import QrcodeVue from 'qrcode.vue';
 import Card from '~/components/Card.vue';
 import CardContent from '~/components/CardContent.vue';
 import AddressCard from '~/components/AddressCard';
@@ -468,7 +473,8 @@ export default {
     SfList,
     SfListItem,
     Dropdown,
-    CopyOrderDropdownContent
+    CopyOrderDropdownContent,
+    QrcodeVue
   },
   setup(_, context) {
     // const isThankYou = computed(() => currentStep.value === 'thank-you');
@@ -484,6 +490,8 @@ export default {
     const toggleQR = () => {
       openQR.value = !openQR.value;
     };
+
+    const encodedOrderDetails = localStorage.getItem('encodedOrderDetails');
 
     const {
       poll: onTrack,
@@ -722,7 +730,8 @@ export default {
       selectMoreItemsId,
       getMoreItems,
       openQR,
-      toggleQR
+      toggleQR,
+      encodedOrderDetails
     };
   }
 };

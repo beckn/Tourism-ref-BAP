@@ -1,5 +1,5 @@
 <template>
-  <no-ssr>
+  <client-only>
     <div class="location-blk d-flex w-100">
       <SfCircleIcon class="sf-circle-icon--large left-pos" aria-label="marker" icon="marker" icon-size="18px" />
       <div class="layout-container">
@@ -23,11 +23,11 @@
             </div>
             <div v-if="isLocationSelected">
               <input v-model="location" type="text" aria-label="Select Location" class="
-                    sf-header__search
-                    sf-search-bar
-                    sf-header__search
-                    be-search-location
-                  " disabled="isActive" v-e2e="'app-header-location-input'" />
+                      sf-header__search
+                      sf-search-bar
+                      sf-header__search
+                      be-search-location
+                    " disabled="isActive" v-e2e="'app-header-location-input'" />
             </div>
           </client-only>
           <template>
@@ -93,7 +93,7 @@
         </div>
       </div>
     </div>
-  </no-ssr>
+  </client-only>
 </template>
 <script>
 import {

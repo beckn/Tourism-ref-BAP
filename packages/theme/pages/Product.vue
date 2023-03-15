@@ -8,7 +8,11 @@
 
     <div>
       <div>
-        <img class="product-description-image" v-bind:src="images" alt="product img" />
+        <img
+          class="product-description-image"
+          v-bind:src="images"
+          alt="product img"
+        />
       </div>
       <div class="head-container">
         <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
@@ -20,20 +24,26 @@
         </div> -->
         <div v-html="product.descriptor.long_desc">
           <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
-
         </div>
       </div>
 
-
       <div class="product__info">
         <div class="product__header">
-          <SfHeading :title="productGetters.getName(product)" :level="3"
-            class="sf-heading--no-underline sf-heading--left" />
+          <SfHeading
+            :title="productGetters.getName(product)"
+            :level="3"
+            class="sf-heading--no-underline sf-heading--left"
+          />
         </div>
-
+        <br />
+        <br />
         <div class="bottom-bar-cart">
-          <BookNow :totalPrice="Math.abs(product.price.value)" :key="keyVal + 'product-page'"
-            :value="cartGetters.getItemQty(isInCart({ product }))" @updateItemCount="updateCart" />
+          <BookNow
+            :totalPrice="Math.abs(product.price.value)"
+            :key="keyVal + 'product-page'"
+            :value="cartGetters.getItemQty(isInCart({ product }))"
+            @updateItemCount="updateCart"
+          />
         </div>
       </div>
     </div>
@@ -394,22 +404,26 @@ export default {
   }
 
   &__count {
-    @include font(--count-font,
+    @include font(
+      --count-font,
       var(--font-weight--normal),
       var(--font-size--sm),
       1.4,
-      var(--font-family--secondary));
+      var(--font-family--secondary)
+    );
     color: var(--c-text);
     text-decoration: none;
     margin: 0 0 0 var(--spacer-xs);
   }
 
   &__description {
-    @include font(--product-description-font,
+    @include font(
+      --product-description-font,
       var(--font-weight--light),
       var(--font-size--base),
       1.6,
-      var(--font-family--primary));
+      var(--font-family--primary)
+    );
   }
 
   &__select-size {
@@ -421,11 +435,13 @@ export default {
   }
 
   &__colors {
-    @include font(--product-color-font,
+    @include font(
+      --product-color-font,
       var(--font-weight--normal),
       var(--font-size--lg),
       1.6,
-      var(--font-family--secondary));
+      var(--font-family--secondary)
+    );
     display: flex;
     align-items: center;
     margin-top: var(--spacer-xl);
@@ -484,11 +500,13 @@ export default {
 
   &__additional-info {
     color: var(--c-link);
-    @include font(--additional-info-font,
+    @include font(
+      --additional-info-font,
       var(--font-weight--light),
       var(--font-size--sm),
       1.6,
-      var(--font-family--primary));
+      var(--font-family--primary)
+    );
 
     &__title {
       font-weight: var(--font-weight--normal);

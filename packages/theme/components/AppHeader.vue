@@ -5,8 +5,8 @@
 <template>
   <div class="header-container">
     <div class="fixed-head">
-      <div class="fixed-head-height"></div>
-      <div class="header h-padding">
+      <!-- <div class="fixed-head-height"></div> -->
+      <!-- <div class="header h-padding">
         <nuxt-link :to="localePath('/')">
           <SfImage
             src="/icons/beckn.png"
@@ -15,7 +15,7 @@
             alt="Vue Storefront Next"
           />
         </nuxt-link>
-      </div>
+      </div> -->
       <LoadingBar
         :enable="
           enableLoadindBar &&

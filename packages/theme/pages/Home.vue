@@ -29,7 +29,7 @@ export default {
         const cartData = JSON.parse(localStorage.getItem('cartData'));
         const days = helpers.calculateDays(cartData.cartTime, new Date());
         if (days > 7) {
-          console.log('removed')
+          console.log('removed');
           localStorage.removeItem('cartData');
           localStorage.removeItem('transactionId');
         }
@@ -42,10 +42,17 @@ export default {
 
 <style lang="scss" scoped>
 .home-page {
-  height: 85vh;
+  height: 90vh;
+
+  @media (min-height: 740px) {
+    height: 93vh;
+  }
+  position: fixed;
+
   background-image: url('/icons/Kedarkantha-Peak.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  overflow: hidden;
 }
 </style>

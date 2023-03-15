@@ -42,13 +42,10 @@ export default {
 
 <style lang="scss" scoped>
 .home-page {
-  height: 90vh;
+  height: 100vh;
 
-  @media (min-height: 740px) {
-    height: 93vh;
-  }
   position: fixed;
-
+  width: 100%;
   background-image: url('/icons/Kedarkantha-Peak.png');
   background-repeat: no-repeat;
   background-position: center center;

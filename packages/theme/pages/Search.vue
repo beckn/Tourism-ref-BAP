@@ -249,6 +249,7 @@ export default {
     };
 
     const totalResults = computed(() => {
+      console.log('pollREsults', pollResults)
       let reusltNum = 0;
       for (const bpp of pollResults?.value) {
         if (bpp.bpp_providers) {

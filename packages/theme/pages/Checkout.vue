@@ -298,10 +298,10 @@ export default {
       return (
         shippingAddress.value.name !== '' &&
         shippingAddress.value.mobile !== '' &&
-        shippingAddress.value.building !== '' &&
+        // shippingAddress.value.building !== '' &&
         shippingAddress.value.address !== '' &&
-        shippingAddress.value.pincode !== '' &&
-        shippingAddress.value.landmark !== ''
+        shippingAddress.value.pincode !== '' 
+        // shippingAddress.value.landmark !== ''
       );
     });
     const isBillingAddressFilled = computed(() => {

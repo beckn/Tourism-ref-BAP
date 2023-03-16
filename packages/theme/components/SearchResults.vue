@@ -222,6 +222,7 @@ export default {
 
     const totalResults = (newValue) => {
       if (newValue) {
+        console.log('newValue', newValue)
         let reusltNum = 0;
         for (const bpp of newValue) {
           for (const provider of bpp.bpp_providers) {

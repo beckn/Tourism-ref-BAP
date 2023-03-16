@@ -243,7 +243,6 @@ export default {
       if (!isTransactionMatching.value) {
         context.root.$router.push('/');
       }
-      console.log(order.value);
     });
     return {
       paymentMethod,

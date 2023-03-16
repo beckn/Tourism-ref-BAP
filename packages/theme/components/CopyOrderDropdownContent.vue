@@ -10,7 +10,7 @@
       </div>
       <div class="labels" @click="$emit('openQR')">
         <SfImage alt="copypast" class="empty-cart__image" src="/icons/scan.png" width="10px" height="11px" />
-        Scan QR
+        View QR
       </div>
 
       <div>
@@ -31,7 +31,6 @@ export default {
 
   methods: {
     async copyOrder() {
-
       try {
         await navigator.clipboard.writeText(
           localStorage.getItem('orderObject')

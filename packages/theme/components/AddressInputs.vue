@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="modal-heading">{{ headingText }}</div>
-    <div><hr class="sf-divider" /></div>
+    <div>
+      <hr class="sf-divider" />
+    </div>
     <div class="address-inputs-container">
       <SfInput
         v-e2e="'name-input'"
@@ -50,14 +52,14 @@
         v-e2e="'building-input'"
         v-model="address.building"
         :type="'text'"
-        :label="'Building Name & Floor*'"
+        :label="'Building Name & Floor'"
         :name="'building'"
       />
       <SfInput
         v-e2e="'landmark-input'"
         v-model="address.landmark"
         :type="'text'"
-        :label="'Landmark*'"
+        :label="'Landmark'"
         :name="'locality'"
         @change="() => {}"
       />
@@ -77,7 +79,7 @@
 
 <script>
 import { SfButton, SfInput } from '@storefront-ui/vue';
-import { ref, computed, watch } from '@vue/composition-api';
+import { ref, computed, watch, onMounted } from '@vue/composition-api';
 export default {
   name: 'AddressInputs',
   components: {
@@ -121,7 +123,7 @@ export default {
       const regforSpecialCharacters = /[!@#$%^&*()_+\=\[\]{};':"\\|.<>\/?]+/;
       switch (field) {
         case 'Name':
-          if (address.value.name && address.value.name.length < 4) {
+          if (address.value.name && address.value.name.length < 2) {
             return 'Please enter a valid name';
           }
           break;
@@ -159,6 +161,12 @@ export default {
 
     const autoComplete = new window.google.maps.places.AutocompleteService();
     const geoCoder = new window.google.maps.Geocoder();
+
+    onMounted(() => {
+        address.value.mobile = '9191223433';
+        address.value.pincode = '560078'
+    })
+
     watch(
       () => address.value.pincode,
       (newValue) => {
@@ -176,7 +184,6 @@ export default {
                   .geocode({ placeId: loc.place_id })
                   .then((response) => {
                     const adds = response.results[0].address_components;
-                    console.log('address', adds);
                     const state = adds.find((v) => {
                       return v.types[0] === 'administrative_area_level_1';
                     });
@@ -197,8 +204,6 @@ export default {
                     address.value.city = city.long_name;
                     // eslint-disable-next-line camelcase
                     address.value.state = state.long_name;
-
-                    console.log('Addres setState', address.value);
                   })
                   // eslint-disable-next-line no-alert
                   .catch((err) => alert(err));

@@ -1,7 +1,12 @@
 <template>
   <client-only>
     <div class="location-blk d-flex w-100">
-      <SfCircleIcon class="sf-circle-icon--large left-pos" aria-label="marker" icon="marker" icon-size="18px" />
+      <SfCircleIcon
+        class="sf-circle-icon--large left-pos"
+        aria-label="marker"
+        icon="marker"
+        icon-size="18px"
+      />
       <div class="layout-container">
         <div class="location-content">
           <client-only>
@@ -10,11 +15,18 @@
                 <div>
                   <p>{{ locationText }}</p>
                 </div>
-                <div @click="toggleIsShow" v-e2e="'app-header-location-input-div'">
+                <div
+                  @click="toggleIsShow"
+                  v-e2e="'app-header-location-input-div'"
+                >
                   <template>
                     <SfButton class="button-pos sf-button--pure">
                       <span class="sf-search-bar__icon">
-                        <SfIcon color="var(--c-text)" size="18px" icon="chevron_down" />
+                        <SfIcon
+                          color="var(--c-text)"
+                          size="18px"
+                          icon="chevron_down"
+                        />
                       </span>
                     </SfButton>
                   </template>
@@ -22,22 +34,37 @@
               </slot>
             </div>
             <div v-if="isLocationSelected">
-              <input v-model="location" type="text" aria-label="Select Location" class="
+              <input
+                v-model="location"
+                type="text"
+                aria-label="Select Location"
+                class="
                       sf-header__search
                       sf-search-bar
                       sf-header__search
                       be-search-location
-                    " disabled="isActive" v-e2e="'app-header-location-input'" />
+                    "
+                disabled="isActive"
+                v-e2e="'app-header-location-input'"
+              />
             </div>
           </client-only>
           <template>
             <div id="location" class="location-drop">
-              <SfSidebar :visible="!!isLocationdropOpen" :button="false" title="My Location" @close="toggleLocationDrop"
-                class="sidebar sf-sidebar--right">
+              <SfSidebar
+                :visible="!!isLocationdropOpen"
+                :button="false"
+                title="My Location"
+                @close="toggleLocationDrop"
+                class="sidebar sf-sidebar--right"
+              >
                 <transition name="fade">
                   <client-only>
-                    <LocationSearchBar @locationSelected="locationSelected" @toggleLocationDrop="toggleLocationDrop"
-                      v-e2e="'app-location-sidebar'" />
+                    <LocationSearchBar
+                      @locationSelected="locationSelected"
+                      @toggleLocationDrop="toggleLocationDrop"
+                      v-e2e="'app-location-sidebar'"
+                    />
                   </client-only>
                 </transition>
               </SfSidebar>
@@ -46,8 +73,11 @@
           <div class="popover-blk">
             <template>
               <div v-if="!!isShow" @click="toggleIsShow">
-                <ModalComponent @toggleLocationDrop="toggleLocationDrop" class="modalclass"
-                  v-e2e="'app-header-location-modal'" />
+                <ModalComponent
+                  @toggleLocationDrop="toggleLocationDrop"
+                  class="modalclass"
+                  v-e2e="'app-header-location-modal'"
+                />
               </div>
             </template>
           </div>
@@ -65,7 +95,10 @@
           <div class="user-content">
             <nuxt-link :to="localePath('/Login')">
               <div v-if="isAuthenticatedUser">
-                <div class="profile-tooltip" :data-tooltip="this.$fire.auth.currentUser.displayName">
+                <div
+                  class="profile-tooltip"
+                  :data-tooltip="this.$fire.auth.currentUser.displayName"
+                >
                   <div @click="openHamburger = !openHamburger">
                     <Dropdown>
                       <SfButton class="button-pos sf-button--pure">
@@ -240,7 +273,7 @@ export default {
 .user-cart-content {
   display: flex;
   justify-content: space-between;
-  width: 8rem;
+  width: 6rem;
   align-items: center;
 }
 
@@ -257,7 +290,8 @@ export default {
   position: absolute;
   top: -0.25rem;
   left: 50%;
-  transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
   transition: 150ms transform;
   transform-origin: bottom center;
 }

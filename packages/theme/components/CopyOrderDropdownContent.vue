@@ -2,7 +2,7 @@
   <transition name="dropdown-content-copy-order">
     <div v-if="active" class="drop">
       <div @click="copyOrder" class="labels">
-        <SfImage alt="copypast" class="empty-cart__image" src="/icons/copyPast.png" width="10px" height="11px" />
+        <SfImage alt="copypast" class="empty-cart__image" src="/icons/importOrderIcon.svg" width="10px" height="11px" />
         Copy Order
       </div>
       <div>
@@ -10,7 +10,7 @@
       </div>
       <div class="labels" @click="$emit('openQR')">
         <SfImage alt="copypast" class="empty-cart__image" src="/icons/scan.png" width="10px" height="11px" />
-        Scan QR
+        View QR
       </div>
 
       <div>
@@ -31,7 +31,6 @@ export default {
 
   methods: {
     async copyOrder() {
-
       try {
         await navigator.clipboard.writeText(
           localStorage.getItem('orderObject')

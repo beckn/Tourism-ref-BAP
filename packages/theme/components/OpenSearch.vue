@@ -184,7 +184,7 @@ export default {
 }
 
 .sf-footer {
-  z-index: +1;
+  z-index:1;
   text-align: center;
   background: transparent !important;
   position: fixed;

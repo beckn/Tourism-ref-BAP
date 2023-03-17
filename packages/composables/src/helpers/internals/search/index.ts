@@ -6,7 +6,8 @@ export const buildSearchItemsWhere = (params) => {
   const paramsObj: { [k: string]: any } = {
     locationIs: params.locationIs,
     offset: params.page * params.itemsPerPage,
-    limit: params.itemsPerPage
+    limit: params.itemsPerPage,
+    category: params.category
   };
   if (params.term) paramsObj.itemContains = params.term;
 

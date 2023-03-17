@@ -165,7 +165,8 @@ export default {
         locationIs:
           selectedLocation?.value?.latitude +
           ',' +
-          selectedLocation?.value?.longitude
+          selectedLocation?.value?.longitude,
+        category: 'tourism',
         // eslint-disable-next-line no-unused-vars
       }).then((_) => {
         localStorage.setItem(

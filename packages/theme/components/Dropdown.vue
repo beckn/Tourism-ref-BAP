@@ -32,3 +32,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.relative{
+  z-index: 1;
+}
+</style>

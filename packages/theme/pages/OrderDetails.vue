@@ -44,23 +44,28 @@
       </div> -->
       <Card>
         <SfAccordion>
-          <SfAccordionItem :header="'My Trip'">
-            <CardContent class="flex-space-bw">
-              <div class="address-text"><span>Booked on</span></div>
-              <div class="address-text order-id">
-                <span>{{ orderPlacementTime }}</span>
-              </div>
-            </CardContent>
-            <div>
-              <hr class="sf-divider divider" />
+          <h5
+            style="color:#387f9a;font-size: 20px;
+    font-weight: 500;"
+          >
+            My Trip
+          </h5>
+          <CardContent class="flex-space-bw">
+            <div class="address-text"><span>Booked on</span></div>
+            <div class="address-text order-id">
+              <span>{{ orderPlacementTime }}</span>
             </div>
+          </CardContent>
+          <div>
+            <hr class="sf-divider divider" />
+          </div>
 
-            <div
-              :key="orderId"
-              v-for="(order, orderId, index) in order.orderData"
-              class="shipment-wrapper"
-            >
-              <!-- <CardContent class="flex-space-bw">
+          <div
+            :key="orderId"
+            v-for="(order, orderId, index) in order.orderData"
+            class="shipment-wrapper"
+          >
+            <!-- <CardContent class="flex-space-bw">
                 <div class="address-text">
                   <span>Order Id {{ index + 1 }}</span>
                 </div>
@@ -68,46 +73,46 @@
                   <span>Id - {{ orderId }}</span>
                 </div>
               </CardContent> -->
-              <CardContent
-                v-if="orderStatusData && orderStatusData[index]"
-                class="flex-space-bw"
-              >
-                <div class="address-text"><span>Status</span></div>
-                <div class="status-text">
-                  <span>
-                    <!-- {{
+            <CardContent
+              v-if="orderStatusData && orderStatusData[index]"
+              class="flex-space-bw"
+            >
+              <div class="address-text"><span>Status</span></div>
+              <div class="status-text">
+                <span>
+                  <!-- {{
                     orderStatusData[index].state.charAt(0).toUpperCase() +
                       orderStatusData[index].state.slice(1).toLowerCase()
                 
                   }} -->
-                    Confirmed
-                  </span>
-                </div>
-              </CardContent>
-              <CardContent class="flex-space-bw">
-                <div class="address-text-items"><span>Item (s)</span></div>
-              </CardContent>
-              <CardContent class="flex-space-bw">
-                <div class="order-desrciption">
-                  {{ order.quote.breakup[0].title }} x
-                  {{ order.items[0].quantity.count }}
-                </div>
-                <div v-if="order.items.length > 1">
-                  <div
-                    @click="
-                      openItemsModal = true;
-                      selectMoreItemsId = orderId;
-                    "
-                    class="more-items-button"
+                  Confirmed
+                </span>
+              </div>
+            </CardContent>
+            <CardContent class="flex-space-bw">
+              <div class="address-text-items"><span>Item (s)</span></div>
+            </CardContent>
+            <CardContent class="flex-space-bw">
+              <div class="order-desrciption">
+                {{ order.quote.breakup[0].title }} x
+                {{ order.items[0].quantity.count }}
+              </div>
+              <div v-if="order.items.length > 1">
+                <div
+                  @click="
+                    openItemsModal = true;
+                    selectMoreItemsId = orderId;
+                  "
+                  class="more-items-button"
+                >
+                  <span class="more-items-text"
+                    >{{ order.items.length - 1 }} more items</span
                   >
-                    <span class="more-items-text"
-                      >{{ order.items.length - 1 }} more items</span
-                    >
-                  </div>
                 </div>
-              </CardContent>
+              </div>
+            </CardContent>
 
-              <!-- <div class="order-buttons-wrapper">
+            <!-- <div class="order-buttons-wrapper">
                 <SfButton class="sf-button--pure" @click="
                   openTrackModal = true;
                 selectedTrackingId = index;
@@ -122,71 +127,78 @@
                   <div class="color-def">Support</div>
                 </SfButton>
               </div> -->
-              <!-- <div>
+            <!-- <div>
                 <hr class="sf-divider divider" />
               </div> -->
+          </div>
+        </SfAccordion>
+      </Card>
+
+      <div class="sub-heading"></div>
+
+      <Card>
+        <SfAccordion>
+          <h5
+            style="color:#387f9a;font-size: 20px;
+    font-weight: 500;"
+          >
+            Traveller Details
+          </h5>
+          <AddressCard
+            :name="order.shippingAddress.name"
+            :address="order.shippingAddress.address"
+            :mobile="order.shippingAddress.mobile"
+            :building="order.shippingAddress.building"
+            :pincode="order.shippingAddress.pincode"
+          />
+        </SfAccordion>
+      </Card>
+
+      <div class="sub-heading"></div>
+
+      <Card>
+        <SfAccordion>
+          <h5
+            style="color:#387f9a;font-size: 20px;
+    font-weight: 500;"
+          >
+            Paymen
+          </h5>
+          <div :key="orderId" v-for="(value, orderId) in order.orderData">
+            <div :key="id" v-for="(breakup, id) in value.quote.breakup">
+              <CardContent class="flex-space-bw">
+                <div class="address-text">{{ breakup.title }}</div>
+                <div class="address-text-value">
+                  ₹ {{ formatPrice(breakup.price.value) }}
+                </div>
+              </CardContent>
             </div>
-          </SfAccordionItem>
-        </SfAccordion>
-      </Card>
-
-      <div class="sub-heading"></div>
-
-      <Card>
-        <SfAccordion>
-          <SfAccordionItem :header="'Traveller Details'">
-            <AddressCard
-              :name="order.shippingAddress.name"
-              :address="order.shippingAddress.address"
-              :mobile="order.shippingAddress.mobile"
-              :building="order.shippingAddress.building"
-              :pincode="order.shippingAddress.pincode"
-            />
-          </SfAccordionItem>
-        </SfAccordion>
-      </Card>
-
-      <div class="sub-heading"></div>
-
-      <Card>
-        <SfAccordion>
-          <SfAccordionItem :header="'Payment'">
-            <div :key="orderId" v-for="(value, orderId) in order.orderData">
-              <div :key="id" v-for="(breakup, id) in value.quote.breakup">
-                <CardContent class="flex-space-bw">
-                  <div class="address-text">{{ breakup.title }}</div>
-                  <div class="address-text-value">
-                    ₹ {{ formatPrice(breakup.price.value) }}
-                  </div>
-                </CardContent>
-              </div>
-              <div>
-                <hr class="sf-divider divider" />
-              </div>
-              <CardContent class="flex-space-bw">
-                <div class="address-text">Total</div>
-                <div class="address-text-value">
-                  ₹ {{ formatPrice(value.quote.price.value) }}
-                </div>
-              </CardContent>
-              <CardContent class="flex-space-bw">
-                <div class="address-text">Status</div>
-                <div class="address-text-value">
-                  {{
-                    value.payment.status.charAt(0).toUpperCase() +
-                      value.payment.status.slice(1).toLowerCase()
-                  }}
-                </div>
-              </CardContent>
+            <div>
+              <hr class="sf-divider divider" />
             </div>
             <CardContent class="flex-space-bw">
-              <div class="address-text">Method</div>
-              <div class="address-text-value">{{ order.paymentMethod }}</div>
+              <div class="address-text">Total</div>
+              <div class="address-text-value">
+                ₹ {{ formatPrice(value.quote.price.value) }}
+              </div>
             </CardContent>
-            <div>
-              <hr />
-            </div>
-          </SfAccordionItem>
+            <CardContent class="flex-space-bw">
+              <div class="address-text">Status</div>
+              <div class="address-text-value">
+                {{
+                  value.payment.status.charAt(0).toUpperCase() +
+                    value.payment.status.slice(1).toLowerCase()
+                }}
+              </div>
+            </CardContent>
+          </div>
+          <CardContent class="flex-space-bw">
+            <div class="address-text">Method</div>
+            <div class="address-text-value">{{ order.paymentMethod }}</div>
+          </CardContent>
+          <div>
+            <hr />
+          </div>
         </SfAccordion>
       </Card>
 
@@ -826,7 +838,7 @@ export default {
 
 .details {
   padding: 20px;
-  height: calc(100vh - 149px);
+  //height: calc(100vh - 149px);
   overflow: scroll;
 }
 

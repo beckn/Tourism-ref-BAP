@@ -273,7 +273,7 @@ export default {
 .user-cart-content {
   display: flex;
   justify-content: space-between;
-  width: 6rem;
+  width: 7.5rem;
   align-items: center;
 }
 

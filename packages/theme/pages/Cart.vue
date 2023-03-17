@@ -87,7 +87,7 @@
         :totalPrice="cartGetters.getTotals(cart).total"
         :totalItem="cartGetters.getTotalItems(cart)"
         :buttonEnable="!errOutOfStock && !errUpdateCount && !enableLoader"
-        buttonText="Checkout"
+        buttonText="Next"
       >
         <template v-slot:buttonIcon>
           <SfIcon icon="empty_cart" color="white" :coverage="1" />

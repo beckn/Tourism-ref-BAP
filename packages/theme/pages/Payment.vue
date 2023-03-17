@@ -63,6 +63,34 @@
           />
         </CardContent>
       </Card>
+      <!-- <div class="p-name">Credit & Debit Cards</div>
+      <div class="pay1">
+        <SfImage
+          src="/icons/cardpayment.svg"
+          :width="273"
+          :height="114"
+          alt="Vue Storefront Next"
+        />
+      </div> -->
+      <div class="sub-heading">
+      <div class="p-name">UPI</div></div>
+
+      <div class="pay">
+        <SfImage
+          src="/icons/phonepe.svg"
+          :width="212"
+          :height="49"
+          alt="Vue Storefront Next"
+        />
+      </div>
+      <div class="pay">
+        <SfImage
+          src="/icons/paytm.svg"
+          :width="193"
+          :height="49"
+          alt="Vue Storefront Next"
+        />
+      </div>
     </div>
     <Footer
       class="footer-fixed"
@@ -93,7 +121,7 @@
   </div>
 </template>
 <script>
-import { SfButton, SfRadio, SfIcon } from '@storefront-ui/vue';
+import { SfButton, SfRadio, SfIcon, SfImage } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 
 import { ref, computed, onBeforeMount, watch } from '@vue/composition-api';
@@ -111,6 +139,7 @@ export default {
   middleware: 'auth',
   name: 'Payment',
   components: {
+    SfImage,
     SfButton,
     SfIcon,
     Card,
@@ -320,7 +349,11 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
+.pay {
+  padding-top: 13px;
+  padding-left: 33px;
+  background: white;
+}
 .loader-circle {
   width: 100%;
   position: fixed;

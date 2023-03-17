@@ -17,14 +17,19 @@
       </div>
       <Card v-if="order.cart">
         <div v-for="(value, bppId) in order.cart.quoteItem" :key="bppId">
-          <div :key="providerId" v-for="(valuePerProvider, providerId) in value" class="address-text bold">
+          <div
+            :key="providerId"
+            v-for="(valuePerProvider, providerId) in value"
+            class="address-text bold"
+          >
             <div :key="id" v-for="(breakup, id) in valuePerProvider.breakup">
               <CardContent class="flex-space-bw">
                 <div class="address-text">
                   {{ breakup.title }}
                 </div>
                 <div class="address-text">
-                  ₹ {{ formatPrice(parseFloat(breakup.price.value).toFixed(2)) }}
+                  ₹
+                  {{ formatPrice(parseFloat(breakup.price.value).toFixed(2)) }}
                 </div>
               </CardContent>
             </div>
@@ -47,19 +52,41 @@
       <Card>
         <CardContent>
           <!-- <div class="address-text color-def">Add Shipping Details</div> -->
-          <SfRadio class="sf-radio--transparent" :name="'Payment'" :value="'Pay on arrival'" label="Pay on arrival"
-            :disabled="false" :selected="paymentMethod" @change="changePaymentMethod" />
+          <SfRadio
+            class="sf-radio--transparent"
+            :name="'Payment'"
+            :value="'Pay on arrival'"
+            label="Pay on arrival"
+            :disabled="false"
+            :selected="paymentMethod"
+            @change="changePaymentMethod"
+          />
         </CardContent>
       </Card>
     </div>
-    <Footer class="footer-fixed" :buttonText="'Confirm'" :buttonEnable="isPayConfirmActive"
-      :totalPrice="order.cart.totalPrice" :totalItem="cartGetters.getTotalItems(order.cart)"
-      @buttonClick="proceedToConfirm">
+    <Footer
+      class="footer-fixed"
+      :buttonText="'Confirm'"
+      :buttonEnable="isPayConfirmActive"
+      :totalPrice="order.cart.totalPrice"
+      :totalItem="cartGetters.getTotalItems(order.cart)"
+      @buttonClick="proceedToConfirm"
+    >
       <template v-slot:buttonIcon>
-        <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="25"
+          height="19"
+          viewBox="0 0 25 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M1.0166 7.10181H23.0166M3.0166 1.10181H21.0166C22.1212 1.10181 23.0166 1.99724 23.0166 3.10181V15.1018C23.0166 16.2064 22.1212 17.1018 21.0166 17.1018H3.0166C1.91203 17.1018 1.0166 16.2064 1.0166 15.1018V3.10181C1.0166 1.99724 1.91203 1.10181 3.0166 1.10181Z"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </template>
     </Footer>
@@ -79,6 +106,7 @@ import Card from '~/components/Card.vue';
 import Footer from '~/components/Footer.vue';
 import CardContent from '~/components/CardContent.vue';
 import helpers, { createConfirmOrderRequest } from '../helpers/helpers';
+import { json } from 'body-parser';
 const { toggleCartSidebar } = useUiState();
 export default {
   middleware: 'auth',
@@ -135,7 +163,7 @@ export default {
       );
       const confirmResponses = await init(
         params,
-        localStorage.getItem('token')
+        context.root.$store.state.token
       );
 
       let messageIds = '';
@@ -143,7 +171,7 @@ export default {
         messageIds += confirmResponse.context?.message_id + ',';
       });
       messageIds = messageIds.substring(0, messageIds.length - 1);
-      await poll({ messageIds: messageIds }, localStorage.getItem('token'));
+      await poll({ messageIds: messageIds }, context.root.$store.state.token);
     };
 
     const setOrderHistory = (onConfirmResponse) => {
@@ -162,14 +190,13 @@ export default {
 
       order.value.parentOrderId = parentOrderId;
       order.value.orderData = orderData;
-      const orderHistory =
-        JSON.parse(localStorage.getItem('orderHistory')) ?? [];
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) ?? [];
       orderHistory.push(order.value);
-
       localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
       const itemsInTheCart = JSON.parse(localStorage.getItem('cartData'));
-      const shippingAddress = JSON.parse(localStorage.getItem('shipping_address'));
-
+      const shippingAddress = JSON.parse(
+        localStorage.getItem('shipping_address')
+      );
       const orderObjectPrsed = {
         context: {},
         order: {
@@ -207,12 +234,18 @@ export default {
           ]
         }
       };
+      context.root.$store.dispatch('setorderObject', orderObjectPrsed);
 
-      localStorage.setItem('orderObject', JSON.stringify(orderObjectPrsed));
+      //localStorage.setItem('orderObject', JSON.stringify(orderObjectPrsed));
 
       const encodedOrderDetails = btoa(JSON.stringify(orderObjectPrsed));
 
-      localStorage.setItem('encodedOrderDetails', encodedOrderDetails);
+      context.root.$store.dispatch(
+        'setncodedOrderDetails',
+        encodedOrderDetails
+      );
+
+      //localStorage.setItem('encodedOrderDetails', encodedOrderDetails);
 
       context.root.$router.push({
         path: '/ordersuccess',
@@ -239,7 +272,7 @@ export default {
     );
 
     onBeforeMount(() => {
-      order.value = JSON.parse(localStorage.getItem('orderProgress'));
+      order.value = JSON.parse(localStorage.getItem('orderProgress')); //context.root.$store.state.orderProgress;
       if (!isTransactionMatching.value) {
         context.root.$router.push('/');
       }
@@ -253,7 +286,7 @@ export default {
       proceedToConfirm,
       isTransactionMatching,
       enableLoader,
-      goBack,
+      goBack
     };
   }
 };

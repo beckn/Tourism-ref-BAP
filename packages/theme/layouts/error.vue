@@ -29,7 +29,10 @@ export default {
   name: 'Error',
   components: { SfButton, SfImage, SfHeading, GoBackLink },
   setup(_, context) {
-    const goHome = () => context.root.$router.push('/');
+    const goHome = () => {
+      localStorage.clear();
+      context.root.$router.push('/');
+    };
 
     const goBack = () => context.root.$router.back();
     return {

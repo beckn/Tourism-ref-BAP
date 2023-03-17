@@ -22,16 +22,20 @@ export default {
       toggleCartSidebar();
     }
   },
-  setup() {
+  setup(_,context) {
     const { load } = useCart();
     onMounted(() => {
       if (localStorage.getItem('cartData')) {
-        const cartData = JSON.parse(localStorage.getItem('cartData'));
+        const cartData = JSON.parse(localStorage.getItem('cartData'));                                                                  //JSON.parse(localStorage.getItem('cartData'));
         const days = helpers.calculateDays(cartData.cartTime, new Date());
         if (days > 7) {
           console.log('removed');
+
           localStorage.removeItem('cartData');
-          localStorage.removeItem('transactionId');
+          context.root.$store.dispatch('setTransactionId', null)
+
+          // localStorage.removeItem('cartData');
+          // localStorage.removeItem('transactionId');
         }
       }
       load();

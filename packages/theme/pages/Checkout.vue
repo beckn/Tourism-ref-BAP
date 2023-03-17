@@ -82,22 +82,43 @@
 
       <div class="sub-heading">
         <div class="p-name">Traveller Details</div>
-        <SfButton v-if="isShippingAddressFilled" class="sf-button--pure" @click="toggleShippingModal">
+        <SfButton
+          v-if="isShippingAddressFilled"
+          class="sf-button--pure"
+          @click="toggleShippingModal"
+        >
           <div class="color-def">Change</div>
         </SfButton>
       </div>
-      <AddressCard v-if="isShippingAddressFilled" :name="shippingAddress.name" :address="shippingAddress.address"
-        :mobile="shippingAddress.mobile" :pincode="shippingAddress.pincode" :building="shippingAddress.building" />
+      <AddressCard
+        v-if="isShippingAddressFilled"
+        :name="shippingAddress.name"
+        :address="shippingAddress.address"
+        :mobile="shippingAddress.mobile"
+        :pincode="shippingAddress.pincode"
+        :building="shippingAddress.building"
+      />
       <Card v-if="!isShippingAddressFilled">
         <CardContent>
           <div class="address-bar-icon">
-            <svg width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="16"
+              height="21"
+              viewBox="0 0 16 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M8 1C11.8598 1 15 4.1402 15 8C15 13.2126 9.80472 18.1458 7.99934 19.7024C6.19334 18.1482 1 13.2239 1 8C1 4.1402 4.14018 1 8 1ZM8 0C3.58176 0 0 3.5817 0 8C0 14.8571 8 21 8 21C8 21 16 14.8571 16 8C16 3.5817 12.4182 0 8 0ZM7 12H9V9H12V7H9V4H7V7H4V9H7V12Z"
-                fill="#387F9A" />
+                fill="#387F9A"
+              />
             </svg>
           </div>
-          <div @click="toggleShippingModal" v-e2e="'add-shipping-details'" class="address-text color-def">
+          <div
+            @click="toggleShippingModal"
+            v-e2e="'add-shipping-details'"
+            class="address-text color-def"
+          >
             Add Traveller Details
           </div>
         </CardContent>
@@ -105,23 +126,35 @@
 
       <div v-if="isShippingAddressFilled" class="sub-heading">
         <div class="p-name">Billing</div>
-        <SfButton v-if="isBillingAddressFilled || !shippingAsBilling" class="sf-button--pure" @click="toggleBillingModal">
+        <SfButton
+          v-if="isBillingAddressFilled || !shippingAsBilling"
+          class="sf-button--pure"
+          @click="toggleBillingModal"
+        >
           <div class="color-def">Change</div>
         </SfButton>
       </div>
       <Card v-if="isShippingAddressFilled" class="card-checkbox">
         <CardContent>
           <div class="address-bar-icon">
-            <SfCheckbox @change="changeShippingAsBilling" :selected="shippingAsBilling" name="shipping" />
+            <SfCheckbox
+              @change="changeShippingAsBilling"
+              :selected="shippingAsBilling"
+              name="shipping"
+            />
           </div>
           <div class="address-text">Same as Traveller Details</div>
         </CardContent>
       </Card>
 
-      <AddressCard v-if="isBillingAddressFilled && !shippingAsBilling" :name="billingAddress.name"
-        :address="billingAddress.address" :mobile="billingAddress.mobile" :pincode="billingAddress.pincode"
-        :building="billingAddress.building" />
-
+      <AddressCard
+        v-if="isBillingAddressFilled && !shippingAsBilling"
+        :name="billingAddress.name"
+        :address="billingAddress.address"
+        :mobile="billingAddress.mobile"
+        :pincode="billingAddress.pincode"
+        :building="billingAddress.building"
+      />
 
       <div v-show="isValidCart(cart)" class="sub-heading">
         <div class="p-name">Payment</div>
@@ -133,10 +166,18 @@
             <SfAccordionItem :header="'Subtotal'">
               <div class="bpp_breakup">
                 {{ log('value in he cart', cart) }}
-                <div :key="bppId" v-for="(value, bppId) in cartGetters.getQuoteItem(cart)">
-
-                  <div :key="providerId" v-for="(valuePerProvider, providerId) in value">
-                    <div :key="id" v-for="(breakup, id) in valuePerProvider.breakup">
+                <div
+                  :key="bppId"
+                  v-for="(value, bppId) in cartGetters.getQuoteItem(cart)"
+                >
+                  <div
+                    :key="providerId"
+                    v-for="(valuePerProvider, providerId) in value"
+                  >
+                    <div
+                      :key="id"
+                      v-for="(breakup, id) in valuePerProvider.breakup"
+                    >
                       <CardContent class="flex-space-bw">
                         <div>{{ breakup.title }}</div>
                         <div>₹ {{ formatPrice(breakup.price.value) }}</div>
@@ -155,8 +196,6 @@
           </SfAccordion>
         </Card>
       </div>
-
-
 
       <div class="order-policy">
         <div class="sub-heading">
@@ -177,25 +216,51 @@
         </Card>
       </div>
     </div>
-    <Footer class="footer-fixed" @buttonClick="paymentProceed" :totalPrice="cartGetters.getTotals(cart).total"
-      :totalItem="cartGetters.getTotalItems(cart)" :buttonText="'Proceed to Pay'" :buttonEnable="proceedToPay">
+    <Footer
+      class="footer-fixed"
+      @buttonClick="paymentProceed"
+      :totalPrice="cartGetters.getTotals(cart).total"
+      :totalItem="cartGetters.getTotalItems(cart)"
+      :buttonText="'Proceed to Pay'"
+      :buttonEnable="proceedToPay"
+    >
       <template v-slot:buttonIcon>
-        <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="25"
+          height="19"
+          viewBox="0 0 25 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M1.0166 7.10181H23.0166M3.0166 1.10181H21.0166C22.1212 1.10181 23.0166 1.99724 23.0166 3.10181V15.1018C23.0166 16.2064 22.1212 17.1018 21.0166 17.1018H3.0166C1.91203 17.1018 1.0166 16.2064 1.0166 15.1018V3.10181C1.0166 1.99724 1.91203 1.10181 3.0166 1.10181Z"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </template>
     </Footer>
     <ModalSlide :visible="shippingAddressModal" @close="toggleShippingModal">
-      <AddressInputs :buttonText="'Save Traveller Details'" :headingText="'Traveller Details'"
-        :addressDetails="shippingAddress" @getAddress="toggleShippingModal" @initCall="initOrder"
-        :buttonEnable="isShippingButtonEnabled" />
+      <AddressInputs
+        :buttonText="'Save Traveller Details'"
+        :headingText="'Traveller Details'"
+        :addressDetails="shippingAddress"
+        @getAddress="toggleShippingModal"
+        @initCall="initOrder"
+        :buttonEnable="isShippingButtonEnabled"
+      />
     </ModalSlide>
     <ModalSlide :visible="billingAddressModal" @close="toggleBillingModal">
-      <AddressInputs :buttonText="'Save Billing Details'" :headingText="'Billing Details'"
-        :addressDetails="billingAddress" @getAddress="toggleBillingModal" @initCall="initOrder"
-        :buttonEnable="isBillingButtonEnabled" />
+      <AddressInputs
+        :buttonText="'Save Billing Details'"
+        :headingText="'Billing Details'"
+        :addressDetails="billingAddress"
+        @getAddress="toggleBillingModal"
+        @initCall="initOrder"
+        :buttonEnable="isBillingButtonEnabled"
+      />
     </ModalSlide>
   </div>
 </template>
@@ -300,7 +365,7 @@ export default {
         shippingAddress.value.mobile !== '' &&
         // shippingAddress.value.building !== '' &&
         shippingAddress.value.address !== '' &&
-        shippingAddress.value.pincode !== '' 
+        shippingAddress.value.pincode !== ''
         // shippingAddress.value.landmark !== ''
       );
     });
@@ -365,7 +430,7 @@ export default {
         shippingAsBilling.value,
         '12.9063433,77.5856825'
       );
-      const response = await init(params, localStorage.getItem('token'));
+      const response = await init(params, context.root.$store.state.token);
 
       if (response) {
         let messageIds = '';
@@ -378,7 +443,7 @@ export default {
             // eslint-disable-next-line camelcase
             messageIds: messageIds
           },
-          localStorage.getItem('token')
+          context.root.$store.state.token
         );
       } else {
         enableLoader.value = false;
@@ -427,6 +492,18 @@ export default {
           });
 
           // TODO( To provide BPP Id too in the object once we start getting it)
+
+          //   JSON.stringify({
+          // context.root.$store.dispatch('setorderProgress', {
+          //   shippingAddress: shippingAddress.value,
+          //   billingAddress: billingAddress.value,
+          //   shippingAsBilling: shippingAsBilling.value,
+          //   transactionId: transactionId.value,
+          //   status: 0,
+          //   initOrder: initOrderPerBppPerProvider,
+          //   cart: cart.value
+          // });
+
           localStorage.setItem(
             'orderProgress',
             JSON.stringify({
@@ -449,7 +526,7 @@ export default {
 
     onBeforeMount(() => {
       load();
-      transactionId.value = localStorage.getItem('transactionId');
+      transactionId.value = context.root.$store.state.TransactionId; // localStorage.getItem('transactionId');
       getOrderPolicy({
         context: {
           bpp_id: cart.value.items[0].bpp.id
@@ -486,14 +563,14 @@ export default {
 
   methods: {
     log(address, value) {
-      console.log(address, value)
+      console.log(address, value);
     },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(',', '.');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     },
     isValidCart(cart) {
-      return Object.keys(cart.quoteItem).length !== 0
+      return Object.keys(cart.quoteItem).length !== 0;
     }
   }
 };

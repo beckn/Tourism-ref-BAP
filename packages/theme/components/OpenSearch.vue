@@ -7,18 +7,30 @@
       </h3>
       <h4>for All</h4>
       <p>
-        A global marketplace to discover anything you need. Just type where you want to go and we'll take care of the
-        rest.
+        A global marketplace to discover anything you need. Just type where you
+        want to go and we'll take care of the rest.
       </p>
       <div class="open-search-input">
-        <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
-          placeholder="Search for travel location" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-input'" />
-        <SfButton class="button-pos sf-button--pure color-primary" :class="{
-          'is-disabled--button':
-            !selectedLocation.latitude || !selectedLocation.longitude
-        }" @click="openSearch" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-button'">
+        <input
+          v-on:keyup.enter="openSearch"
+          v-model="message"
+          :valid="false"
+          errorMessage="errer"
+          type="text"
+          placeholder="Search for travel location"
+          :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
+          v-e2e="'home-search-input'"
+        />
+        <SfButton
+          class="button-pos sf-button--pure color-primary"
+          :class="{
+            'is-disabled--button':
+              !selectedLocation.latitude || !selectedLocation.longitude
+          }"
+          @click="openSearch"
+          :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
+          v-e2e="'home-search-button'"
+        >
           <span class="sf-search-bar__icon">
             <SfIcon color="var(--c-text)" size="18px" icon="search" />
           </span>
@@ -60,6 +72,7 @@ export default {
 
     const openSearch = () => {
       if (message.value) {
+        context.root.$store.dispatch('setserchstring', message.value);
         if (errorMsg.value) errorMsg.value = false;
         context.root.$router.push({
           name: 'Search',
@@ -184,7 +197,7 @@ export default {
 }
 
 .sf-footer {
-  z-index:1;
+  z-index: 1;
   text-align: center;
   background: transparent !important;
   position: fixed;
@@ -201,11 +214,9 @@ export default {
       color: #fbfcff;
       top: -6px;
 
-
       &.powered-by {
         font-size: 10px;
         top: -1px !important;
-
       }
     }
   }

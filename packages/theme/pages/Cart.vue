@@ -87,7 +87,7 @@
         :totalPrice="cartGetters.getTotals(cart).total"
         :totalItem="cartGetters.getTotalItems(cart)"
         :buttonEnable="!errOutOfStock && !errUpdateCount && !enableLoader"
-        buttonText="Checkout"
+        buttonText="Next"
       >
         <template v-slot:buttonIcon>
           <SfIcon icon="empty_cart" color="white" :coverage="1" />
@@ -262,7 +262,10 @@ export default {
         cart.value.quote.price.value || cart.value.totalPrice;
 
       setCart(cart.value);
+
+    
       localStorage.setItem('cartData', JSON.stringify(cart.value));
+
       enableLoader.value = false;
     };
 
@@ -293,9 +296,9 @@ export default {
     );
 
     const matchQuote = async () => {
-      if (cart.value.totalItems > 0 && localStorage.getItem('transactionId')) {
+      if (cart.value.totalItems > 0 && root.$store.state.TransactionId) {
         enableLoader.value = true;
-        const transactionId = localStorage.getItem('transactionId');
+        const transactionId = root.$store.state.TransactionId;
 
         const getQuoteRequest = [];
         const cartItemsPerBppPerProvider = cartGetters.getCartItemsPerBppPerProvider(
@@ -328,10 +331,12 @@ export default {
 
         const getQuoteResponse = await init(
           getQuoteRequest,
-          localStorage.getItem('token')
+
+          root.$store.state.token
+          //localStorage.getItem('token')
         );
         const messageIds = helpers.getMessageIdsFromResponse(getQuoteResponse);
-        await poll({ messageIds: messageIds }, localStorage.getItem('token'));
+        await poll({ messageIds: messageIds }, root.$store.state.token);
       } else {
         enableLoader.value = false;
       }

@@ -91,7 +91,7 @@
 
 <script>
 import { SfButton, SfIcon, SfImage } from '@storefront-ui/vue';
-// import {state} from '../store/index.js'
+ //import {state} from '../store/index.js'
 
 export default {
   middleware: 'auth',

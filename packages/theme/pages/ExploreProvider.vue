@@ -77,11 +77,7 @@
         >
           Related to your search “{{ setSearchKey }}”
         </div>
-        <div
-          v-if="!enableLoader"
-          key="p-list"
-          class="product-container grid"
-        >
+        <div v-if="!enableLoader" key="p-list" class="product-container grid">
           <ProductCard
             v-for="(product, pIndex) in itemList"
             v-if="pIndex < loadNum"
@@ -95,7 +91,12 @@
             @updateItemCount="(item) => updateItemCount(item, pIndex)"
           />
         </div>
-        <div v-if="itemList.length > loadNum " key="load-more" class="load-more" @click="loadMore">
+        <div
+          v-if="itemList.length > loadNum"
+          key="load-more"
+          class="load-more"
+          @click="loadMore"
+        >
           <button>Load More</button>
         </div>
         <LoadingCircle :enable="enableLoader" key="loding-cir" />
@@ -176,10 +177,13 @@ export default {
           selectedLocation?.value?.longitude,
         providerId: provider.id
       });
-      localStorage.setItem(
-        'transactionId',
-        result.value.data.ackResponse.context.transaction_id
-      );
+
+     context.root.$store.dispatch('setTransactionId',( result.value.data.ackResponse.context.transaction_id));
+
+      // localStorage.setItem(
+      //   'transactionId',
+      //   result.value.data.ackResponse.context.transaction_id
+      // );
       watch(
         () => pollResults.value,
         (newValue) => {
@@ -370,8 +374,8 @@ export default {
       padding-bottom: 70px;
       button {
         background-color: #fff;
-        color: #387F9A;
-        border: 2px solid #387F9A;
+        color: #387f9a;
+        border: 2px solid #387f9a;
         border-radius: 3px;
         font-weight: 600;
         font-size: 15px;

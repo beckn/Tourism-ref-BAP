@@ -392,11 +392,13 @@
             />
           </div>
           <br />
-          <div style="display: flex; align-items: center; justify-content: space-evenly;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-evenly;"
+          >
             <div>
               <SfImage
-              width="60px"
-              height="60px"
+                width="60px"
+                height="60px"
                 alt="copypast"
                 class="e"
                 src="/icons/ONDC_logo.png"
@@ -404,8 +406,8 @@
             </div>
             <div>
               <SfImage
-              width="43px"
-              height="61px"
+                width="43px"
+                height="61px"
                 alt="copypast"
                 class="e"
                 src="/icons/openKochi.png"
@@ -413,8 +415,8 @@
             </div>
             <div>
               <SfImage
-              width="63px"
-              height="19px"
+                width="63px"
+                height="19px"
                 alt="copypast"
                 class="e"
                 src="/icons/beckn_main_scanner.png"
@@ -647,7 +649,10 @@ export default {
     const openSupportModal = ref(false);
     const openTrackModal = ref(false);
     const openItemsModal = ref(false);
-    const goHome = () => context.root.$router.push('/');
+    const goHome = () => {
+      localStorage.clear();
+      context.root.$router.push('/');
+    };
     const goBack = () => context.root.$router.push('/orders');
     const onCancel = () => context.root.$router.push('/cancelorder');
 
@@ -657,10 +662,10 @@ export default {
         'ref_id'
       );
       try {
-        const response = await support(params, localStorage.getItem('token'));
+        const response = await support(params, context.root.$store.state.token);
         await onSupport(
           { messageIds: helpers.getMessageIdsFromResponse(response) },
-          localStorage.getItem('token')
+          context.root.$store.state.token
         );
       } catch (error) {
         console.log('Error calling support apis - ', error);
@@ -673,10 +678,10 @@ export default {
         'order_id'
       );
       try {
-        const response = await status(params, localStorage.getItem('token'));
+        const response = await status(params, context.root.$store.state.token);
         await onStatus(
           { orderIds: order.value.order.id },
-          localStorage.getItem('token')
+          context.root.$store.state.token
         );
       } catch (error) {
         console.log('Error calling track apis - ', error);
@@ -689,10 +694,10 @@ export default {
         'order_id'
       );
       try {
-        const response = await track(params, localStorage.getItem('token'));
+        const response = await track(params, context.root.$store.state.token);
         await onTrack(
           { messageIds: helpers.getMessageIdsFromResponse(response) },
-          localStorage.getItem('token')
+          context.root.$store.state.token
         );
       } catch (error) {
         console.log('Error calling track apis - ', error);

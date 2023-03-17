@@ -10,7 +10,10 @@ const actions = {
       });
     } else {
       const { uid, email, Aa } = authUser;
-      localStorage.setItem('token', Aa);
+
+      //localStorage.setItem('token', Aa);
+      state.commit('Set_token', Aa);
+
       state.commit('SET_USER', {
         uid,
         email,
@@ -18,22 +21,29 @@ const actions = {
       });
       this.$router.go(-2);
     }
+  },
+  settoken({ commit }, data) {
+    commit('Set_token', data);
   }
 };
 
 const mutations = {
   SET_USER(state, user) {
     state.user = user;
+  },
+  Set_token(state, data) {
+    state.token = data;
   }
 };
 
 const state = () => ({
-  user: null
+  user: null,
+  token: ''
 });
 
 const getters = {
   getUser(state) {
-    return state.user;
+    return state.user, state.token;
   }
 };
 

@@ -328,10 +328,10 @@ export default {
 
         const getQuoteResponse = await init(
           getQuoteRequest,
-          localStorage.getItem('token')
+          root.$store.state.token
         );
         const messageIds = helpers.getMessageIdsFromResponse(getQuoteResponse);
-        await poll({ messageIds: messageIds }, localStorage.getItem('token'));
+        await poll({ messageIds: messageIds }, root.$store.state.token);
       } else {
         enableLoader.value = false;
       }

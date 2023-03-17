@@ -6,7 +6,7 @@
       <Dropdown>
         <div>
           <!-- <SfIcon icon="profile" /> -->
-          <SfImage src="/icons/copypast.png" alt="icon" />
+          <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
           <CopyOrderDropdownContent @openQR="toggleQR" />
         </div>
       </Dropdown>

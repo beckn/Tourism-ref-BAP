@@ -13,7 +13,8 @@ export class SearchRequest {
     public searchType: SearchType,
     public location?: string,
     public limit?: number,
-    public offset?: number
+    public offset?: number,
+    public category?: string
   ) {}
 
   toParams() {
@@ -23,7 +24,9 @@ export class SearchRequest {
       this.searchType && { searchType: this.searchType },
       this.location && { location: this.location },
       this.limit && { limit: this.limit },
-      this.offset && { offset: this.offset }
+      this.offset && { offset: this.offset },
+      this.offset && { offset: this.offset },
+      this.category && { category: this.category }
     );
   }
 }
@@ -36,6 +39,7 @@ export interface BaseSearchWhere {
 
 export interface SearchItemsWhere extends BaseSearchWhere {
   itemContains: string;
+  category: string;
 }
 export interface PollRequest {
   // eslint-disable-next-line camelcase

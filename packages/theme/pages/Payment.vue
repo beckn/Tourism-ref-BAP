@@ -73,7 +73,8 @@
         />
       </div> -->
       <div class="sub-heading">
-      <div class="p-name">UPI</div></div>
+        <div class="p-name">UPI</div>
+      </div>
 
       <div class="pay">
         <SfImage
@@ -205,6 +206,7 @@ export default {
     const setOrderHistory = (onConfirmResponse) => {
       // Next Line: To be removed after orderData flow is set
       order.value.order = onConfirmResponse[0].message.order;
+      localStorage.setItem('orderId', onConfirmResponse[0].parent_order_id);
       const parentOrderId = helpers.generateUniqueOrderId();
       const orderData = {};
 
@@ -230,39 +232,42 @@ export default {
 
       const orderObjectPrsed = {
         context: {},
-        order: {
-          orderId: '596006453',
-          billing: {
-            address: {
-              street: shippingAddress.address
-            }
-          },
-          item: [
-            {
-              descriptor: {
-                name: itemsInTheCart.items[0].descriptor.name,
-                images: itemsInTheCart.items[0].descriptor.images
-              },
-              price: {
-                value: itemsInTheCart.items[0].price.value
-              },
-              quantity: itemsInTheCart.items[0].quantity,
-              tags: {
-                fulfillment_end_loc:
-                  itemsInTheCart.items[0].tags.fulfillment_end_loc,
-                fulfillment_end_time:
-                  itemsInTheCart.items[0].tags.fulfillment_end_time,
-                fulfillment_start_loc:
-                  itemsInTheCart.items[0].tags.fulfillment_start_loc,
-                fulfillment_start_time:
-                  itemsInTheCart.items[0].tags.fulfillment_start_time
-              },
-              fulfillment: {
-                start: orderHistory[0].order.fulfillment.start,
-                end: orderHistory[0].order.fulfillment.end
+        message: {
+          order: {
+            id: localStorage.getItem('orderId'),
+            created_at: helpers.getOrderPlacementTimeline(Date.now()),
+            billing: {
+              address: {
+                street: shippingAddress.address
               }
-            }
-          ]
+            },
+            item: [
+              {
+                descriptor: {
+                  name: itemsInTheCart.items[0].descriptor.name,
+                  images: itemsInTheCart.items[0].descriptor.images
+                },
+                price: {
+                  value: itemsInTheCart.items[0].price.value
+                },
+                quantity: itemsInTheCart.items[0].quantity,
+                tags: {
+                  fulfillment_end_loc:
+                    itemsInTheCart.items[0].tags.fulfillment_end_loc,
+                  fulfillment_end_time:
+                    itemsInTheCart.items[0].tags.fulfillment_end_time,
+                  fulfillment_start_loc:
+                    itemsInTheCart.items[0].tags.fulfillment_start_loc,
+                  fulfillment_start_time:
+                    itemsInTheCart.items[0].tags.fulfillment_start_time
+                },
+                fulfillment: {
+                  start: orderHistory[0].order.fulfillment.start,
+                  end: orderHistory[0].order.fulfillment.end
+                }
+              }
+            ]
+          }
         }
       };
 

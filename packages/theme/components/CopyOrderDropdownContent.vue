@@ -79,6 +79,7 @@ export default {
 }
 
 .labels {
+  font-size: 15px;
   padding: 10px;
 }
 

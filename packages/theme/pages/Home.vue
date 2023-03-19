@@ -31,8 +31,8 @@ export default {
         const days = helpers.calculateDays(cartData.cartTime, new Date());
         if (days > 7) {
           console.log('removed');
-          localStorage.removeItem('cartData');
-          localStorage.removeItem('transactionId');
+          // localStorage.removeItem('cartData');
+          // localStorage.removeItem('transactionId');
         }
       }
       load();

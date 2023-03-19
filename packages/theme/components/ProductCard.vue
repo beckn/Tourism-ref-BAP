@@ -12,15 +12,16 @@
             Conducted by {{ _pProviderName }}
             <span class="s-p-retailer-distance">{{ _pDistance }}</span>
           </div>
-          <!-- <div class="s-p-bpp-provider">
+          <div class="s-p-bpp-provider">
             <p v-if="_pBppName !== _pProviderName">
-              {{
-                _pBppName.charAt(0).toUpperCase() +
-                  _pBppName.slice(1).toLowerCase()
+              By {{
+                // _pBppName.charAt(0).toUpperCase() +
+                //   _pBppName.slice(1).toLowerCase()
+                _pBppName
               }}
             </p>
             <span class="s-p-retailer-distance">{{ _pDistance }}</span>
-          </div> -->
+          </div>
         </div>
         <!-- <div class="s-p-weight">{{ _pWieght }}</div>    -->
         <div class="price-increase" v-if="!!_updatedPrice && _updatedPrice !== _pPrice">
@@ -171,8 +172,9 @@ export default {
 .s-p-bpp-provider {
   p {
     margin: 0;
-    padding-top: 2px;
+    padding-top: 3px;
     font-size: 12px;
+    font-weight: 500;
   }
 }
 

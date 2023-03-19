@@ -9,14 +9,8 @@
         <hr class="sf-divider" />
       </div>
       <div class="labels" @click="$emit('openQR')">
-        <SfImage
-          alt="copypast"
-          class="empty-cart__image"
-          src="/icons/scan.png"
-          width="10px"
-          height="11px"
-        />
-        View QR
+        <SfImage alt="copypast" class="empty-cart__image" src="/icons/scan.png" width="10px" height="11px" />
+        Shop for Items
       </div>
 
       <div>

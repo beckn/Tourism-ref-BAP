@@ -6,16 +6,16 @@
   <div class="header-container">
     <div class="fixed-head">
       <!-- <div class="fixed-head-height"></div> -->
-      <!-- <div class="header h-padding">
+      <div class="header h-padding">
         <nuxt-link :to="localePath('/')">
           <SfImage
-            src="/icons/beckn.png"
+            src="/icons/travelio.png"
             :width="63"
             :height="20"
             alt="Vue Storefront Next"
           />
         </nuxt-link>
-      </div> -->
+      </div>
       <LoadingBar
         :enable="
           enableLoadindBar &&

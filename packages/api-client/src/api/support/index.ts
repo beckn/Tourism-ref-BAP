@@ -15,10 +15,6 @@ export async function support(
   return client
     .post(config.api.url + config.api.endpoints.support)
     .send(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });
@@ -34,10 +30,6 @@ export async function onSupport(
   return client
     .get(config.api.url + config.api.endpoints.onSupport)
     .query(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });

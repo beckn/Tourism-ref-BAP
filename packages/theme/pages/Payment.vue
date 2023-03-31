@@ -63,6 +63,35 @@
           />
         </CardContent>
       </Card>
+      <!-- <div class="p-name">Credit & Debit Cards</div>
+      <div class="pay1">
+        <SfImage
+          src="/icons/cardpayment.svg"
+          :width="273"
+          :height="114"
+          alt="Vue Storefront Next"
+        />
+      </div> -->
+      <div class="sub-heading">
+        <div class="p-name">UPI</div>
+      </div>
+
+      <div class="pay">
+        <SfImage
+          src="/icons/phonepe.svg"
+          :width="212"
+          :height="49"
+          alt="Vue Storefront Next"
+        />
+      </div>
+      <div class="pay">
+        <SfImage
+          src="/icons/paytm.svg"
+          :width="193"
+          :height="49"
+          alt="Vue Storefront Next"
+        />
+      </div>
     </div>
     <Footer
       class="footer-fixed"
@@ -93,7 +122,7 @@
   </div>
 </template>
 <script>
-import { SfButton, SfRadio, SfIcon } from '@storefront-ui/vue';
+import { SfButton, SfRadio, SfIcon, SfImage } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
 
 import { ref, computed, onBeforeMount, watch } from '@vue/composition-api';
@@ -108,9 +137,9 @@ import CardContent from '~/components/CardContent.vue';
 import helpers, { createConfirmOrderRequest } from '../helpers/helpers';
 const { toggleCartSidebar } = useUiState();
 export default {
-  middleware: 'auth',
   name: 'Payment',
   components: {
+    SfImage,
     SfButton,
     SfIcon,
     Card,
@@ -176,6 +205,7 @@ export default {
     const setOrderHistory = (onConfirmResponse) => {
       // Next Line: To be removed after orderData flow is set
       order.value.order = onConfirmResponse[0].message.order;
+      localStorage.setItem('orderId', onConfirmResponse[0].parent_order_id);
       const parentOrderId = helpers.generateUniqueOrderId();
       const orderData = {};
 
@@ -201,39 +231,42 @@ export default {
 
       const orderObjectPrsed = {
         context: {},
-        order: {
-          orderId: '596006453',
-          billing: {
-            address: {
-              street: shippingAddress.address
-            }
-          },
-          item: [
-            {
-              descriptor: {
-                name: itemsInTheCart.items[0].descriptor.name,
-                images: itemsInTheCart.items[0].descriptor.images
-              },
-              price: {
-                value: itemsInTheCart.items[0].price.value
-              },
-              quantity: itemsInTheCart.items[0].quantity,
-              tags: {
-                fulfillment_end_loc:
-                  itemsInTheCart.items[0].tags.fulfillment_end_loc,
-                fulfillment_end_time:
-                  itemsInTheCart.items[0].tags.fulfillment_end_time,
-                fulfillment_start_loc:
-                  itemsInTheCart.items[0].tags.fulfillment_start_loc,
-                fulfillment_start_time:
-                  itemsInTheCart.items[0].tags.fulfillment_start_time
-              },
-              fulfillment: {
-                start: orderHistory[0].order.fulfillment.start,
-                end: orderHistory[0].order.fulfillment.end
+        message: {
+          order: {
+            id: localStorage.getItem('orderId'),
+            created_at: helpers.getOrderPlacementTimeline(Date.now()),
+            billing: {
+              address: {
+                street: shippingAddress.address
               }
-            }
-          ]
+            },
+            item: [
+              {
+                descriptor: {
+                  name: itemsInTheCart.items[0].descriptor.name,
+                  images: itemsInTheCart.items[0].descriptor.images
+                },
+                price: {
+                  value: itemsInTheCart.items[0].price.value
+                },
+                quantity: itemsInTheCart.items[0].quantity,
+                tags: {
+                  fulfillment_end_loc:
+                    itemsInTheCart.items[0].tags.fulfillment_end_loc,
+                  fulfillment_end_time:
+                    itemsInTheCart.items[0].tags.fulfillment_end_time,
+                  fulfillment_start_loc:
+                    itemsInTheCart.items[0].tags.fulfillment_start_loc,
+                  fulfillment_start_time:
+                    itemsInTheCart.items[0].tags.fulfillment_start_time
+                },
+                fulfillment: {
+                  start: orderHistory[0].order.fulfillment.start,
+                  end: orderHistory[0].order.fulfillment.end
+                }
+              }
+            ]
+          }
         }
       };
 
@@ -320,7 +353,11 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
+.pay {
+  padding-top: 13px;
+  padding-left: 33px;
+  background: white;
+}
 .loader-circle {
   width: 100%;
   position: fixed;

@@ -302,7 +302,6 @@ import helpers, { createOrderRequest } from '../helpers/helpers';
 /* eslint camelcase: 0 */
 
 export default {
-  middleware: 'auth',
   name: 'Checkout',
   components: {
     SfButton,

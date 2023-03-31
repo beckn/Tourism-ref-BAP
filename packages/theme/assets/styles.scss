@@ -35,6 +35,15 @@ body {
   overflow-x: hidden;
   background: #fbfcff;
 }
+
+.descriptor-body {
+  li {
+    margin-bottom: 8px;
+  }
+  ul {
+    margin-left: -20px;
+  }
+}
 // ::-webkit-scrollbar {
 //     width: 10px;
 //     height: 10px;
@@ -653,9 +662,9 @@ body {
     display: flex;
     .s-p-image {
       height: 90px;
-     .sf-image-loaded {
+      .sf-image-loaded {
         border-radius: 6px;
-     }
+      }
     }
     .s-p-details {
       display: flex;

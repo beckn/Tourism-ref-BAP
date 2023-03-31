@@ -14,10 +14,6 @@ export async function orderStatus(
   return client
     .post(config.api.url + config.api.endpoints.orderStatus)
     .send(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });
@@ -33,10 +29,6 @@ export async function onOrderStatus(
   return client
     .get(config.api.url + config.api.endpoints.onOrderStatus)
     .query(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });

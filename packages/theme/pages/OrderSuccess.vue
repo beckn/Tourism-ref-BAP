@@ -16,7 +16,7 @@
         <button class="sf-button button color-primary" link="" @click="goToOrderDetails">
           <!-- button icon template  -->
           <slot name="buttonIcon" />
-          <div class="f-btn-text">VIEW PACKAGE</div>
+          <div class="f-btn-text">VIEW Booking</div>
         </button>
       </div>
     </div>
@@ -35,7 +35,6 @@ import Card from '~/components/Card.vue';
 import Footer from '~/components/Footer.vue';
 import CardContent from '~/components/CardContent.vue';
 export default {
-  middleware: 'auth',
   name: 'OrderSuccess',
   components: {
     SfButton,

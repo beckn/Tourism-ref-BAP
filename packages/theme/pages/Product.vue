@@ -22,7 +22,7 @@
         <!-- <div>
           <span class="Itinerary-text">Itinerary</span>
         </div> -->
-        <div v-html="product.descriptor.long_desc">
+        <div class="descriptor-body" v-html="product.descriptor.long_desc">
           <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
         </div>
       </div>
@@ -80,7 +80,6 @@ import LazyHydrate from 'vue-lazy-hydration';
 import { onBeforeMount, ref, watch } from '@vue/composition-api';
 
 export default {
-  middleware: 'auth',
   name: 'Product',
   transition: 'fade',
 
@@ -171,6 +170,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 .trek-description-container {
   display: block;
   width: 82%;
@@ -281,51 +282,6 @@ export default {
     background: #387f9a;
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    width: 100%;
-    margin: 0;
-
-    li {
-      width: 50%;
-      padding: 12px 0px 12px 50px;
-      display: block;
-      background: #fff;
-
-      h3 {
-        font-size: 12px;
-        font-weight: 600;
-        color: #000;
-      }
-
-      h4 {
-        font-size: 16px;
-        color: #387f9a;
-
-        span {
-          font-size: 10px;
-          color: #8d9091;
-          font-weight: 400;
-        }
-      }
-
-      &.b-cart-blk {
-        font-size: 16px;
-        color: #fcfcfc;
-        background: #387f9a;
-        display: flex !important;
-        justify-content: space-around;
-        padding: 0px 25px !important;
-        padding-top: 20px !important;
-
-        .mt {
-          margin-top: 4px;
-        }
-      }
-    }
-  }
 }
 
 .sf-accordion.product__tabs.has-chevron {
@@ -540,9 +496,9 @@ export default {
 
 .head-container {
   /* padding: 18px 22px; */
-  padding-left: 18px;
+  padding-left: 9%;
   padding-top: 26px;
-  padding-bottom: 31px;
+  padding-bottom: 7px;
 }
 
 .product__header {

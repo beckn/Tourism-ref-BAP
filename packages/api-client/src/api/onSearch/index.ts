@@ -18,9 +18,6 @@ export default async function onSearch(
   return client
     .get(config.api.url + config.api.endpoints.onSearch)
     .query(qParams)
-    .set({
-      'Content-Type': 'application/json'
-    })
     .then((res) => {
       // console.log(res.body);
       return res.body as any;

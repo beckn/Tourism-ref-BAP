@@ -24,14 +24,15 @@ export default {
   },
   setup() {
     const { load } = useCart();
-    onMounted(() => {
+    onMounted(
+    () => {
       if (localStorage.getItem('cartData')) {
         const cartData = JSON.parse(localStorage.getItem('cartData'));
         const days = helpers.calculateDays(cartData.cartTime, new Date());
         if (days > 7) {
           console.log('removed');
-          localStorage.removeItem('cartData');
-          localStorage.removeItem('transactionId');
+          // localStorage.removeItem('cartData');
+          // localStorage.removeItem('transactionId');
         }
       }
       load();

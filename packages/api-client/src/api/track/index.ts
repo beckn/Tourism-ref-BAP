@@ -15,10 +15,6 @@ export async function track(
   return client
     .post(config.api.url + config.api.endpoints.track)
     .send(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });
@@ -34,10 +30,6 @@ export async function onTrack(
   return client
     .get(config.api.url + config.api.endpoints.onTrack)
     .query(params)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .then((res) => {
       return res.body as AckResponse;
     });

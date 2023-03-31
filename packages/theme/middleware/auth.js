@@ -3,7 +3,7 @@ export default ({ app, route, redirect }) => {
     // we are on a protected route
     if (!app.$fire.auth.currentUser) {
       // take them to sign in page
-      return redirect('/Login');
+      return redirect('/');
     }
   } else if (route.path === '/Login') {
     if (!app.$fire.auth.currentUser) {

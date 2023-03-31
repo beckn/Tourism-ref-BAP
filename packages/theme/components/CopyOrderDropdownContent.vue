@@ -10,7 +10,7 @@
       </div>
       <div class="labels" @click="$emit('openQR')">
         <SfImage alt="copypast" class="empty-cart__image" src="/icons/scan.png" width="10px" height="11px" />
-        View QR
+        Shop for Items
       </div>
 
       <div>
@@ -67,17 +67,19 @@ export default {
 .drop {
   display: block;
   position: absolute;
-  right: -6px;
+  right: 71px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 10rem;
   border-radius: 10px;
-  margin-top: 2.1rem;
+  top: 3px;
+  /* // margin-top: 2.1rem; */
   margin-right: -0.4rem;
   background: #fbfcff;
 }
 
 .labels {
+  font-size: 15px;
   padding: 10px;
 }
 

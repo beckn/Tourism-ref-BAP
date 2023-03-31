@@ -14,7 +14,7 @@ export default {
     fallback: true
   },
   head: {
-    title: 'Tourism App',
+    title: 'Travelio',
     script: [
       {
         src: `https://maps.googleapis.com/maps/api/js?key=${mapsKey}&callback=Function.prototype&libraries=places`,

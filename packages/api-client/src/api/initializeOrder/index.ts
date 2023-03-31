@@ -13,10 +13,6 @@ export default async function initializeOrder(
   const client = context.client as sa.SuperAgent<sa.SuperAgentRequest>;
   return client
     .post(config.api.url + config.api.endpoints.initializeOrder)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .send(params)
     .then((res) => {
       return res.body as AckResponse;

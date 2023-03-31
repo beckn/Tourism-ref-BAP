@@ -149,7 +149,6 @@ import { useUiState } from '~/composables';
 import LoadingCircle from '~/components/LoadingCircle';
 import helpers from '../helpers/helpers';
 export default {
-  middleware: 'auth',
   name: 'Cart',
   components: {
     SfSidebar,

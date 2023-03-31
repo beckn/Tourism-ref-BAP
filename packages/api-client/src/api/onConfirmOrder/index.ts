@@ -12,10 +12,6 @@ export default async function onConfirmOrder(
   const client = context.client as sa.SuperAgent<sa.SuperAgentRequest>;
   return client
     .get(config.api.url + config.api.endpoints.onConfirmOrder)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .query(params)
     .then((res) => {
       return res.body as AckResponse;

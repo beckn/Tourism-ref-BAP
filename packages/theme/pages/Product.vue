@@ -80,7 +80,6 @@ import LazyHydrate from 'vue-lazy-hydration';
 import { onBeforeMount, ref, watch } from '@vue/composition-api';
 
 export default {
-  middleware: 'auth',
   name: 'Product',
   transition: 'fade',
 

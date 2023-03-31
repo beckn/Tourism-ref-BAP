@@ -14,10 +14,6 @@ export default async function getQuote(
 
   return client
     .post(config.api.url + config.api.endpoints.getQuote)
-    .set({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    })
     .send(params)
     .then((res) => {
       return res.body as AckResponse;

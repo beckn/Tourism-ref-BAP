@@ -137,7 +137,6 @@ import CardContent from '~/components/CardContent.vue';
 import helpers, { createConfirmOrderRequest } from '../helpers/helpers';
 const { toggleCartSidebar } = useUiState();
 export default {
-  middleware: 'auth',
   name: 'Payment',
   components: {
     SfImage,

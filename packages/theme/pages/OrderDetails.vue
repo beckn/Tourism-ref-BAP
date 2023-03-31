@@ -434,7 +434,6 @@ import Dropdown from '../components/Dropdown.vue';
 import CopyOrderDropdownContent from '../components/CopyOrderDropdownContent.vue';
 
 export default {
-  middleware: 'auth',
   name: 'OrderDetails',
   components: {
     SfButton,

@@ -162,9 +162,9 @@
 
       <div v-show="isValidCart(cart)">
         <Card>
-          <SfAccordion>
-            <SfAccordionItem :header="'Subtotal'">
-              <div class="bpp_breakup">
+          <!-- <SfAccordion> -->
+            <!-- <SfAccordionItem :header="'Subtotal'"> -->
+              <div>
                 {{ log('value in he cart', cart) }}
                 <div
                   :key="bppId"
@@ -174,26 +174,28 @@
                     :key="providerId"
                     v-for="(valuePerProvider, providerId) in value"
                   >
-                    <div
+                      <div  
+                     
                       :key="id"
                       v-for="(breakup, id) in valuePerProvider.breakup"
                     >
-                      <CardContent class="flex-space-bw">
+                      <CardContent class="flex-space-bw" >
                         <div>{{ breakup.title }}</div>
                         <div>₹ {{ formatPrice(breakup.price.value) }}</div>
                       </CardContent>
                     </div>
+                    <hr>
                     <CardContent class="flex-space-bw">
                       <div>Subtotal :</div>
-                      <div>
+                      <div >
                         ₹ {{ formatPrice(valuePerProvider.price.value) }}
                       </div>
                     </CardContent>
                   </div>
                 </div>
               </div>
-            </SfAccordionItem>
-          </SfAccordion>
+            <!-- </SfAccordionItem> -->
+          <!-- </SfAccordion> -->
         </Card>
       </div>
 

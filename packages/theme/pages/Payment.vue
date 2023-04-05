@@ -73,22 +73,23 @@
         />
       </div> -->
       <div class="sub-heading">
-        <div class="p-name">UPI</div>
+      
       </div>
 
-      <div class="pay">
+      <div style="background:white;">
         <SfImage
-          src="/icons/phonepe.svg"
-          :width="212"
-          :height="49"
+          src="/icons/Credit & Debit cards 1.svg"
+          :width="303"
+          :height="215"
           alt="Vue Storefront Next"
         />
       </div>
+      <div class="p-name">UPI</div>
       <div class="pay">
         <SfImage
-          src="/icons/paytm.svg"
-          :width="193"
-          :height="49"
+          src="/icons/UPI 1.svg"
+          :width="375"
+          :height="257"
           alt="Vue Storefront Next"
         />
       </div>
@@ -354,9 +355,9 @@ export default {
   justify-content: space-between;
 }
 .pay {
-  padding-top: 13px;
-  padding-left: 33px;
   background: white;
+  left: -24px;
+  position: relative;
 }
 .loader-circle {
   width: 100%;

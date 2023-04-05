@@ -1,16 +1,18 @@
 <template>
   <div>
     <div class="top-bar">
-      <div class="header-push">Booking Details</div>
+      <div class="header-push" style="    padding-left: 5%;">
+        Booking Details
+      </div>
+      <div><CopyOrderDropdownContent @openQR="toggleQR" /></div>
+    </div>
 
-      <Dropdown>
+    <!-- <Dropdown>
         <div>
           <!-- <SfIcon icon="profile" /> -->
-          <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
-          <CopyOrderDropdownContent @openQR="toggleQR" />
-        </div>
-      </Dropdown>
-    </div>
+    <!-- <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
+        </div> -->
+    <!-- </Dropdown> -->
 
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
       <LoadingCircle :enable="enableLoader" />
@@ -52,7 +54,7 @@
           </h5>
           <CardContent class="flex-space-bw">
             <div class="address-text"><span>Booked on</span></div>
-            <div class="address-text order-id">
+            <div class="order-desrciption order-id">
               <span>{{ orderPlacementTime }}</span>
             </div>
           </CardContent>
@@ -166,14 +168,10 @@
             Payment
           </h5>
           <div :key="orderId" v-for="(value, orderId) in order.orderData">
-         
-          
             <div :key="id" v-for="(breakup, id) in value.quote.breakup">
-              
               <CardContent class="flex-space-bw">
-            <div class="address-text">{{ breakup.title }}</div> 
-            
-                
+                <div class="address-text">{{ breakup.title }}</div>
+
                 <div class="address-text-value">
                   ₹ {{ formatPrice(breakup.price.value) }}
                 </div>
@@ -202,9 +200,7 @@
             <div class="address-text">Method</div>
             <div class="address-text-value">{{ order.paymentMethod }}</div>
           </CardContent>
-          <div>
-            
-          </div>
+          <div></div>
         </SfAccordion>
       </Card>
       <div class="sub-heading"></div>
@@ -968,8 +964,9 @@ export default {
 .top-bar {
   align-items: center;
   display: flex;
+  justify-content: center;
   font-size: 18px;
-  justify-content: space-around;
+  // justify-content: space-around;
   height: 60px;
   font-weight: 500;
   background: white;

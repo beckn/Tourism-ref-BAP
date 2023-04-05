@@ -1,23 +1,34 @@
 <template>
-  <transition name="dropdown-content-copy-order">
-    <div v-if="active" class="drop">
-      <div @click="copyOrder" class="labels">
-        <SfImage alt="copypast" class="empty-cart__image" src="/icons/importOrderIcon.svg" width="10px" height="11px" />
-        Copy Order
-      </div>
-      <div>
-        <hr class="sf-divider" />
-      </div>
-      <div class="labels" @click="$emit('openQR')">
-        <SfImage alt="copypast" class="empty-cart__image" src="/icons/scan.png" width="10px" height="11px" />
-        Shop for Items
-      </div>
-
-      <div>
-        <hr class="sf-divider" />
-      </div>
+  <!-- <transition name="dropdown-content-copy-order"> -->
+  <!-- v-if="active" -->
+  <div class="drop1">
+    <div class="labels " @click="copyOrder">
+      <SfImage
+        alt="copypast"
+        class="empty-cart__image"
+        src="/icons/importOrderIcon.svg"
+        width="22px"
+        height="24px"
+      />
+      <!-- Copy Order -->
     </div>
-  </transition>
+    <div></div>
+    <div class="labels" @click="$emit('openQR')">
+      <SfImage
+        alt="copypast"
+        class="empty-cart__image"
+        src="/icons/scan.svg"
+        width="22px"
+        height="24px"
+      />
+      <!-- Shop for Items -->
+    </div>
+
+    <!-- <div>
+        <hr class="sf-divider" />
+      </div> -->
+  </div>
+  <!-- </transition> -->
 </template>
 
 <script>
@@ -64,23 +75,25 @@ export default {
 </script>
 
 <style>
-.drop {
-  display: block;
-  position: absolute;
-  right: 71px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+.drop1 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* position: absolute;
+  right: 71px; */
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+  /* z-index: 1; */
   width: 10rem;
   border-radius: 10px;
   top: 3px;
   /* // margin-top: 2.1rem; */
-  margin-right: -0.4rem;
+  /* margin-right: -0.4rem; */
   background: #fbfcff;
 }
 
 .labels {
-  font-size: 15px;
-  padding: 10px;
+  /* //font-size: 15px; */
+  padding: 15px;
 }
 
 .rahul:hover {

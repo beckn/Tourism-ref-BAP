@@ -11,19 +11,31 @@
         rest.
       </p>
       <div class="open-search-input">
-        <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
+        <!-- <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
           placeholder="Search for travel location" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-input'" />
+          v-e2e="'home-search-input'" /> -->
+        <input v-on:keyup.enter="openSearch" ref="input" @input="onInput" v-model="searchAddress" type="text" errorMessage="errer"
+          placeholder="Search for travel location" v-e2e="'home-search-input'" />
+
         <SfButton class="button-pos sf-button--pure color-primary" :class="{
           'is-disabled--button':
-            !selectedLocation.latitude || !selectedLocation.longitude
-        }" @click="openSearch" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
-          v-e2e="'home-search-button'">
+            !searchAddress
+        }" @click="openSearch" :disabled="!searchAddress" v-e2e="'home-search-button'">
+
           <span class="sf-search-bar__icon">
             <SfIcon color="var(--c-text)" size="18px" icon="search" />
           </span>
         </SfButton>
       </div>
+
+
+      <ul ref="locationListDropdown" v-if="showDropdown" class="home-page-location-list">
+        <li :class="{ 'location-list-item': true, 'location-list-last-item': i === searchResults.length - 1 }"
+          v-for="(result, i) in searchResults" :key="i" @click="getLocationDetails(result)">
+          {{ result.description }}
+        </li>
+      </ul>
+
       <div v-if="errorMsg" class="error-msg">Please fill out this field.</div>
     </div>
 
@@ -44,8 +56,6 @@ import { useUiState } from '~/composables';
 import { SfFooter } from '@storefront-ui/vue';
 import { ref } from '@vue/composition-api';
 
-const { selectedLocation } = useUiState();
-
 export default {
   components: {
     SfButton,
@@ -54,17 +64,108 @@ export default {
     SfImage
   },
 
+  data() {
+    return {
+      searchAddress: '',
+      searchResults: [],
+      service: null,
+      showDropdown: false,
+      geocodeService: null
+    }
+
+  },
+
+  created() {
+    if (process.client) {
+      this.service = new window.google.maps.places.AutocompleteService();
+      this.geocodeService = new window.google.maps.Geocoder();
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          const latLng = new window.google.maps.LatLng(latitude, longitude);
+          this.geocodeService.geocode({ location: latLng }, (results, status) => {
+            if (status === 'OK' && results[0]) {
+              localStorage.setItem('selectedLocation', results[0].formatted_address)
+              this.searchAddress = results[0].formatted_address;
+            }
+          });
+        });
+      }
+    }
+  },
+
+
+  methods: {
+    onInput() {
+      if (this.searchAddress.length > 0) {
+        this.service.getPlacePredictions(
+          { input: this.searchAddress, types: ['geocode'], },
+          (predictions, status) => {
+            if (status === 'OK') {
+              this.showDropdown = true;
+              this.searchResults = predictions;
+            } else {
+              this.showDropdown = false;
+              this.searchResults = [];
+            }
+          }
+        );
+      } else {
+        this.showDropdown = false;
+        this.searchResults = [];
+      }
+    },
+
+    getLocationDetails(selectedLocation) {
+      const { updateLocation } = useUiState();
+      localStorage.setItem('selectedLocation', selectedLocation.description)
+      this.searchAddress = selectedLocation.description;
+      this.geocodeService
+        .geocode({ placeId: selectedLocation.place_id })
+        .then((response) => {
+          updateLocation({
+            latitude: response.results[0].geometry.location.lat(),
+            longitude: response.results[0].geometry.location.lng(),
+            address: selectedLocation.description
+          });
+
+
+          this.showDropdown = false;
+          // eslint-disable-next-line no-alert
+        })
+        .catch((err) => alert(err));
+    },
+
+    handleClickOutside(event) {
+      // Check if the click event occurred outside of the dropdown
+      if (this.$refs.locationListDropdown && !this.$refs.locationListDropdown.contains(event.target)) {
+        this.showDropdown = false;
+      }
+    }
+  },
+
+  mounted() {
+    // Add a click event listener to the document object
+    document.addEventListener('click', this.handleClickOutside);
+  },
+
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  },
+
   setup(_, context) {
+
     const message = ref('');
     const errorMsg = ref(false);
 
     const openSearch = () => {
-      if (message.value) {
+      console.log('context in the file', localStorage.getItem('selectedLocation'))
+      if (localStorage.getItem('selectedLocation')) {
         if (errorMsg.value) errorMsg.value = false;
         context.root.$router.push({
           name: 'Search',
           params: {
-            searchKey: message.value
+            searchKey: localStorage.getItem('selectedLocation')
           }
         });
       } else {
@@ -73,7 +174,7 @@ export default {
     };
 
     return {
-      selectedLocation,
+      // selectedLocation,
       message,
       errorMsg,
       openSearch
@@ -184,7 +285,7 @@ export default {
 }
 
 .sf-footer {
-  z-index:1;
+  z-index: 1;
   text-align: center;
   background: transparent !important;
   position: fixed;
@@ -226,40 +327,23 @@ export default {
   cursor: pointer;
 }
 
-// .dowpdown {
-//   background: #ffffff;
-//   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.3);
-//   border-radius: 6px;
-//   padding: 0 7px;
-//   position: absolute;
-//   width: 342px;
-//   z-index: 1;
-//   .dowpdown-item {
-//     display: flex;
-//     align-items: center;
-//     padding: 8px 0;
-//     cursor: pointer;
-//   }
-//   .border {
-//     border-bottom: 1px solid rgba(226, 226, 226, 0.7);
-//   }
-//   .color-text {
-//     color: #387F9A;
-//     cursor: pointer;
-//   }
-// }
+.home-page-location-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid white;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 
-// .search-by-icon {
-//   padding-right: 20px;
-//   padding-left: 8px;
-// }
+.location-list-item {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
 
-// .dropdown-disabled {
-//   opacity: 0.4;
-//   color: #e0e0e1 !important;
-
-//   .sf-icon {
-//     --icon-color: #e0e0e1 !important;
-//   }
-// }
+.location-list-last-item {
+  border-bottom: none;
+}
 </style>

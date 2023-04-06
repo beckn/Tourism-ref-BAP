@@ -33,12 +33,12 @@
         >
           <SfIcon color="var(--c-text)" size="20px" icon="chevron_left" />
         </div>
-        <Location
+        <!-- <Location
           :isDisabled="false"
           :class="{ 'disable-location': false }"
           class="location-section aline-center"
           v-e2e="'app-header-location'"
-        />
+        /> -->
       </div>
     </div>
   </div>

@@ -14,8 +14,8 @@
         <!-- <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
           placeholder="Search for travel location" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
           v-e2e="'home-search-input'" /> -->
-        <input v-on:keyup.enter="openSearch" ref="input" @input="onInput" v-model="searchAddress" type="text" errorMessage="errer"
-          placeholder="Search for travel location" v-e2e="'home-search-input'" />
+        <input v-on:keyup.enter="openSearch" ref="input" @input="onInput" v-model="searchAddress" type="text"
+          errorMessage="errer" placeholder="Search for travel location" v-e2e="'home-search-input'" />
 
         <SfButton class="button-pos sf-button--pure color-primary" :class="{
           'is-disabled--button':
@@ -79,18 +79,18 @@ export default {
     if (process.client) {
       this.service = new window.google.maps.places.AutocompleteService();
       this.geocodeService = new window.google.maps.Geocoder();
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const { latitude, longitude } = position.coords;
-          const latLng = new window.google.maps.LatLng(latitude, longitude);
-          this.geocodeService.geocode({ location: latLng }, (results, status) => {
-            if (status === 'OK' && results[0]) {
-              localStorage.setItem('selectedLocation', results[0].formatted_address)
-              this.searchAddress = results[0].formatted_address;
-            }
-          });
-        });
-      }
+      // if (navigator.geolocation) {
+      //   navigator.geolocation.getCurrentPosition(position => {
+      //     const { latitude, longitude } = position.coords;
+      //     const latLng = new window.google.maps.LatLng(latitude, longitude);
+      //     this.geocodeService.geocode({ location: latLng }, (results, status) => {
+      //       if (status === 'OK' && results[0]) {
+      //         localStorage.setItem('selectedLocation', results[0].formatted_address)
+      //         this.searchAddress = results[0].formatted_address;
+      //       }
+      //     });
+      //   });
+      // }
     }
   },
 

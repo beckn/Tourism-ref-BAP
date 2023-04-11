@@ -163,9 +163,7 @@ export default {
       search({
         term: paramValue,
         locationIs:
-          selectedLocation?.value?.latitude +
-          ',' +
-          selectedLocation?.value?.longitude,
+          "12.9063433,77.5856825",
         category: 'tourism',
         // eslint-disable-next-line no-unused-vars
       }).then((_) => {

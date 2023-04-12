@@ -7,7 +7,7 @@
 <script>
 import OpenSearch from '../components/OpenSearch';
 import { useUiState } from '~/composables';
-import { onMounted } from '@vue/composition-api';
+import { onMounted, onBeforeMount } from '@vue/composition-api';
 import helpers from '../helpers/helpers';
 import { useCart } from '@vue-storefront/beckn';
 
@@ -23,7 +23,13 @@ export default {
     }
   },
   setup() {
-    const { load } = useCart();
+    const { load, clear } = useCart();
+    
+    onBeforeMount(() => {
+       clear();
+       localStorage.clear() 
+})
+    
     onMounted(
     () => {
       if (localStorage.getItem('cartData')) {

@@ -608,7 +608,7 @@ export default {
   padding: 2px 20px;
   padding-bottom: 56px;
   height: calc(100vh - 165px);
-  overflow: scroll;
+  overflow: auto;
 }
 
 .address-bar-icon {

@@ -503,7 +503,7 @@ export default {
   flex-direction: column;
   padding: 0 16px;
   height: calc(100vh - 235px);
-  overflow: scroll;
+  overflow: auto;
   margin-top: 20px;
 
   &__total-items {

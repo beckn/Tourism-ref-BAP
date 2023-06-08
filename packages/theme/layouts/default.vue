@@ -1,28 +1,28 @@
 <template>
   <div>
-      <LazyHydrate when-visible>
-        <!-- <TopBar class="desktop-only" /> -->
-      </LazyHydrate>
-      <!-- <LazyHydrate when-idle> -->
-      <AppHeader />
-      <!-- </LazyHydrate> -->
+    <LazyHydrate when-visible>
+      <!-- <TopBar class="desktop-only" /> -->
+    </LazyHydrate>
+    <!-- <LazyHydrate when-idle> -->
+    <AppHeader />
+    <!-- </LazyHydrate> -->
 
-      <div id="layout">
-    <Error>
+    <div id="layout">
+      <Error>
         <nuxt :key="$route.fullPath" />
-    </Error>
-        <ClearCartPopup />
-        <LazyHydrate when-visible>
-          <!-- <BottomNavigation /> -->
-        </LazyHydrate>
-        <CartSidebar />
-        <WishlistSidebar />
-        <LoginModal />
-        <Notification />
-      </div>
+      </Error>
+      <ClearCartPopup />
       <LazyHydrate when-visible>
-        <!-- <AppFooter /> -->
+        <!-- <BottomNavigation /> -->
       </LazyHydrate>
+      <CartSidebar />
+      <WishlistSidebar />
+      <LoginModal />
+      <Notification />
+    </div>
+    <LazyHydrate when-visible>
+      <!-- <AppFooter /> -->
+    </LazyHydrate>
   </div>
 </template>
 
@@ -64,6 +64,10 @@ export default {
 
 <style lang="scss">
 @import '~@storefront-ui/vue/styles';
+
+#layout::-webkit-scrollbar {
+  display: none;
+}
 
 #layout {
   box-sizing: border-box;

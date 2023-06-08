@@ -802,7 +802,7 @@ export default {
 .details {
   padding: 20px;
   //height: calc(100vh - 149px);
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .address-bar-icon {

@@ -801,8 +801,10 @@ export default {
 
 .details {
   padding: 20px;
-  //height: calc(100vh - 149px);
-  overflow: scroll;
+
+  height: calc(100vh - 160px);
+  overflow-y:auto ;
+  overflow-x: hidden;
 }
 
 .address-bar-icon {

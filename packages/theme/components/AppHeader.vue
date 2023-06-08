@@ -10,8 +10,8 @@
         <nuxt-link :to="localePath('/')">
           <SfImage
             src="/icons/travelio.png"
-            :width="63"
-            :height="20"
+            :width="120"
+            :height="25"
             alt="Vue Storefront Next"
           />
         </nuxt-link>

@@ -72,9 +72,7 @@
           alt="Vue Storefront Next"
         />
       </div> -->
-      <div class="sub-heading">
-      
-      </div>
+      <div class="sub-heading"></div>
 
       <div style="background:white;">
         <SfImage
@@ -88,7 +86,7 @@
       <div class="pay">
         <SfImage
           src="/icons/UPI 1.svg"
-          :width="375"
+          :width="350"
           :height="257"
           alt="Vue Storefront Next"
         />
@@ -341,6 +339,10 @@ export default {
 
 .details {
   margin: 2px 20px;
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  
 }
 
 .p-name {

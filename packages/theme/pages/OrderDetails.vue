@@ -1,16 +1,20 @@
 <template>
   <div>
     <div class="top-bar">
-      <div class="header-push">Booking Details</div>
+      <div class="header-push" style="    padding-left: 5%;">
+        Booking Details
+      </div>
+      <div>
+        <CopyOrderDropdownContent @openQR="toggleQR" />
+      </div>
+    </div>
 
-      <Dropdown>
+    <!-- <Dropdown>
         <div>
           <!-- <SfIcon icon="profile" /> -->
-          <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
-          <CopyOrderDropdownContent @openQR="toggleQR" />
-        </div>
-      </Dropdown>
-    </div>
+    <!-- <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
+        </div> -->
+    <!-- </Dropdown> -->
 
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
       <LoadingCircle :enable="enableLoader" />
@@ -45,12 +49,12 @@
       <Card>
         <SfAccordion>
           <h5 style="color:#387f9a;font-size: 17px;
-                      font-weight: 500;">
+                        font-weight: 500;">
             My Trip
           </h5>
           <CardContent class="flex-space-bw">
             <div class="address-text"><span>Booked on</span></div>
-            <div class="address-text order-id">
+            <div class="order-desrciption order-id">
               <span>{{ orderPlacementTime }}</span>
             </div>
           </CardContent>
@@ -68,6 +72,15 @@
                   <span>Id - {{ orderId }}</span>
                 </div>
               </CardContent> -->
+
+            <CardContent class="flex-space-bw">
+              <div class="order-desrciption">
+                {{ productName }} x
+                {{ order.items[0].quantity.count }}
+              </div>
+              <div class="address-text-items"><span>Id - {{ parentOrderIdOfTheCurentOrder }}</span></div>
+
+            </CardContent>
             <CardContent v-if="orderStatusData && orderStatusData[index]" class="flex-space-bw">
               <div class="address-text"><span>Status</span></div>
               <div class="status-text">
@@ -82,20 +95,11 @@
               </div>
             </CardContent>
             <CardContent class="flex-space-bw">
-              <div class="address-text-items"><span>Item (s)</span></div>
-            </CardContent>
-            <CardContent class="flex-space-bw">
-              <div class="order-desrciption">
-                {{ productName }} x
-                {{ order.items[0].quantity.count }}
-              </div>
               <div v-if="order.items.length > 1">
-                <div
-                  @click="
-                    openItemsModal = true;
-                  selectMoreItemsId = orderId;
-                                                                                                                                                                                          "
-                  class="more-items-button">
+                <div @click="
+                  openItemsModal = true;
+                selectMoreItemsId = orderId;
+                                    " class="more-items-button">
                   <span class="more-items-text">{{ order.items.length - 1 }} more items</span>
                 </div>
               </div>
@@ -128,7 +132,7 @@
       <Card>
         <SfAccordion>
           <h5 style="color:#387f9a;font-size: 17px;
-                      font-weight: 500;">
+                        font-weight: 500;">
             Traveller Details
           </h5>
           <AddressCard :name="order.shippingAddress.name" :address="order.shippingAddress.address"
@@ -142,13 +146,14 @@
       <Card>
         <SfAccordion>
           <h5 style="color:#387f9a;font-size: 17px;
-                      font-weight: 500;">
+                        font-weight: 500;">
             Payment
           </h5>
           <div :key="orderId" v-for="(value, orderId) in order.orderData">
             <div :key="id" v-for="(breakup, id) in value.quote.breakup">
               <CardContent class="flex-space-bw">
                 <div class="address-text">{{ breakup.title }}</div>
+
                 <div class="address-text-value">
                   ₹ {{ formatPrice(breakup.price.value) }}
                 </div>
@@ -158,7 +163,7 @@
               <hr class="sf-divider divider" />
             </div>
             <CardContent class="flex-space-bw">
-              <div class="address-text">Total</div>
+              <div class="address-text">Subtotal</div>
               <div class="address-text-value">
                 ₹ {{ formatPrice(value.quote.price.value) }}
               </div>
@@ -177,27 +182,22 @@
             <div class="address-text">Method</div>
             <div class="address-text-value">{{ order.paymentMethod }}</div>
           </CardContent>
-          <div>
-            <hr />
-          </div>
+          <div></div>
         </SfAccordion>
       </Card>
       <div class="sub-heading"></div>
       <Card>
         <SfAccordion>
           <h5 style="color:#387f9a;font-size: 17px;
-                      font-weight: 500;">
+                        font-weight: 500;">
             Open in Wallet
           </h5>
           <CardContent class="flex-space-bw">
             <div class="open-wallet-QR-container">
-
-
               <qrcode-vue :value="
                 `https://experience-guide.becknprotocol.io/wallet?${encodedOrderDetails}`
               " size="200" level="L" />
             </div>
-
           </CardContent>
         </SfAccordion>
       </Card>
@@ -211,13 +211,8 @@
           </h5> -->
             <CardContent class="flex-space-bw">
               <div class="open-wallet-QR-container">
-
-
-                <qrcode-vue :value="
-                  orderObjectForQR
-                " size="200" level="L" />
+                <qrcode-vue :value="orderObjectForQR" size="200" level="L" />
               </div>
-
             </CardContent>
           </SfAccordionItem>
         </SfAccordion>
@@ -234,7 +229,7 @@
       <ModalSlide :visible="openSupportModal" @close="
         openSupportModal = false;
       selectedSupportId = null;
-                                                                                ">
+                ">
         <div class="modal-heading">Contact Support</div>
         <div>
           <hr class="sf-divider" />
@@ -269,7 +264,7 @@
       <ModalSlide :visible="openTrackModal" @close="
         openTrackModal = false;
       selectedTrackingId = null;
-                                                                                ">
+                ">
         <div class="modal-heading">Track</div>
         <div>
           <hr class="sf-divider" />
@@ -299,7 +294,7 @@
       <ModalSlide :visible="openItemsModal" @close="
         openItemsModal = false;
       selectMoreItemsId = null;
-                                                                                ">
+                ">
         <div class="modal-heading">Ordered Items</div>
         <div>
           <hr class="sf-divider" />
@@ -472,15 +467,18 @@ export default {
     const selectMoreItemsId = ref(null);
     const { clear } = useCart();
     const openQR = ref(false);
+    const parentOrderIdOfTheCurentOrder = ref('');
     const toggleQR = () => {
       openQR.value = !openQR.value;
     };
 
-    const exportingOrderObject = JSON.parse(localStorage.getItem('orderObject'))
-    const productName = exportingOrderObject.message.order.item[0].descriptor.name
+    const exportingOrderObject = JSON.parse(
+      localStorage.getItem('orderObject')
+    );
+    const productName =
+      exportingOrderObject.message.order.item[0].descriptor.name;
 
-
-    const orderObjectForQR = JSON.stringify(exportingOrderObject, undefined, 2)
+    const orderObjectForQR = JSON.stringify(exportingOrderObject, undefined, 2);
     const encodedOrderDetails = localStorage.getItem('encodedOrderDetails');
 
     const {
@@ -668,6 +666,7 @@ export default {
       }
     };
     onBeforeMount(async () => {
+      parentOrderIdOfTheCurentOrder.value = JSON.parse(localStorage.getItem('orderObject')).message.order.id
       const orders = JSON.parse(localStorage.getItem('orderHistory')) ?? [];
 
       order.value = orders.find((ord) => {
@@ -726,12 +725,13 @@ export default {
       toggleQR,
       encodedOrderDetails,
       orderObjectForQR,
-      productName
+      productName,
+      parentOrderIdOfTheCurentOrder
     };
   },
   methods: {
     log(exp, value) {
-      console.log(exp, value)
+      console.log(exp, value);
     },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(',', '.');
@@ -749,6 +749,7 @@ export default {
 
 .order-desrciption {
   margin-left: 4px;
+  max-width: 50%;
 }
 
 .track-target {
@@ -800,8 +801,10 @@ export default {
 
 .details {
   padding: 20px;
-  //height: calc(100vh - 149px);
-  overflow: hidden;
+
+  height: calc(100vh - 160px);
+  overflow-y:auto ;
+  overflow-x: hidden;
 }
 
 .address-bar-icon {
@@ -870,8 +873,9 @@ export default {
 .top-bar {
   align-items: center;
   display: flex;
+  justify-content: center;
   font-size: 18px;
-  justify-content: space-around;
+  // justify-content: space-around;
   height: 60px;
   font-weight: 500;
   background: white;

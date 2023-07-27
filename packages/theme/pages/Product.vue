@@ -6,7 +6,7 @@
       </span>
     </div>
 
-    <div>
+    <div class="product-wraper">
       <div>
         <img
           class="product-description-image"
@@ -14,36 +14,38 @@
           alt="product img"
         />
       </div>
-      <div class="head-container">
-        <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
-      </div>
+      <div>
+        <div class="head-container">
+          <h1 class="head-title">{{ productGetters.getName(product) }}</h1>
+        </div>
 
-      <div class="trek-description-container">
-        <!-- <div>
+        <div class="trek-description-container">
+          <!-- <div>
           <span class="Itinerary-text">Itinerary</span>
         </div> -->
-        <div class="descriptor-body" v-html="product.descriptor.long_desc">
-          <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
+          <div class="descriptor-body" v-html="product.descriptor.long_desc">
+            <!-- <div v-html="product.tags.fulfillment_start_time" class="trek-description-container"></div> -->
+          </div>
         </div>
-      </div>
 
-      <div class="product__info">
-        <div class="product__header">
-          <SfHeading
-            :title="productGetters.getName(product)"
-            :level="3"
-            class="sf-heading--no-underline sf-heading--left"
-          />
-        </div>
-        <br />
-        <br />
-        <div class="bottom-bar-cart">
-          <BookNow
-            :totalPrice="Math.abs(product.price.value)"
-            :key="keyVal + 'product-page'"
-            :value="cartGetters.getItemQty(isInCart({ product }))"
-            @updateItemCount="updateCart"
-          />
+        <div class="product__info">
+          <div class="product__header">
+            <SfHeading
+              :title="productGetters.getName(product)"
+              :level="3"
+              class="sf-heading--no-underline sf-heading--left"
+            />
+          </div>
+          
+          
+          <div class="bottom-bar-cart">
+            <BookNow
+              :totalPrice="Math.abs(product.price.value)"
+              :key="keyVal + 'product-page'"
+              :value="cartGetters.getItemQty(isInCart({ product }))"
+              @updateItemCount="updateCart"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -170,8 +172,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .trek-description-container {
   display: block;
   width: 82%;
@@ -229,7 +229,10 @@ export default {
     word-break: break-word;
   }
 }
-
+.product-wraper {
+  height: calc(100vh - 130px);
+  overflow: auto;
+}
 .prod-info-child {
   @extend .prod-info;
   margin-top: 0;
@@ -281,7 +284,6 @@ export default {
   .cart-checkout {
     background: #387f9a;
   }
-
 }
 
 .sf-accordion.product__tabs.has-chevron {

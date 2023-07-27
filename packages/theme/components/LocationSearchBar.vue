@@ -2,21 +2,14 @@
   <div>
     <slot name="locationInput">
       <div class="position-relative">
-        <input
-          ref="locationAutocomplete"
-          v-model="location"
-          type="text"
-          placeholder="Enter Location"
-          aria-label="Select Location"
-          class="
-            sf-header__search
-            be-search-location
-            sf-search-bar
-            sf-header__search
-            be-search-location
-          "
-          v-e2e="'app-location-sidebar-input'"
-        />
+        <input ref="locationAutocomplete" v-model="location" type="text" placeholder="Enter Location"
+          aria-label="Select Location" class="
+              sf-header__search
+              be-search-location
+              sf-search-bar
+              sf-header__search
+              be-search-location
+            " v-e2e="'app-location-sidebar-input'" />
         <SfButton class="button-pos sf-button--pure">
           <span class="sf-search-bar__icon">
             <SfIcon color="var(--c-text)" size="18px" icon="search" />
@@ -24,12 +17,8 @@
         </SfButton>
       </div>
       <ul class="location-list">
-        <li
-          v-for="(result, i) in searchResults"
-          :key="i"
-          @click="getLocationDetails(result)"
-          v-e2e="'app-location-sidebar-input-options'"
-        >
+        <li v-for="(result, i) in searchResults" :key="i" @click="getLocationDetails(result)"
+          v-e2e="'app-location-sidebar-input-options'">
           <SfButton class="button-pos sf-button--pure pos-map-icon">
             <span class="sf-search-bar__icon">
               <SfIcon color="var(--c-text)" size="10px" icon="marker" />
@@ -94,7 +83,6 @@ export default {
           {
             input: this.location,
             types: ['geocode'],
-            componentRestrictions: { country: 'in' }
           },
           this.displaySuggestions
         );

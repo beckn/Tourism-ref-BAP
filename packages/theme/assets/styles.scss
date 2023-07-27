@@ -36,6 +36,21 @@ body {
   background: #fbfcff;
 }
 
+body::-webkit-scrollbar {
+  width: 0.25rem; /* Set width to a small value to effectively hide it */
+  background-color: #f9f9f9; /* Set background color to match the body background color */
+}
+
+/* Hide scrollbar thumb */
+body::-webkit-scrollbar-thumb {
+  background-color: #f9f9f9; /* Set thumb color to match the body background color */
+}
+
+/* Hide scrollbar track */
+body::-webkit-scrollbar-track {
+  background-color: #f9f9f9; /* Set track color to match the body background color */
+}
+
 .descriptor-body {
   li {
     margin-bottom: 8px;

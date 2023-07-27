@@ -10,8 +10,8 @@
         <nuxt-link :to="localePath('/')">
           <SfImage
             src="/icons/travelio.png"
-            :width="63"
-            :height="20"
+            :width="120"
+            :height="25"
             alt="Vue Storefront Next"
           />
         </nuxt-link>
@@ -33,12 +33,12 @@
         >
           <SfIcon color="var(--c-text)" size="20px" icon="chevron_left" />
         </div>
-        <Location
+        <!-- <Location
           :isDisabled="false"
           :class="{ 'disable-location': false }"
           class="location-section aline-center"
           v-e2e="'app-header-location'"
-        />
+        /> -->
       </div>
     </div>
   </div>

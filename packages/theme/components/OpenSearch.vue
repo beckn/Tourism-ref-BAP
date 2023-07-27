@@ -1,3 +1,4 @@
+<!-- eslint-disable no-alert -->
 <template>
   <div>
     <div class="open-search header-top-space">
@@ -27,7 +28,6 @@
           </span>
         </SfButton>
       </div>
-
 
       <ul ref="locationListDropdown" v-if="showDropdown" class="home-page-location-list">
         <li :class="{ 'location-list-item': true, 'location-list-last-item': i === searchResults.length - 1 }"
@@ -71,14 +71,16 @@ export default {
       service: null,
       showDropdown: false,
       geocodeService: null
-    }
+    };
 
   },
 
   created() {
     if (process.client) {
-      this.service = new window.google.maps.places.AutocompleteService();
-      this.geocodeService = new window.google.maps.Geocoder();
+      if (window && window.google) {
+        this.service = new window.google.maps.places.AutocompleteService();
+        this.geocodeService = new window.google.maps.Geocoder();
+      }
       // if (navigator.geolocation) {
       //   navigator.geolocation.getCurrentPosition(position => {
       //     const { latitude, longitude } = position.coords;
@@ -93,7 +95,6 @@ export default {
       // }
     }
   },
-
 
   methods: {
     onInput() {
@@ -118,7 +119,7 @@ export default {
 
     getLocationDetails(selectedLocation) {
       const { updateLocation } = useUiState();
-      localStorage.setItem('selectedLocation', selectedLocation.description)
+      localStorage.setItem('selectedLocation', selectedLocation.description);
       this.searchAddress = selectedLocation.description;
       this.geocodeService
         .geocode({ placeId: selectedLocation.place_id })
@@ -129,10 +130,9 @@ export default {
             address: selectedLocation.description
           });
 
-
           this.showDropdown = false;
-          // eslint-disable-next-line no-alert
         })
+        // eslint-disable-next-line no-alert
         .catch((err) => alert(err));
     },
 
@@ -159,7 +159,6 @@ export default {
     const errorMsg = ref(false);
 
     const openSearch = () => {
-      console.log('context in the file', localStorage.getItem('selectedLocation'))
       if (localStorage.getItem('selectedLocation')) {
         if (errorMsg.value) errorMsg.value = false;
         context.root.$router.push({
@@ -301,7 +300,6 @@ export default {
       position: relative;
       color: #fbfcff;
       top: -6px;
-
 
       &.powered-by {
         font-size: 10px;

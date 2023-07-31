@@ -9,13 +9,6 @@
       </div>
     </div>
 
-    <!-- <Dropdown>
-        <div>
-          <!-- <SfIcon icon="profile" /> -->
-    <!-- <SfImage src="/icons/importOrderIcon.svg" alt="icon" />
-        </div> -->
-    <!-- </Dropdown> -->
-
     <div v-if="enableLoader" key="loadingCircle" class="loader-circle">
       <LoadingCircle :enable="enableLoader" />
     </div>
@@ -85,11 +78,6 @@
               <div class="address-text"><span>Status</span></div>
               <div class="status-text">
                 <span>
-                  <!-- {{
-                    orderStatusData[index].state.charAt(0).toUpperCase() +
-                      orderStatusData[index].state.slice(1).toLowerCase()
-                
-                  }} -->
                   Confirmed
                 </span>
               </div>
@@ -99,7 +87,7 @@
                 <div @click="
                   openItemsModal = true;
                 selectMoreItemsId = orderId;
-                                    " class="more-items-button">
+                " class="more-items-button">
                   <span class="more-items-text">{{ order.items.length - 1 }} more items</span>
                 </div>
               </div>
@@ -194,9 +182,8 @@
           </h5>
           <CardContent class="flex-space-bw">
             <div class="open-wallet-QR-container">
-              <qrcode-vue :value="
-                `https://experience-guide.becknprotocol.io/wallet?${encodedOrderDetails}`
-              " size="200" level="L" />
+              <qrcode-vue :value="`https://experience-guide-staging.becknprotocol.io/wallet?${encodedOrderDetails}`
+                " size="200" level="L" />
             </div>
           </CardContent>
         </SfAccordion>
@@ -229,7 +216,7 @@
       <ModalSlide :visible="openSupportModal" @close="
         openSupportModal = false;
       selectedSupportId = null;
-                ">
+      ">
         <div class="modal-heading">Contact Support</div>
         <div>
           <hr class="sf-divider" />
@@ -250,7 +237,7 @@
               Call us</SfButton>
             <SfButton class="support-btns" v-if="supportData[selectedSupportId].email" @click="
               openWindow('mailto:' + supportData[selectedSupportId].email)
-            " aria-label="Close modal" type="button">Email us</SfButton>
+              " aria-label="Close modal" type="button">Email us</SfButton>
             <SfButton class="support-btns" v-if="supportData[selectedSupportId].uri"
               @click="openWindow(supportData[selectedSupportId].uri)" aria-label="Close modal" type="button">Chat with us
             </SfButton>
@@ -264,7 +251,7 @@
       <ModalSlide :visible="openTrackModal" @close="
         openTrackModal = false;
       selectedTrackingId = null;
-                ">
+      ">
         <div class="modal-heading">Track</div>
         <div>
           <hr class="sf-divider" />
@@ -294,7 +281,7 @@
       <ModalSlide :visible="openItemsModal" @close="
         openItemsModal = false;
       selectMoreItemsId = null;
-                ">
+      ">
         <div class="modal-heading">Ordered Items</div>
         <div>
           <hr class="sf-divider" />
@@ -311,9 +298,9 @@
           <div v-if="selectMoreItemsId !== null">
             <CardContent class="more-items-flex">
               <div v-for="(product, index) in getMoreItems(
-                order,
-                selectMoreItemsId
-              )" :key="index" class="item-wrapper">
+                    order,
+                    selectMoreItemsId
+                  )" :key="index" class="item-wrapper">
                 <div class="s-p-image">
                   <SfImage :src="cartGetters.getItemImage(product)" alt="product img" :width="85" :height="90" />
                 </div>
@@ -362,9 +349,8 @@
           <br />
           <div style="display: flex; align-items: center; justify-content: center;">
             <!-- <SfImage alt="copypast" class="e" src="/icons/QR.png" /> -->
-            <qrcode-vue :value="
-              `https://retail-app.becknprotocol.io?${encodedOrderDetails}`
-            " size="200" level="L" />
+            <qrcode-vue :value="`https://retail-app-staging.becknprotocol.io?${encodedOrderDetails}`
+              " size="200" level="L" />
           </div>
           <br />
           <div style="display: flex; align-items: center; justify-content: space-evenly;">
@@ -734,7 +720,7 @@ export default {
       console.log(exp, value);
     },
     formatPrice(value) {
-      let val = (value / 1).toFixed(2).replace(',', '.');
+      const val = (value / 1).toFixed(2).replace(',', '.');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
@@ -803,7 +789,7 @@ export default {
   padding: 20px;
 
   height: calc(100vh - 160px);
-  overflow-y:auto ;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 

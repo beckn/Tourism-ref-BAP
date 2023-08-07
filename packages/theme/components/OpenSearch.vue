@@ -98,7 +98,7 @@ export default {
 
   methods: {
     onInput() {
-      if (this.searchAddress.length > 0) {
+      if (this.searchAddress.length > 0 && this.service) {
         this.service.getPlacePredictions(
           { input: this.searchAddress, types: ['geocode'], },
           (predictions, status) => {

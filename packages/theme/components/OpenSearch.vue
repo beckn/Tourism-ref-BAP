@@ -98,7 +98,7 @@ export default {
 
   methods: {
     onInput() {
-      if (this.searchAddress.length > 0 && this.service) {
+      if (this.searchAddress.length > 0) {
         this.service.getPlacePredictions(
           { input: this.searchAddress, types: ['geocode'], },
           (predictions, status) => {
@@ -117,7 +117,7 @@ export default {
       }
     },
 
-    getLocationDetails (selectedLocation) {
+    getLocationDetails(selectedLocation) {
       const { updateLocation } = useUiState();
       localStorage.setItem('selectedLocation', selectedLocation.description);
       this.searchAddress = selectedLocation.description;

@@ -2,7 +2,7 @@ export default {
   timers: {
     search: {
       interval: 2000,
-      poll: 40000
+      poll: 10000
     },
     quote: {
       interval: 2000,

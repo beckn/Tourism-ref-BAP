@@ -1,31 +1,17 @@
 <template>
   <div class="search-page">
     <div class="search-bar side-padding">
-      <SfSearchBar
-        placeholder="Search for items"
-        aria-label="Search"
-        :icon="null"
-        :value="searchKey"
-        @input="(value) => (searchKey = value)"
-        @keydown.enter="searchHit($event)"
-      >
+      <SfSearchBar placeholder="Search for items" aria-label="Search" :icon="null" :value="searchKey"
+        @input="(value) => (searchKey = value)" @keydown.enter="searchHit($event)">
         <template #icon>
-          <SfButton
-            v-if="searchKey"
-            class="sf-search-bar__button sf-button--pure"
-            @click="clearSearch"
-          >
+          <SfButton v-if="searchKey" class="sf-search-bar__button sf-button--pure" @click="clearSearch">
             <span class="sf-search-bar__icon">
               <SfIcon color="var(--c-text)" size="20px" icon="cross" />
             </span>
           </SfButton>
-          <SfButton
-            v-else
-            class="sf-search-bar__button sf-button--pure"
-            @click="
-              isSearchOpen ? (isSearchOpen = false) : (isSearchOpen = true)
-            "
-          >
+          <SfButton v-else class="sf-search-bar__button sf-button--pure" @click="
+            isSearchOpen ? (isSearchOpen = false) : (isSearchOpen = true)
+            ">
             <span class="sf-search-bar__icon">
               <SfIcon color="var(--c-text)" size="20px" icon="search" />
             </span>
@@ -36,71 +22,43 @@
 
     <div class="details">
       <transition-group name="sf-fade" mode="out-in" v-if="!enableLoader">
-        <div
-          v-if="pollResults && pollResults.length > 0"
-          class="search__wrapper-results"
-          key="results"
-        >
+        <div v-if="pollResults && pollResults.message.catalogs.length > 0" class="search__wrapper-results" key="results">
           <div>
             <div class="product-list-header">
-              <span class="side-padding travel-package-text"
-                >Travel Packages</span
-              >
+              <span class="side-padding travel-package-text">Travel Packages</span>
             </div>
             <div class="side-padding result-num">
               <div>
-                <span
-                  ><span v-e2e="'total-result'">{{ totalResults }}</span>
-                  results found</span
-                >
+                <span><span v-e2e="'total-result'">{{ totalResults }}</span>
+                  results found</span>
               </div>
             </div>
           </div>
-          <div v-for="(bpp, bppIndex) in pollResults" :key="bppIndex">
-            <div
-              v-for="(provider, prIndex) in bpp.bpp_providers"
-              :key="prIndex"
-            >
-              <div
-                v-for="(product, pIndex) in provider.items"
-                :key="
-                  bppIndex +
-                    '-' +
-                    prIndex +
-                    '-' +
-                    pIndex +
-                    '-' +
-                    keyVal +
-                    'product'
-                "
-                class="results--mobile"
-              >
-                <ProductCard
-                  @goToProduct="goToProduct(product, provider, bpp)"
-                  :pName="productGetters.getName(product)"
-                  :pProviderName="providerGetters.getProviderName(provider)"
-                  :pBppName="bpp.bpp_descriptor.name"
+          <div v-for="(bpp, bppIndex) in pollResults.message.catalogs" :key="bppIndex">
+            <div v-for="(provider, prIndex) in bpp.bpp_providers" :key="prIndex">
+              <div v-for="(product, pIndex) in provider.items" :key="bppIndex +
+                '-' +
+                prIndex +
+                '-' +
+                pIndex +
+                '-' +
+                keyVal +
+                'product'
+                " class="results--mobile">
+                <ProductCard @goToProduct="goToProduct(product, provider, bpp)" :pName="productGetters.getName(product)"
+                  :pProviderName="providerGetters.getProviderName(provider)" :pBppName="bpp.bpp_descriptor.name"
                   :pPrice="productGetters.getPrice(product).regular"
                   :pImage="productGetters.getGallery(product)[0].small[0]"
                   :pWieght="productGetters.getProductWeight(product) + ' kg'"
-                  :pCount="cartGetters.getItemQty(isInCart({ product }))"
-                  @updateItemCount="
-                    (item) => updateItemCount(item, provider, bpp, pIndex)
-                  "
-                  :horizontalView="false"
-                />
+                  :pCount="cartGetters.getItemQty(isInCart({ product }))" @updateItemCount="(item) => updateItemCount(item, provider, bpp, pIndex)
+                    " :horizontalView="false" />
               </div>
             </div>
           </div>
         </div>
 
         <div v-if="noSearchFound" key="no-search" class="before-results">
-          <SfImage
-            src="/icons/feather_search.svg"
-            class=""
-            alt="error"
-            loading="lazy"
-          />
+          <SfImage src="/icons/feather_search.svg" class="" alt="error" loading="lazy" />
           <p>
             <b>{{ $t('Your search did not yield ') }}</b>
           </p>
@@ -112,11 +70,7 @@
         </div>
       </transition-group>
 
-      <LoadingCircle
-        :enable="enableLoader"
-        :customText="`Searching for things to do in ${searchKey}`"
-        key="loding-cir"
-      />
+      <LoadingCircle :enable="enableLoader" :customText="`Searching for things to do in ${searchKey}`" key="loding-cir" />
     </div>
     <!-- TODO :- removal for DEMO. Need proper handling -->
     <!-- <div v-if="cartGetters.getTotalItems(cart)" class="sr-footer">
@@ -188,8 +142,8 @@ export default {
     const openSearchByDropdown = ref(false);
     const selectedSearchByOption = ref(
       context.root.$route.params.searchBy ||
-        localStorage.getItem('selectedLocation') ||
-        'search-by-all'
+      localStorage.getItem('selectedLocation') ||
+      'search-by-all'
     );
 
     console.log(cart);
@@ -296,9 +250,8 @@ export default {
     };
 
     const totalResults = computed(() => {
-      console.log('pollREsults', pollResults);
       let reusltNum = 0;
-      for (const bpp of pollResults?.value) {
+      for (const bpp of pollResults?.value.message.catalogs) {
         if (bpp.bpp_providers) {
           if (bpp.bpp_providers.length !== 0) {
             for (const provider of bpp.bpp_providers) {

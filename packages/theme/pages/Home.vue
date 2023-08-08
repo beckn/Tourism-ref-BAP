@@ -27,11 +27,9 @@ export default {
 
     onBeforeMount(() => {
       clear();
-      localStorage.clear()
-    })
+      localStorage.clear();
+    });
 
-    
-    
     onMounted(
       () => {
         if (localStorage.getItem('cartData')) {

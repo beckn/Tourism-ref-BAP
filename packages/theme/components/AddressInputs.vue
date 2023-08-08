@@ -121,9 +121,10 @@ export default {
     const validateInput = (field) => {
       const re = /^[0-9\b]+$/;
       const regforSpecialCharacters = /[!@#$%^&*()_+\=\[\]{};':"\\|.<>\/?]+/;
+      const  regName =/^[a-zA-Z0-9]+$/;
       switch (field) {
         case 'Name':
-          if (address.value.name && address.value.name.length < 2) {
+          if (address.value.name && address.value.name.length < 2&& regName.test(address.value.name )) {
             return 'Please enter a valid name';
           }
           break;

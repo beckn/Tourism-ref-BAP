@@ -51,19 +51,8 @@ const usePollerFactory = (factoryParams: UsePollerFactoryParams) => {
       pollFunction.value.interval = setInterval(async () => {
         try {
           const data = await _factoryParams.poll({ params, token });
-          pollResults.value = _factoryParams.dataHandler({
-            oldResults: pollResults.value,
-            newResults: data
-          });
-          if (
-            !_factoryParams.continuePolling({
-              oldResults: pollResults.value,
-              newResults: data
-            })
-          ) {
-            clearInterval(pollFunction.value.interval);
-            clearTimeout(pollFunction.value.interval);
-          }
+
+          pollResults.value = data;
         } catch (err) {
           console.error(err);
 
@@ -74,6 +63,7 @@ const usePollerFactory = (factoryParams: UsePollerFactoryParams) => {
       }, intervalTime);
 
       pollFunction.value.timeout = setTimeout(() => {
+        console.log('polltime in the polling', pollTime);
         clearInterval(pollFunction.value.interval);
         polling.value = false;
       }, pollTime);
@@ -88,6 +78,11 @@ const usePollerFactory = (factoryParams: UsePollerFactoryParams) => {
       clearInterval(pollFunction.value.interval);
       clearTimeout(pollFunction.value.interval);
     };
+
+    console.log(
+      'pollreskwed.value',
+      computed(() => pollResults.value)
+    );
 
     return {
       pollResults: computed(() => pollResults.value),

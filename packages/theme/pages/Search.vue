@@ -11,7 +11,7 @@
           </SfButton>
           <SfButton v-else class="sf-search-bar__button sf-button--pure" @click="
             isSearchOpen ? (isSearchOpen = false) : (isSearchOpen = true)
-          ">
+            ">
             <span class="sf-search-bar__icon">
               <SfIcon color="var(--c-text)" size="20px" icon="search" />
             </span>
@@ -22,7 +22,7 @@
 
     <div class="details">
       <transition-group name="sf-fade" mode="out-in" v-if="!enableLoader">
-        <div v-if="pollResults && pollResults.length > 0" class="search__wrapper-results" key="results">
+        <div v-if="pollResults && pollResults.message.catalogs.length > 0" class="search__wrapper-results" key="results">
           <div>
             <div class="product-list-header">
               <span class="side-padding travel-package-text">Travel Packages</span>
@@ -34,10 +34,9 @@
               </div>
             </div>
           </div>
-          <div v-for="(bpp, bppIndex) in pollResults" :key="bppIndex">
+          <div v-for="(bpp, bppIndex) in pollResults.message.catalogs" :key="bppIndex">
             <div v-for="(provider, prIndex) in bpp.bpp_providers" :key="prIndex">
-              <div v-for="(product, pIndex) in provider.items" :key="
-                bppIndex +
+              <div v-for="(product, pIndex) in provider.items" :key="bppIndex +
                 '-' +
                 prIndex +
                 '-' +
@@ -45,15 +44,14 @@
                 '-' +
                 keyVal +
                 'product'
-              " class="results--mobile">
+                " class="results--mobile">
                 <ProductCard @goToProduct="goToProduct(product, provider, bpp)" :pName="productGetters.getName(product)"
                   :pProviderName="providerGetters.getProviderName(provider)" :pBppName="bpp.bpp_descriptor.name"
                   :pPrice="productGetters.getPrice(product).regular"
                   :pImage="productGetters.getGallery(product)[0].small[0]"
                   :pWieght="productGetters.getProductWeight(product) + ' kg'"
-                  :pCount="cartGetters.getItemQty(isInCart({ product }))" @updateItemCount="
-                    (item) => updateItemCount(item, provider, bpp, pIndex)
-                  " :horizontalView="false" />
+                  :pCount="cartGetters.getItemQty(isInCart({ product }))" @updateItemCount="(item) => updateItemCount(item, provider, bpp, pIndex)
+                    " :horizontalView="false" />
               </div>
             </div>
           </div>
@@ -130,7 +128,10 @@ export default {
     };
 
     const { addItem, cart, isInCart, load } = useCart();
-    const data = context.root.$route.params.searchKey;
+    const data = context.root.$route.params.searchKey
+      ? context.root.$route.params.searchKey
+      : localStorage.getItem('selectedLocation');
+
     const searchKey = ref(data);
     const enableLoader = ref(Boolean(data));
     const keyVal = ref(0);
@@ -140,7 +141,9 @@ export default {
 
     const openSearchByDropdown = ref(false);
     const selectedSearchByOption = ref(
-      context.root.$route.params.searchBy || 'search-by-all'
+      context.root.$route.params.searchBy ||
+      localStorage.getItem('selectedLocation') ||
+      'search-by-all'
     );
 
     console.log(cart);
@@ -162,9 +165,8 @@ export default {
 
       search({
         term: paramValue,
-        locationIs:
-          "12.9063433,77.5856825",
-        category: 'tourism',
+        locationIs: '12.9063433,77.5856825',
+        category: 'tourism'
         // eslint-disable-next-line no-unused-vars
       }).then((_) => {
         localStorage.setItem(
@@ -248,9 +250,8 @@ export default {
     };
 
     const totalResults = computed(() => {
-      console.log('pollREsults', pollResults)
       let reusltNum = 0;
-      for (const bpp of pollResults?.value) {
+      for (const bpp of pollResults?.value.message.catalogs) {
         if (bpp.bpp_providers) {
           if (bpp.bpp_providers.length !== 0) {
             for (const provider of bpp.bpp_providers) {

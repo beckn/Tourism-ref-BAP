@@ -1,52 +1,54 @@
 <!-- eslint-disable no-alert -->
 <template>
-  <div>
-    <div class="open-search header-top-space">
-      <h3>
-        Travel <br />
-        Experience
-      </h3>
-      <h4>for All</h4>
-      <p>
-        A global marketplace to discover anything you need. Just type where you want to go and we'll take care of the
-        rest.
-      </p>
-      <div class="open-search-input">
-        <!-- <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
+  <div v-if="googleInitialized">
+    <div>
+      <div class="open-search header-top-space">
+        <h3>
+          Travel <br />
+          Experience
+        </h3>
+        <h4>for All</h4>
+        <p>
+          A global marketplace to discover anything you need. Just type where you want to go and we'll take care of the
+          rest.
+        </p>
+        <div class="open-search-input">
+          <!-- <input v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text"
           placeholder="Search for travel location" :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
           v-e2e="'home-search-input'" /> -->
-        <input v-on:keyup.enter="openSearch" ref="input" @input="onInput" v-model="searchAddress" type="text"
-          errorMessage="errer" placeholder="Search for travel location" v-e2e="'home-search-input'" />
+          <input v-on:keyup.enter="openSearch" ref="input" @input="onInput" v-model="searchAddress" type="text"
+            errorMessage="errer" placeholder="Search for travel location" v-e2e="'home-search-input'" />
 
-        <SfButton class="button-pos sf-button--pure color-primary" :class="{
-          'is-disabled--button':
-            !searchAddress
-        }" @click="openSearch" :disabled="!searchAddress" v-e2e="'home-search-button'">
+          <SfButton class="button-pos sf-button--pure color-primary" :class="{
+            'is-disabled--button':
+              !searchAddress
+          }" @click="openSearch" :disabled="!searchAddress" v-e2e="'home-search-button'">
 
-          <span class="sf-search-bar__icon">
-            <SfIcon color="var(--c-text)" size="18px" icon="search" />
-          </span>
-        </SfButton>
+            <span class="sf-search-bar__icon">
+              <SfIcon color="var(--c-text)" size="18px" icon="search" />
+            </span>
+          </SfButton>
+        </div>
+
+        <ul ref="locationListDropdown" v-if="showDropdown" class="home-page-location-list">
+          <li :class="{ 'location-list-item': true, 'location-list-last-item': i === searchResults.length - 1 }"
+            v-for="(result, i) in searchResults" :key="i" @click="getLocationDetails(result)">
+            {{ result.description }}
+          </li>
+        </ul>
+
+        <div v-if="errorMsg" class="error-msg">Please fill out this field.</div>
       </div>
 
-      <ul ref="locationListDropdown" v-if="showDropdown" class="home-page-location-list">
-        <li :class="{ 'location-list-item': true, 'location-list-last-item': i === searchResults.length - 1 }"
-          v-for="(result, i) in searchResults" :key="i" @click="getLocationDetails(result)">
-          {{ result.description }}
-        </li>
-      </ul>
-
-      <div v-if="errorMsg" class="error-msg">Please fill out this field.</div>
-    </div>
-
-    <div class="sf-footer">
-      <SfFooter class="footer">
-        <!-- <p><span>By</span> <img src="../assets/images/p-b-phonepe.png" alt="" /> </p> -->
-        <p>
-          <span class="powered-by">Powered by</span>
-          <img src="../assets/images/beckn-logo.png" alt="" />
-        </p>
-      </SfFooter>
+      <div class="sf-footer">
+        <SfFooter class="footer">
+          <!-- <p><span>By</span> <img src="../assets/images/p-b-phonepe.png" alt="" /> </p> -->
+          <p>
+            <span class="powered-by">Powered by</span>
+            <img src="../assets/images/beckn-logo.png" alt="" />
+          </p>
+        </SfFooter>
+      </div>
     </div>
   </div>
 </template>
@@ -66,6 +68,7 @@ export default {
 
   data() {
     return {
+      googleInitialized: false,
       searchAddress: '',
       searchResults: [],
       service: null,
@@ -75,25 +78,19 @@ export default {
 
   },
 
-  created() {
+  mounted() {
     if (process.client) {
       if (window && window.google) {
-        this.service = new window.google.maps.places.AutocompleteService();
-        this.geocodeService = new window.google.maps.Geocoder();
+        this.initializeGoogleMaps();
+      } else {
+        setTimeout(() => {
+          if (window && window.google) {
+            this.initializeGoogleMaps();
+          }
+        }, 1500);
       }
-      // if (navigator.geolocation) {
-      //   navigator.geolocation.getCurrentPosition(position => {
-      //     const { latitude, longitude } = position.coords;
-      //     const latLng = new window.google.maps.LatLng(latitude, longitude);
-      //     this.geocodeService.geocode({ location: latLng }, (results, status) => {
-      //       if (status === 'OK' && results[0]) {
-      //         localStorage.setItem('selectedLocation', results[0].formatted_address)
-      //         this.searchAddress = results[0].formatted_address;
-      //       }
-      //     });
-      //   });
-      // }
     }
+    document.addEventListener('click', this.handleClickOutside);
   },
 
   methods: {
@@ -115,6 +112,12 @@ export default {
         this.showDropdown = false;
         this.searchResults = [];
       }
+    },
+
+    initializeGoogleMaps() {
+      this.service = new window.google.maps.places.AutocompleteService();
+      this.geocodeService = new window.google.maps.Geocoder();
+      this.googleInitialized = true;
     },
 
     getLocationDetails(selectedLocation) {
@@ -142,11 +145,6 @@ export default {
         this.showDropdown = false;
       }
     }
-  },
-
-  mounted() {
-    // Add a click event listener to the document object
-    document.addEventListener('click', this.handleClickOutside);
   },
 
   beforeUnmount() {

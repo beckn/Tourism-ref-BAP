@@ -425,7 +425,7 @@
           </div>
           <br />
           <div
-            style="display: flex; align-items: center; justify-content: center;"
+            style="display: flex; flex-direction:column; align-items: center; justify-content: center;"
           >
             <!-- <SfImage alt="copypast" class="e" src="/icons/QR.png" /> -->
             <qrcode-vue
@@ -435,7 +435,17 @@
               size="200"
               level="L"
             />
+            <br />
+            <button
+              class="sf-button button color-primary"
+              link=""
+              @click="redirectToDynamicLink"
+            >
+              <!-- button icon template  -->
+              <div class="f-btn-text">Shop for items</div>
+            </button>
           </div>
+
           <br />
           <div
             style="display: flex; align-items: center; justify-content: space-evenly;"
@@ -570,6 +580,11 @@ export default {
 
     const orderObjectForQR = JSON.stringify(exportingOrderObject, undefined, 2);
     const encodedOrderDetails = localStorage.getItem('encodedOrderDetails');
+
+    const redirectToDynamicLink = () => {
+      const url = `https://retail-app-staging.becknprotocol.io?${encodedOrderDetails}`;
+      window.location.href = url;
+    };
 
     const {
       poll: onTrack,
@@ -819,7 +834,8 @@ export default {
       encodedOrderDetails,
       orderObjectForQR,
       productName,
-      parentOrderIdOfTheCurentOrder
+      parentOrderIdOfTheCurentOrder,
+      redirectToDynamicLink
     };
   },
   methods: {

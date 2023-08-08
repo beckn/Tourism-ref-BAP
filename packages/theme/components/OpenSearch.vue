@@ -117,7 +117,7 @@ export default {
       }
     },
 
-    getLocationDetails(selectedLocation) {
+    getLocationDetails (selectedLocation) {
       const { updateLocation } = useUiState();
       localStorage.setItem('selectedLocation', selectedLocation.description);
       this.searchAddress = selectedLocation.description;

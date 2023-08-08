@@ -243,7 +243,8 @@ export default {
               {
                 descriptor: {
                   name: itemsInTheCart.items[0].descriptor.name,
-                  images: itemsInTheCart.items[0].descriptor.images
+                  images: itemsInTheCart.items[0].descriptor.images,
+                  short_desc: "This show offers a classic take on the life of a miser, with playful jokes, the show is suitable for young and old alike!"
                 },
                 price: {
                   value: itemsInTheCart.items[0].price.value

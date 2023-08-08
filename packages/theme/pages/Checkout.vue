@@ -361,8 +361,10 @@ export default {
     const transactionId = ref('');
 
     const isShippingAddressFilled = computed(() => {
+      const  regName =/^[a-zA-Z]+$/;
       return (
         shippingAddress.value.name !== '' &&
+        regName.test(shippingAddress.value.name )&&
         shippingAddress.value.mobile !== '' &&
         // shippingAddress.value.building !== '' &&
         shippingAddress.value.address !== '' &&

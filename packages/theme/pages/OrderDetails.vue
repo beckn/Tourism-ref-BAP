@@ -482,7 +482,7 @@ export default {
     const encodedOrderDetails = localStorage.getItem('encodedOrderDetails');
 
     const redirectToDynamicLink = () => {
-      const url = `https://retail-app-staging-infra.becknprotocol.io??external_url=${orderObjectFetchUrl}`;
+      const url = `https://retail-app-staging-infra.becknprotocol.io??external_url=${orderObjectFetchUrl.value}`;
       window.location.href = url;
     };
 

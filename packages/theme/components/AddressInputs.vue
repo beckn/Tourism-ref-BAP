@@ -11,6 +11,8 @@
         :errorMessage="validateInput('Name')"
         v-model="address.name"
         :type="'text'"
+        pattern="^[A-Za-z]+$"
+        v-on:keypress="isLetter($event)"
         :label="'Name*'"
         :name="'Name'"
       />
@@ -118,10 +120,16 @@ export default {
       building: false
     });
 
+    const isLetter=(e)=> {
+  let char = String.fromCharCode(e.keyCode); // Get the character
+  if(/^[A-Za-z]+$/.test(char)) return true; // Match with regex 
+  else e.preventDefault(); // If not match, don't add to input text
+}
+
     const validateInput = (field) => {
       const re = /^[0-9\b]+$/;
       const regforSpecialCharacters = /[!@#$%^&*()_+\=\[\]{};':"\\|.<>\/?]+/;
-      const  regName =/^[a-zA-Z0-9]+$/;
+      const  regName =/^[a-zA-Z]+$/;
       switch (field) {
         case 'Name':
           if (address.value.name && address.value.name.length < 2&& regName.test(address.value.name )) {
@@ -241,7 +249,8 @@ export default {
       saveDetails,
       valid,
       isFieldsValid,
-      validateInput
+      validateInput,
+      isLetter
     };
   }
 };
